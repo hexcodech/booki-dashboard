@@ -1,0 +1,44 @@
+{
+  "name": "booki-dashboard",
+  "version": "1.0.0",
+  "description": "An admin dashboard for booki.me",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Nico Hauser (Tyratox)",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2016": "^6.16.0",
+    "babel-preset-es2017": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "bootstrap": "^4.0.0-alpha.5",
+    "chart.js": "^2.4.0",
+    "react": "^15.4.1",
+    "react-chartjs-2": "^1.6.2",
+    "react-dom": "^15.4.1",
+    "react-json-tree": "^0.10.0",
+    "react-redux": "^5.0.1",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.7",
+    "react-select": "^1.0.0-rc.2",
+    "react-tag-input": "^4.6.2",
+    "react-timeago": "^3.1.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-es2015-spread": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "react-hot-loader": "^1.3.1",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.1.1",
+    "webpack-hot-middleware": "^2.14.0"
+  }
+}

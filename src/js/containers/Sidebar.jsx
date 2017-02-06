@@ -1,9 +1,11 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
 
+import {push}				from 'react-router-redux';
+
 import SidebarElement		from '../components/SidebarElement.jsx';
 
-const Sidebar = ({children, name, profilePictureUrl}) => {
+const Sidebar = ({userId, name, profilePictureUrl, dispatch}) => {
 	
 	let width	= window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	let height	= window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -18,7 +20,7 @@ const Sidebar = ({children, name, profilePictureUrl}) => {
 	
 	return (
 		<aside className="sidebar bg-primary" style={bgStyles}>
-			<figure className="profile-picture">
+			<figure className="profile-picture clickable" onClick={()=>{dispatch(push("/dashboard/user/" + userId + "/"))}}>
 				<img src={profilePictureUrl} className="mx-auto d-block" height="100" width="100" />
 				<p className="text-center user-name">
 					{name.display}
@@ -35,6 +37,7 @@ const Sidebar = ({children, name, profilePictureUrl}) => {
 
 const mapStateToProps = (state) => {
 	return {
+		userId				: state.app.authentication.user._id,
 		name				: state.app.authentication.user.name,
 		profilePictureUrl	: state.app.authentication.user.profilePictureUrl
 	};

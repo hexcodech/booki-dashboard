@@ -78,7 +78,15 @@ class UserList extends React.Component{
 								<td>{user.name.first}</td>
 								<td>{user.name.last}</td>
 								<td>{user.email.verified}</td>
-								<td><img height="20" width="20" src={"/img/language-flags/" + user.locale + ".svg"} /> ({user.locale})</td>
+								<td>
+									<span className="rel hint-right-middle hint-anim" data-hint={user.locale}>
+										<img
+											height="20"
+											width="20"
+											src={"/img/language-flags/" + user.locale + ".svg"}
+										/>
+									</span>
+								</td>
 							</tr>;
 						})}
 					</tbody>

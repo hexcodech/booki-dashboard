@@ -98,11 +98,11 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/js\/actions\/LabelsActions.js": {
+	"\/js\/actions\/ClientActions.js": {
 		"ft": 64,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "\/js\/actions\/min\/LabelsActions-min.js",
+		"oAP": "\/js\/actions\/min\/ClientActions-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -224,6 +224,24 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/js\/containers\/content\/Client.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/containers\/content\/min\/Client-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/containers\/content\/ClientList.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/containers\/content\/min\/ClientList-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/js\/containers\/content\/DashboardContent.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -238,15 +256,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/js\/containers\/content\/min\/User-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/UserCapabilities.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/min\/UserCapabilities-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -404,6 +413,15 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/js\/reducers\/clientsReducer.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/reducers\/min\/clientsReducer-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/js\/reducers\/dashboardReducer.js": {
 		"ft": 64,
 		"mi": 0,
@@ -418,6 +436,15 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/js\/reducers\/min\/labelsReducer-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/reducers\/newClientReducer.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/reducers\/min\/newClientReducer-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0

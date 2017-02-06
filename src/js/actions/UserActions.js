@@ -1,6 +1,9 @@
 import debounce			from 'lodash/debounce';
 import Utilities		from "../Utilities.js";
 
+import {addErrorNotification}
+							from "./NotificationActions.js";
+
 
 //system
 
@@ -52,6 +55,10 @@ const fetchUsers = (accessToken) => {
 				failUsersRequest(error)
 			);
 			
+			dispatch(
+				addErrorNotification(error)
+			);
+			
 		});
 	};
 }
@@ -93,7 +100,7 @@ export const invalidateUser = (user) => {
 	};
 }
 
-export const clearNewUser = (user) => {
+export const clearNewUser = () => {
 	return {
 		type: "CLEAR_NEW_USER"
 	};
@@ -199,6 +206,10 @@ const debouncedPut = debounce((dispatch, user, accessToken) => {
 			failUserPut(error, user)
 		);
 		
+		dispatch(
+			addErrorNotification(error)
+		);
+		
 	});
 	
 }, 1000);
@@ -237,6 +248,10 @@ export const postUser = (user, accessToken) => {
 				failUserPost(error, user)
 			);
 			
+			dispatch(
+				addErrorNotification(error)
+			);
+			
 		});
 	};
 }
@@ -256,7 +271,7 @@ export const deleteUser = (user, accessToken) => {
 			);
 			
 			if(!response.success){
-				failUserDelete("The API coulnd't delete the user!", user)
+				failUserDelete("The API couldn't delete the user!", user)
 			}
 			
 			return response.success;
@@ -265,6 +280,10 @@ export const deleteUser = (user, accessToken) => {
 			
 			dispatch(
 				failUserDelete(error, user)
+			);
+			
+			dispatch(
+				addErrorNotification(error)
 			);
 			
 		});
@@ -289,6 +308,10 @@ const fetchUser = (user, accessToken) => {
 			
 			dispatch(
 				failUsersRequest(error)
+			);
+			
+			dispatch(
+				addErrorNotification(error)
 			);
 			
 		});

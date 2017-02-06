@@ -16,7 +16,7 @@ import {selectGenerator, arrayGenerator}
 							from '../../FieldGenerators.js';
 
 
-import {JSONTreeTheme, CAPABILITIES, LANGUAGES, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
+import {JSONTreeTheme, PERMISSIONS, LANGUAGES, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
 							from '../../Constants.js';
 
 import {invalidateUsers, clearNewUser, updateNewUser, fetchUsersIfNeeded, putUser, postUser, deleteUser}
@@ -25,22 +25,25 @@ import {invalidateUsers, clearNewUser, updateNewUser, fetchUsersIfNeeded, putUse
 import {addNotification}
 							from '../../actions/NotificationActions.js';
 							
-/*import {fetchLabelsIfNeeded}
-							from '../../actions/LabelsActions.js';*/
+import {fetchClientsIfNeeded}
+							from '../../actions/ClientActions.js';
 
-class UserList extends React.Component{
+class User extends React.Component{
 	
 	constructor(props){
 		super(props);
 		
-		Utilities.bindAll(this, ["componentDidMount", "handleRefreshClick", "handleOnChange", "handleOnAddNewUser", "handleOnDeleteUser"]);
+		Utilities.bindAll(this, [
+			"componentDidMount", 	"handleRefreshClick", 	"handleOnChange",
+			"handleOnAddNewUser", 	"handleOnDeleteUser",	"onClientRowClick"
+		]);
 	}
 	
 	componentDidMount() {
 		const {dispatch, accessToken} = this.props;
 		
 		dispatch(fetchUsersIfNeeded(accessToken));
-		//dispatch(fetchLabelsIfNeeded(accessToken));
+		dispatch(fetchClientsIfNeeded(accessToken));
 	}
 	
 	handleRefreshClick(e) {
@@ -113,17 +116,6 @@ class UserList extends React.Component{
 					clearNewUser()
 				);
 				
-			}else{
-				
-				dispatch(
-					addNotification({
-						title		: "Error",
-						text		: "Something went wrong, please check the logs for a hint.",
-						icon		: "error_outline",
-						color		: COLOR_FAILURE,
-					})
-				);
-				
 			}
 			
 		});
@@ -181,24 +173,22 @@ class UserList extends React.Component{
 				dispatch(
 					push('/dashboard/users/')
 				);
-			}else{
-				
-				dispatch(
-					addNotification({
-						title		: "Error",
-						text		: "Something went wrong, please check the logs for a hint.",
-						icon		: "error_outline",
-						color		: COLOR_FAILURE,
-					})
-				);
-				
 			}
 		});
 	}
 	
+	onClientRowClick(e){
+		this.props.dispatch(
+			push('/dashboard/client/' + e.currentTarget.getAttribute("data-client-id") + "/")
+		);
+	}
+	
 	render(){
 		
-		const {newUser, users, params: {userId}, currentUser} = this.props;
+		const {
+			newUser, users, params: {userId}, currentUser,
+			clients
+		} = this.props;
 		
 		let user;
 		
@@ -271,45 +261,69 @@ class UserList extends React.Component{
 				
 				<hr/>
 				
-				<h2>User form</h2>
-				
-				<form className="profile">
-					<FormGroups
-						object={userId === "new" ? newUser : user}
-						keyPaths={[
-							[
-								{keyPath: "_id",	label: "User Id", inputDisabled: true},
-								{keyPath: "locale", label: "Locale", input: selectGenerator(LANGUAGES, FlagOptionComponent, FlagValueComponent)}
-							],
-							[
-								{keyPath: "name.first", label: "First name"},
-								{keyPath: "name.last",	label: "Last name"}
-							],
-							[
-								{keyPath: "name.display", label: "Display name"}
-							],
-							[
-								{keyPath: "email.verified",		label: "Verified email"},
-								{keyPath: "email.unverified",	label: "Unverified email"}
-							],
-							[
-								{keyPath: "email.verificationCode", label: "Email verification code"}
-							],
-							[
-								{keyPath: "password.resetCode", label: "Password reset code"}
-							],
-							[
-								{keyPath: "profilePictureUrl",	label: "Profile picture url", input: porfilePictureUrlInput},
-								{keyPath: "capabilities",		label: "Capabilities", input: arrayGenerator(CAPABILITIES, true, "Add new capability")}
-							],
-						]}
-						handleOnChange={this.handleOnChange}
-					/>
+				<section>
+					<h2>User form</h2>
 					
-				</form>
+					<form className="profile">
+						<FormGroups
+							object={userId === "new" ? newUser : user}
+							keyPaths={[
+								[
+									{keyPath: "_id",	label: "User Id", inputDisabled: true},
+									{keyPath: "locale", label: "Locale", input: selectGenerator(LANGUAGES, FlagOptionComponent, FlagValueComponent)}
+								],
+								[
+									{keyPath: "name.first", label: "First name"},
+									{keyPath: "name.last",	label: "Last name"}
+								],
+								[
+									{keyPath: "name.display", label: "Display name"}
+								],
+								[
+									{keyPath: "email.verified",		label: "Verified email"},
+									{keyPath: "email.unverified",	label: "Unverified email"}
+								],
+								[
+									{keyPath: "email.verificationCode", label: "Email verification code"}
+								],
+								[
+									{keyPath: "password.resetCode", label: "Password reset code"}
+								],
+								[
+									{keyPath: "profilePictureUrl",	label: "Profile picture url", input: porfilePictureUrlInput},
+									{keyPath: "permissions",		label: "Permissions", input: arrayGenerator(PERMISSIONS, true, "Add new permission")}
+								],
+							]}
+							handleOnChange={this.handleOnChange}
+						/>
+						
+					</form>
+				</section>
 				
-				<h2>Raw JSON</h2>
-				<div className="json-tree">
+				<section>
+					<h2>OAuth clients</h2>
+					<table className="client-list styled clickable-rows">
+						<thead>
+							<tr><th>Name</th><th>Trusted</th></tr>
+						</thead>
+						<tbody>
+							{clients.map((client) => {
+								return <tr onClick={this.onClientRowClick} key={client._id} data-client-id={client._id}>
+									<td>{client.name}</td>
+									<td><span className="rel hint-right-middle hint-anim" data-hint={client.trusted ? "Trusted" : "Untrusted"}>{
+											client.trusted ?
+												<i className="material-icons bottom trusted">verified_user</i> :
+												<i className="material-icons bottom untrusted">lock_open</i>
+										}</span>
+									</td>
+								</tr>;
+							})}
+						</tbody>
+					</table>
+				</section>
+				
+				<section className="json-tree">
+					<h2>Raw JSON</h2>
 					<JSONTree
 						data={userId === "new" ? newUser : user}
 						theme={JSONTreeTheme}
@@ -317,7 +331,7 @@ class UserList extends React.Component{
 						hideRoot={true}
 						sortObjectKeys={true}
 					/>
-				</div>
+				</section>
 			</div>
 		);
 	}
@@ -328,8 +342,9 @@ const mapStateToProps = (state) => {
 		accessToken	: state.app.authentication.accessToken.token,
 		newUser		: state.app.newUser,
 		users		: state.app.users,
+		clients		: state.app.clients,
 		currentUser	: state.app.authentication.user
 	};
 }
 
-export default connect(mapStateToProps)(UserList);
+export default connect(mapStateToProps)(User);

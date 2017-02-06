@@ -117,7 +117,7 @@ export const fetchUser = (accessToken) => {
 		return Utilities.fetchApi("user/me", "GET", {}, accessToken)
 		.then((user) => {
 			
-			if(user.capabilities.indexOf("access-dashboard") !== -1){
+			if(user.permissions.indexOf("admin") !== -1){
 				dispatch(
 					receiveUser(user, Date.now())
 				);

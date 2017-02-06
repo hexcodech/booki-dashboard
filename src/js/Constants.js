@@ -25,15 +25,15 @@ export const JSONTreeTheme	= {
 	base0F: '#FF0000'
 };
 
-export const CAPABILITIES = [
-	"access-dashboard", 
-	"access-raw-data", 
-	"access-system-stats", 
-	"create-users", 
-	"delete-users", 
-	"edit-other-users", 
-	"use-arbitrary-filters", 
-	"list-users"
+export const PERMISSIONS = [
+	"admin",
+	"admin.system",
+	"admin.system.stats",
+	"admin.user",
+	"admin.user.list",
+	"admin.user.create",
+	"admin.user.delete",
+	"admin.user.editOthers",
 ];
 
 export const LANGUAGES = [

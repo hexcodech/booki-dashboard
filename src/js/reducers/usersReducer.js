@@ -20,8 +20,6 @@ const users = (state = [], action) => {
 			});
 		case "FAIL_USERS_REQUEST":
 			
-			console.log(action.error);
-			
 			return state.map((user) => {
 				return {
 					...user,
@@ -64,8 +62,6 @@ const users = (state = [], action) => {
 			
 		case "FAIL_USER_REQUEST":
 		case "FAIL_USER_PUT":
-			
-			console.log(action.error);
 		
 			return [...state.filter((user) => { //filter updated user out and insert the new one
 					return user._id !== action.user._id;

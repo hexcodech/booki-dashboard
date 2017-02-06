@@ -114,3 +114,21 @@ export const addNotification = (notification = {hideDelay: 2500}) => {
 		
 	};
 }
+
+export const addErrorNotification = (error) => {
+	return addNotification({
+		title		: (error.statusText ? error.statusText : "Error") + (error.status ? "(" + error.status + ")" : ""),
+		text		: "Something went wrong",
+		icon		: "error_outline",
+		color		: COLOR_FAILURE,
+		actions		: [
+			{
+				text		: "Log",
+				color		: "#000",
+				action		: function(){
+					console.log(error);
+				}
+			}
+		]
+	});
+};

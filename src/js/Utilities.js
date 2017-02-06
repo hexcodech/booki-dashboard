@@ -140,11 +140,18 @@ class Utilities{
 			http.onreadystatechange = () => {
 				if(http.readyState === 4){
 					if(http.status === 200){
-						resolve(
-							JSON.parse(http.responseText)
-						);
+						
+						let data = JSON.parse(http.responseText);
+						
+						if(data.status && data.status != 200){
+							reject(data);
+						}else{
+							resolve(
+								data
+							);
+						}
 					}else{
-						reject(Error("Error Code: " + http.status));
+						reject("Error Code: " + http.status);
 					}
 				}
 			}

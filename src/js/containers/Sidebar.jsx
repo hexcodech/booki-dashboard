@@ -27,7 +27,7 @@ const Sidebar = ({children, name, profilePictureUrl}) => {
 			<ul className="list-group">
 				<SidebarElement text="Dashboard" icon="dashboard" url="/dashboard/" />
 				<SidebarElement text="Users" icon="supervisor_account" url="/dashboard/users/" />
-				<SidebarElement text="OAuthClients" icon="business" url="/dashboard/oauth-clients/" />
+				<SidebarElement text="OAuthClients" icon="business" url="/dashboard/clients/" />
 			</ul>
 		</aside>
 	);

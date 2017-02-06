@@ -37,11 +37,8 @@ class UserList extends React.Component{
 	}
 	
 	handleUserRowClick(e){
-		
-		let id = e.currentTarget.getAttribute("data-user-id");
-		
 		this.props.dispatch(
-			push('/dashboard/user/' + id + "/")
+			push('/dashboard/user/' + e.currentTarget.getAttribute("data-user-id") + "/")
 		);
 	}
 	

@@ -1,19 +1,19 @@
 import {combineReducers}	from 'redux'
 
-const newUser = (state = {}, action) => {
+const newClient = (state = {}, action) => {
 		
 	switch(action.type){
-		case "CLEAR_NEW_USER":
+		case "CLEAR_NEW_CLIENT":
 			return {};
-		case "UPDATE_NEW_USER":
-			return {...state, ...action.user};
-		case "POST_USER":
+		case "UPDATE_NEW_CLIENT":
+			return {...state, ...action.client};
+		case "POST_CLIENT":
 			return {
 				...state,
 				isFetching: true,
 				didInvalidate: false
 			};
-		case "FAIL_USER_POST":
+		case "FAIL_CLIENT_POST":
 			
 			return {
 				...state,
@@ -27,4 +27,4 @@ const newUser = (state = {}, action) => {
 	};
 };
 
-export default newUser;
+export default newClient;

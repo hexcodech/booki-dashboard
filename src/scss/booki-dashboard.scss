@@ -203,7 +203,12 @@ html, body, #root, .wrapper{
 	transform: translateY(-50%);
 }
 
+.rel{
+	position: relative;
+}
+
 .material-icons{
+	
 	&.bottom{
 		vertical-align: bottom;
 	}
@@ -237,9 +242,22 @@ table.styled{
 	}
 }
 
+.clickable{
+	cursor: pointer;
+}
+
 table.clickable-rows{
 	tr{
-		cursor: pointer;
+		@extend .clickable;
+	}
+}
+
+.client-list{
+	.trusted{
+		color: $brand-success;
+	}
+	.untrusted{
+		color: $brand-danger;
 	}
 }
 
@@ -319,6 +337,8 @@ main.content{
 
 .card.dynamic{
 	display: inline-block;
+	
+	margin-bottom: 15px;
 }
 
 //general
@@ -346,9 +366,8 @@ main.content{
 	align-content	: flex-start;
 }
 
-//json-tree
-.json-tree{
-	padding-bottom: $grid-gutter-width-base / 2;
+section{
+	padding: ($grid-gutter-width-base / 2) 0 ($grid-gutter-width-base / 2) 0;
 }
 
 //spinner from http://tobiasahlin.com/spinkit/

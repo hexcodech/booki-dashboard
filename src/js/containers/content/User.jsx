@@ -125,8 +125,6 @@ class User extends React.Component{
 		e.preventDefault();
 		e.stopPropagation();
 		
-		//TODO: confirmation window
-		
 		const {dispatch, users, accessToken, params: {userId}, clients} = this.props;
 		
 		const user = Object.assign({}, users.filter((user) => {
@@ -239,7 +237,7 @@ class User extends React.Component{
 		});
 		
 		
-		let porfilePictureUrlInput = (id, value="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=512", handleOnChange) => {
+		const porfilePictureUrlInput = (id, value="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=512", handleOnChange) => {
 			
 			return <div className="input-group">
 				<div className="input-group-addon no-padding">
@@ -281,7 +279,7 @@ class User extends React.Component{
 					}
 					{userId === currentUser._id &&
 						<li className="list-inline-item hint-bottom-middle hint-anim" data-hint="This is your account, be careful.">
-							<i className="material-icons bottom">account_circle</i>
+							<i className="material-icons bottom">face</i>
 						</li>
 					}
 				</ul>
@@ -298,7 +296,11 @@ class User extends React.Component{
 							keyPaths={[
 								[
 									{keyPath: "_id",	label: "User Id", inputDisabled: true},
-									{keyPath: "locale", label: "Locale", input: selectGenerator(LANGUAGES, FlagOptionComponent, FlagValueComponent)}
+									{keyPath: "locale", label: "Locale", input: selectGenerator({
+										options			: LANGUAGES,
+										optionComponent	: FlagOptionComponent,
+										valueComponent	: FlagValueComponent
+									})}
 								],
 								[
 									{keyPath: "name.first", label: "First name"},
@@ -320,6 +322,10 @@ class User extends React.Component{
 								[
 									{keyPath: "profilePictureUrl",	label: "Profile picture url", input: porfilePictureUrlInput},
 									{keyPath: "permissions",		label: "Permissions", input: arrayGenerator(PERMISSIONS, true, "Add new permission")}
+								],
+								[
+									{keyPath: "placeOfResidence",	label: "Place of residence"},
+									{keyPath: "created",			label: "Created", inputDisabled: true}
 								],
 							]}
 							handleOnChange={this.handleOnChange}

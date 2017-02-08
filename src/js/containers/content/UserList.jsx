@@ -44,7 +44,7 @@ class UserList extends React.Component{
 	
 	render(){
 		
-		const {users} = this.props;
+		const {users, currentUser} = this.props;
 		
 		return (
 			<div className="user-list">
@@ -64,6 +64,7 @@ class UserList extends React.Component{
 				<table className="styled clickable-rows">
 					<thead>
 						<tr>
+							<th></th>
 							<th>ID</th>
 							<th>First name</th>
 							<th>Last name</th>
@@ -74,6 +75,20 @@ class UserList extends React.Component{
 					<tbody>
 						{users.map((user, index) => {
 							return <tr key={index} onClick={this.handleUserRowClick} data-user-id={user._id}>
+								<td>
+									{
+										user.permissions.indexOf("admin") !== -1 &&
+										<span className="rel hint-bottom-middle hint-anim" data-hint="Admin">
+											<i className="material-icons">gavel</i>
+										</span>
+									}
+									{
+										user._id == currentUser._id &&
+										<span className="rel hint-bottom-middle hint-anim" data-hint="This is your account.">
+											<i className="material-icons">face</i>
+										</span>
+									}
+								</td>
 								<td>{user._id}</td>
 								<td>{user.name.first}</td>
 								<td>{user.name.last}</td>
@@ -99,7 +114,8 @@ class UserList extends React.Component{
 const mapStateToProps = (state) => {
 	return {
 		accessToken	: state.app.authentication.accessToken.token,
-		users		: state.app.users
+		users		: state.app.users,
+		currentUser	: state.app.authentication.user
 	};
 }
 

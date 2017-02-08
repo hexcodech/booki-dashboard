@@ -4,9 +4,6 @@ import Utilities		from "../Utilities.js";
 import {addErrorNotification}
 							from "./NotificationActions.js";
 
-
-//system
-
 export const invalidateClients = () => {
 	return {
 		type: "INVALIDATE_CLIENTS"
@@ -113,51 +110,6 @@ export const updateNewClient = (client) => {
 	};
 }
 
-const putClient_ = (client) => {
-	return {
-		type: "PUT_CLIENT",
-		client
-	};
-}
-
-const postClient_ = (client) => {
-	return {
-		type: "POST_CLIENT",
-		client
-	};
-}
-
-const deleteClient_ = (client) => {
-	return {
-		type: "DELETE_CLIENT",
-		client
-	};
-}
-
-const failClientPut = (error, client) => {
-	return {
-		type: "FAIL_CLIENT_PUT",
-		error,
-		client
-	};
-}
-
-const failClientPost = (error, client) => {
-	return {
-		type: "FAIL_CLIENT_POST",
-		error,
-		client
-	};
-}
-
-const failClientDelete = (error, client) => {
-	return {
-		type: "FAIL_CLIENT_DELETE",
-		error,
-		client
-	};
-}
-
 const requestClient = (client) => {
 	return {
 		type: "REQUEST_CLIENT",
@@ -181,114 +133,6 @@ const receiveClient = (client, receivedAt) => {
 	};
 }
 
-const deletedClient = (client, success) => {
-	return {
-		type: "DELETED_CLIENT",
-		client,
-		success
-	};
-}
-
-const debouncedPut = debounce((dispatch, client, accessToken) => {
-	
-	return Utilities.fetchApi("oauth2/client/" + client._id, "PUT", {client}, accessToken)
-	.then((updatedClient) => {
-		
-		dispatch(
-			receiveClient(updatedClient, Date.now())
-		);
-		
-		return updatedClient;
-		
-	}).catch((error) => {
-		
-		dispatch(
-			failClientPut(error, client)
-		);
-		
-		dispatch(
-			addErrorNotification(error)
-		);
-		
-	});
-	
-}, 1000);
-
-export const putClient = (client, accessToken) => {
-	return (dispatch) => {
-		
-		dispatch(
-			putClient_(client)
-		);
-		
-		debouncedPut(dispatch, client, accessToken);
-		
-	};
-}
-
-export const postClient = (client, accessToken) => {
-	return (dispatch) => {
-		
-		dispatch(
-			postClient_(client)
-		);
-		
-		return Utilities.fetchApi("oauth2/client", "POST", {client}, accessToken)
-		.then((savedClient) => {
-			
-			dispatch(
-				receiveClient(savedClient, Date.now())
-			);
-			
-			return savedClient;
-			
-		}).catch((error) => {
-			
-			dispatch(
-				failClientPost(error, client)
-			);
-			
-			dispatch(
-				addErrorNotification(error)
-			);
-			
-		});
-	};
-}
-
-export const deleteClient = (client, accessToken) => {
-	return (dispatch) => {
-		
-		dispatch(
-			deleteClient_(client)
-		);
-		
-		return Utilities.fetchApi("oauth2/client/" + client._id, "DELETE", {}, accessToken)
-		.then((response) => {
-			
-			dispatch(
-				deletedClient(client, response.success)
-			);
-			
-			if(!response.success){
-				failClientDelete("The API couldn't delete the client!", client)
-			}
-			
-			return response.success;
-			
-		}).catch((error) => {
-			
-			dispatch(
-				failClientDelete(error, client)
-			);
-			
-			dispatch(
-				addErrorNotification(error)
-			);
-			
-		});
-	};
-}
 
 const fetchClient = (client, accessToken) => {
 	return (dispatch) => {
@@ -340,4 +184,160 @@ export const fetchClientIfNeeded = (client, accessToken) => {
 			return Promise.resolve();
 		}
 	}
+}
+
+
+const putClient_ = (client) => {
+	return {
+		type: "PUT_CLIENT",
+		client
+	};
+}
+
+const failClientPut = (error, client) => {
+	return {
+		type: "FAIL_CLIENT_PUT",
+		error,
+		client
+	};
+}
+
+const debouncedPut = debounce((dispatch, client, accessToken) => {
+	
+	return Utilities.fetchApi("oauth2/client/" + client._id, "PUT", {client}, accessToken)
+	.then((updatedClient) => {
+		
+		dispatch(
+			receiveClient(updatedClient, Date.now())
+		);
+		
+		return updatedClient;
+		
+	}).catch((error) => {
+		
+		dispatch(
+			failClientPut(error, client)
+		);
+		
+		dispatch(
+			addErrorNotification(error)
+		);
+		
+	});
+	
+}, 1000);
+
+export const putClient = (client, accessToken) => {
+	return (dispatch) => {
+		
+		dispatch(
+			putClient_(client)
+		);
+		
+		debouncedPut(dispatch, client, accessToken);
+		
+	};
+}
+
+const postClient_ = (client) => {
+	return {
+		type: "POST_CLIENT",
+		client
+	};
+}
+
+
+const failClientPost = (error, client) => {
+	return {
+		type: "FAIL_CLIENT_POST",
+		error,
+		client
+	};
+}
+
+export const postClient = (client, accessToken) => {
+	return (dispatch) => {
+		
+		dispatch(
+			postClient_(client)
+		);
+		
+		return Utilities.fetchApi("oauth2/client", "POST", {client}, accessToken)
+		.then((savedClient) => {
+			
+			dispatch(
+				receiveClient(savedClient, Date.now())
+			);
+			
+			return savedClient;
+			
+		}).catch((error) => {
+			
+			dispatch(
+				failClientPost(error, client)
+			);
+			
+			dispatch(
+				addErrorNotification(error)
+			);
+			
+		});
+	};
+}
+
+const deleteClient_ = (client) => {
+	return {
+		type: "DELETE_CLIENT",
+		client
+	};
+}
+
+const failClientDelete = (error, client) => {
+	return {
+		type: "FAIL_CLIENT_DELETE",
+		error,
+		client
+	};
+}
+
+const deletedClient = (client, success) => {
+	return {
+		type: "DELETED_CLIENT",
+		client,
+		success
+	};
+}
+
+export const deleteClient = (client, accessToken) => {
+	return (dispatch) => {
+		
+		dispatch(
+			deleteClient_(client)
+		);
+		
+		return Utilities.fetchApi("oauth2/client/" + client._id, "DELETE", {}, accessToken)
+		.then((response) => {
+			
+			dispatch(
+				deletedClient(client, response.success)
+			);
+			
+			if(!response.success){
+				failClientDelete("The API couldn't delete the client!", client)
+			}
+			
+			return response.success;
+			
+		}).catch((error) => {
+			
+			dispatch(
+				failClientDelete(error, client)
+			);
+			
+			dispatch(
+				addErrorNotification(error)
+			);
+			
+		});
+	};
 }

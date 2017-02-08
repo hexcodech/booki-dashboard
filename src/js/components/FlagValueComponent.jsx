@@ -1,7 +1,7 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
 
-const FlagOptionComponent = ({value}) => {
+const FlagValueComponent = ({value}) => {
 	
 	let url = "/img/language-flags/" + value.value + ".svg";
 	
@@ -12,4 +12,4 @@ const FlagOptionComponent = ({value}) => {
 	);
 };
 
-export default connect()(FlagOptionComponent);
+export default connect()(FlagValueComponent);

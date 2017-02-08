@@ -113,50 +113,6 @@ export const updateNewUser = (user) => {
 	};
 }
 
-const putUser_ = (user) => {
-	return {
-		type: "PUT_USER",
-		user
-	};
-}
-
-const postUser_ = (user) => {
-	return {
-		type: "POST_USER",
-		user
-	};
-}
-
-const deleteUser_ = (user) => {
-	return {
-		type: "DELETE_USER",
-		user
-	};
-}
-
-const failUserPut = (error, user) => {
-	return {
-		type: "FAIL_USER_PUT",
-		error,
-		user
-	};
-}
-
-const failUserPost = (error, user) => {
-	return {
-		type: "FAIL_USER_POST",
-		error,
-		user
-	};
-}
-
-const failUserDelete = (error, user) => {
-	return {
-		type: "FAIL_USER_DELETE",
-		error,
-		user
-	};
-}
 
 const requestUser = (user) => {
 	return {
@@ -181,114 +137,6 @@ const receiveUser = (user, receivedAt) => {
 	};
 }
 
-const deletedUser = (user, success) => {
-	return {
-		type: "DELETED_USER",
-		user,
-		success
-	};
-}
-
-const debouncedPut = debounce((dispatch, user, accessToken) => {
-	
-	return Utilities.fetchApi("user/" + user._id, "PUT", {user}, accessToken)
-	.then((updatedUser) => {
-		
-		dispatch(
-			receiveUser(updatedUser, Date.now())
-		);
-		
-		return updatedUser;
-		
-	}).catch((error) => {
-		
-		dispatch(
-			failUserPut(error, user)
-		);
-		
-		dispatch(
-			addErrorNotification(error)
-		);
-		
-	});
-	
-}, 1000);
-
-export const putUser = (user, accessToken) => {
-	return (dispatch) => {
-		
-		dispatch(
-			putUser_(user)
-		);
-		
-		debouncedPut(dispatch, user, accessToken);
-		
-	};
-}
-
-export const postUser = (user, accessToken) => {
-	return (dispatch) => {
-		
-		dispatch(
-			postUser_(user)
-		);
-		
-		return Utilities.fetchApi("user", "POST", {user}, accessToken)
-		.then((savedUser) => {
-			
-			dispatch(
-				receiveUser(savedUser, Date.now())
-			);
-			
-			return savedUser;
-			
-		}).catch((error) => {
-			
-			dispatch(
-				failUserPost(error, user)
-			);
-			
-			dispatch(
-				addErrorNotification(error)
-			);
-			
-		});
-	};
-}
-
-export const deleteUser = (user, accessToken) => {
-	return (dispatch) => {
-		
-		dispatch(
-			deleteUser_(user)
-		);
-		
-		return Utilities.fetchApi("user/" + user._id, "DELETE", {}, accessToken)
-		.then((response) => {
-			
-			dispatch(
-				deletedUser(user, response.success)
-			);
-			
-			if(!response.success){
-				failUserDelete("The API couldn't delete the user!", user)
-			}
-			
-			return response.success;
-			
-		}).catch((error) => {
-			
-			dispatch(
-				failUserDelete(error, user)
-			);
-			
-			dispatch(
-				addErrorNotification(error)
-			);
-			
-		});
-	};
-}
 
 const fetchUser = (user, accessToken) => {
 	return (dispatch) => {
@@ -340,4 +188,158 @@ export const fetchUserIfNeeded = (user, accessToken) => {
 			return Promise.resolve();
 		}
 	}
+}
+
+const putUser_ = (user) => {
+	return {
+		type: "PUT_USER",
+		user
+	};
+}
+
+const failUserPut = (error, user) => {
+	return {
+		type: "FAIL_USER_PUT",
+		error,
+		user
+	};
+}
+
+const debouncedPut = debounce((dispatch, user, accessToken) => {
+	
+	return Utilities.fetchApi("user/" + user._id, "PUT", {user}, accessToken)
+	.then((updatedUser) => {
+		
+		dispatch(
+			receiveUser(updatedUser, Date.now())
+		);
+		
+		return updatedUser;
+		
+	}).catch((error) => {
+		
+		dispatch(
+			failUserPut(error, user)
+		);
+		
+		dispatch(
+			addErrorNotification(error)
+		);
+		
+	});
+	
+}, 1000);
+
+export const putUser = (user, accessToken) => {
+	return (dispatch) => {
+		
+		dispatch(
+			putUser_(user)
+		);
+		
+		debouncedPut(dispatch, user, accessToken);
+		
+	};
+}
+
+const postUser_ = (user) => {
+	return {
+		type: "POST_USER",
+		user
+	};
+}
+
+const failUserPost = (error, user) => {
+	return {
+		type: "FAIL_USER_POST",
+		error,
+		user
+	};
+}
+
+export const postUser = (user, accessToken) => {
+	return (dispatch) => {
+		
+		dispatch(
+			postUser_(user)
+		);
+		
+		return Utilities.fetchApi("user", "POST", {user}, accessToken)
+		.then((savedUser) => {
+			
+			dispatch(
+				receiveUser(savedUser, Date.now())
+			);
+			
+			return savedUser;
+			
+		}).catch((error) => {
+			
+			dispatch(
+				failUserPost(error, user)
+			);
+			
+			dispatch(
+				addErrorNotification(error)
+			);
+			
+		});
+	};
+}
+
+const deleteUser_ = (user) => {
+	return {
+		type: "DELETE_USER",
+		user
+	};
+}
+
+const failUserDelete = (error, user) => {
+	return {
+		type: "FAIL_USER_DELETE",
+		error,
+		user
+	};
+}
+
+const deletedUser = (user, success) => {
+	return {
+		type: "DELETED_USER",
+		user,
+		success
+	};
+}
+
+export const deleteUser = (user, accessToken) => {
+	return (dispatch) => {
+		
+		dispatch(
+			deleteUser_(user)
+		);
+		
+		return Utilities.fetchApi("user/" + user._id, "DELETE", {}, accessToken)
+		.then((response) => {
+			
+			dispatch(
+				deletedUser(user, response.success)
+			);
+			
+			if(!response.success){
+				failUserDelete("The API couldn't delete the user!", user)
+			}
+			
+			return response.success;
+			
+		}).catch((error) => {
+			
+			dispatch(
+				failUserDelete(error, user)
+			);
+			
+			dispatch(
+				addErrorNotification(error)
+			);
+			
+		});
+	};
 }

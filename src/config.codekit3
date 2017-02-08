@@ -98,6 +98,15 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/js\/actions\/BookActions.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/actions\/min\/BookActions-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/js\/actions\/ClientActions.js": {
 		"ft": 64,
 		"mi": 0,
@@ -130,6 +139,24 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/js\/actions\/min\/UserActions-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/components\/BookOptionComponent.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/components\/min\/BookOptionComponent-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/components\/BookValueComponent.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/components\/min\/BookValueComponent-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -220,6 +247,24 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/js\/containers\/min\/Content-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/containers\/content\/Book.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/containers\/content\/min\/Book-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/containers\/content\/BookList.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/containers\/content\/min\/BookList-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -350,6 +395,15 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/js\/containers\/TableInput.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/containers\/min\/TableInput-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/js\/containers\/TagInput.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -413,6 +467,24 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/js\/reducers\/bookLookupReducer.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/reducers\/min\/bookLookupReducer-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/reducers\/booksReducer.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/reducers\/min\/booksReducer-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/js\/reducers\/clientsReducer.js": {
 		"ft": 64,
 		"mi": 0,
@@ -436,6 +508,15 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/js\/reducers\/min\/labelsReducer-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/reducers\/newBookReducer.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/js\/reducers\/min\/newBookReducer-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0

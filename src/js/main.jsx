@@ -37,6 +37,9 @@ import Content														from './containers/Content.jsx';
 	
 	import ClientList												from './containers/content/ClientList.jsx';
 	import Client													from './containers/content/Client.jsx';
+	
+	import BookList													from './containers/content/BookList.jsx';
+	import Book														from './containers/content/Book.jsx';
 
 
 
@@ -92,6 +95,9 @@ ReactDOM.render(
 						
 						<Route path="clients/" component={ClientList} />
 						<Route path="client/:clientId/" component={Client} />
+						
+						<Route path="books/" component={BookList} />
+						<Route path="book/:bookId/" component={Book} />
 						
 						
 					</Route>

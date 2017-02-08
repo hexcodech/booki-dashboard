@@ -10,14 +10,27 @@ import users				from "./usersReducer.js";
 import newClient			from "./newClientReducer.js";
 import clients				from "./clientsReducer.js";
 
+import newBook				from "./newBookReducer.js";
+import books				from "./booksReducer.js";
+
+import lookedUpBooks		from "./bookLookupReducer.js";
+
 import notifications		from "./notificationReducer.js";
 
 export default combineReducers({
 	authentication,
 	dashboard,
+	
 	newUser,
 	users,
+	
 	newClient,
 	clients,
+	
+	newBook,
+	books,
+	
+	lookedUpBooks,
+	
 	notifications
 });

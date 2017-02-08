@@ -30,6 +30,7 @@ const Sidebar = ({userId, name, profilePictureUrl, dispatch}) => {
 				<SidebarElement text="Dashboard" icon="dashboard" url="/dashboard/" />
 				<SidebarElement text="Users" icon="supervisor_account" url="/dashboard/users/" />
 				<SidebarElement text="OAuthClients" icon="business" url="/dashboard/clients/" />
+				<SidebarElement text="Books" icon="book" url="/dashboard/books/" />
 			</ul>
 		</aside>
 	);

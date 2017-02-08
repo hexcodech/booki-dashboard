@@ -19,14 +19,14 @@ const FormGroups = ({object, keyPaths, handleOnChange}) => {
 					key={j}
 					object={object}
 					keyPath={keyPaths[i][j].keyPath}
-					fieldSize="col-6"
+					fieldSize={"col-" + (12 / keyPaths[i].length) }
 					
 					label={keyPaths[i][j].label}
-					labelSize="col-4"
+					labelSize={"col-" + (2 * keyPaths[i].length)}
 					
 					inputType={keyPaths[i][j].inputType}
 					inputDisabled={keyPaths[i][j].inputDisabled}
-					inputSize="col-8"
+					inputSize={"col-" + (12 - 2 * keyPaths[i].length)}
 					input={keyPaths[i][j].input}
 					
 					handleOnChange={handleOnChange}

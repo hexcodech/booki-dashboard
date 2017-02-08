@@ -97,9 +97,8 @@ class Client extends React.Component{
 				dispatch(
 					addNotification({
 						title		: "Created",
-						text		: "The client was successfully created",
+						text		: "The client was successfully created. You should now copy the secret.",
 						icon		: "check_circle",
-						hideDelay	: 5000,
 						color		: COLOR_SUCCESS,
 					})
 				);
@@ -120,8 +119,6 @@ class Client extends React.Component{
 	handleOnDeleteClient(e){
 		e.preventDefault();
 		e.stopPropagation();
-		
-		//TODO: confirmation window
 		
 		const {dispatch, clients, accessToken, params: {clientId} } = this.props;
 		
@@ -201,7 +198,7 @@ class Client extends React.Component{
 			return user._id === client.userId;
 		})[0];
 		
-		let userIdInput = (id, value="", handleOnChange) => {
+		const userIdInput = (id, value="", handleOnChange) => {
 			
 			return <div className="input-group">
 				<div className="input-group-addon no-padding clickable" onClick={()=>{dispatch(push("/dashboard/user/" + creator._id + "/"))}}>
@@ -259,7 +256,7 @@ class Client extends React.Component{
 							keyPaths={[
 								[
 									{keyPath: "_id",			label: "Client Id", inputDisabled: true},
-									{keyPath: "trusted",		label: "Trusted", input: checkboxGenerator()},
+									{keyPath: "trusted",		label: "Trusted", input: checkboxGenerator(false)},
 								],
 								[
 									{keyPath: "name",			label: "Name"},
@@ -274,6 +271,19 @@ class Client extends React.Component{
 						
 					</form>
 				</section>
+				
+				{
+					client && client.secret && client.secret.secret &&
+					
+					<section className="row">
+						<div className="col-12 col-md-2">
+							<label htmlFor="secret">Secret</label>
+						</div>
+						<div className="col-12 col-md-10">
+							<input className="form-control" type="text" disabled="disabled" id="secret" value={client.secret.secret} />
+						</div>
+					</section>
+				}
 				
 				<section className="json-tree">
 					<h2>Raw JSON</h2>

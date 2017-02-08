@@ -247,7 +247,7 @@ table.styled{
 }
 
 table.clickable-rows{
-	tr{
+	tbody tr{
 		@extend .clickable;
 	}
 }
@@ -518,7 +518,7 @@ section{
 	}
 }
 
-.flag{
+.flag, .book-select{
 	padding			: 5px;
 	
 	img{
@@ -526,8 +526,30 @@ section{
 	}
 }
 
-.flag-option{
+.book-select{
+	.pageCount{
+		
+		margin-left: 5px;
+		
+		&:before{
+			content: "(";
+		}
+		&:after{
+			content: ")";
+		}
+	}
+}
+
+.Select--single.has-value{
+	.Select-input{
+		display: none !important;
+	}
+}
+
+.flag-option, .book-option{
 	border-bottom	: #eee 1px solid;
+	
+	cursor			: pointer;
 	
 	&:hover{
 		background-color: #eee;

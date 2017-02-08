@@ -91,6 +91,16 @@ const clients = (state = [], action) => {
 		case "DELETED_CLIENT":
 		
 			return state; //we already deleted the client in the "DELETE_CLIENT" event ^^
+			
+			
+		
+			
+		case "DELETE_USER":
+			//cascade delete related clients
+			
+			return state.filter((client)=>{
+				return client.userId !== action.user._id;
+			});
 		
 		default:
 			return state;

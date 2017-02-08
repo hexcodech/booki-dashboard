@@ -180,7 +180,7 @@ class Client extends React.Component{
 		
 		if(clientId === "new"){
 			
-			client = {};
+			client = newClient;
 			
 		}else{
 			
@@ -255,7 +255,7 @@ class Client extends React.Component{
 					
 					<form className="profile">
 						<FormGroups
-							object={clientId === "new" ? newClient : client}
+							object={client}
 							keyPaths={[
 								[
 									{keyPath: "_id",			label: "Client Id", inputDisabled: true},
@@ -278,7 +278,7 @@ class Client extends React.Component{
 				<section className="json-tree">
 					<h2>Raw JSON</h2>
 					<JSONTree
-						data={clientId === "new" ? newClient : client}
+						data={client}
 						theme={JSONTreeTheme}
 						invertTheme={false}
 						hideRoot={true}

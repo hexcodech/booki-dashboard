@@ -25,7 +25,7 @@ import {invalidateUsers, clearNewUser, updateNewUser, fetchUsersIfNeeded, putUse
 import {addNotification}
 							from '../../actions/NotificationActions.js';
 							
-import {fetchClientsIfNeeded}
+import {fetchClientsIfNeeded, postClient}
 							from '../../actions/ClientActions.js';
 
 class User extends React.Component{
@@ -127,16 +127,22 @@ class User extends React.Component{
 		
 		//TODO: confirmation window
 		
-		const {dispatch, users, accessToken, params: {userId} } = this.props;
+		const {dispatch, users, accessToken, params: {userId}, clients} = this.props;
 		
-		let user = Object.assign({}, users.filter((user) => {
+		const user = Object.assign({}, users.filter((user) => {
 			return user._id === userId;
 		})[0]);
+		
+		const ownClients = clients.filter((client) => {
+			return client.userId === userId;
+		});
 		
 		dispatch(
 			deleteUser(user, accessToken)
 		).then((success) => {
 			if(success){
+				
+				
 				
 				dispatch(
 					addNotification({
@@ -151,9 +157,24 @@ class User extends React.Component{
 							color: COLOR_INFO,
 							action: (e, notification) => {
 								
-								dispatch(
-									postUser(user, accessToken)
-								).then((postedUser) => {
+								let promises = [
+									dispatch(
+										postUser(user, accessToken)
+									)
+								];
+								
+								for(let i=0;i<ownClients.length;i++){
+									promises.push(
+										dispatch(
+											postClient(ownClients[i], accessToken)
+										)
+									);
+								}
+								
+								Promise.all(promises).then((values) => {
+									
+									//the first argument is the user
+									let postedUser = values[0];
 									
 									if(postedUser){
 										dispatch(
@@ -194,7 +215,7 @@ class User extends React.Component{
 		
 		if(userId === "new"){
 			
-			user = {};
+			user = newUser;
 			
 		}else{
 			
@@ -210,6 +231,13 @@ class User extends React.Component{
 		}
 		
 		if(!user){return null;}
+		
+		
+		
+		const ownClients = clients.filter((client) => {
+			return client.userId === userId;
+		});
+		
 		
 		let porfilePictureUrlInput = (id, value="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=512", handleOnChange) => {
 			
@@ -266,7 +294,7 @@ class User extends React.Component{
 					
 					<form className="profile">
 						<FormGroups
-							object={userId === "new" ? newUser : user}
+							object={user}
 							keyPaths={[
 								[
 									{keyPath: "_id",	label: "User Id", inputDisabled: true},
@@ -300,32 +328,36 @@ class User extends React.Component{
 					</form>
 				</section>
 				
-				<section>
-					<h2>OAuth clients</h2>
-					<table className="client-list styled clickable-rows">
-						<thead>
-							<tr><th>Name</th><th>Trusted</th></tr>
-						</thead>
-						<tbody>
-							{clients.map((client) => {
-								return <tr onClick={this.onClientRowClick} key={client._id} data-client-id={client._id}>
-									<td>{client.name}</td>
-									<td><span className="rel hint-right-middle hint-anim" data-hint={client.trusted ? "Trusted" : "Untrusted"}>{
-											client.trusted ?
-												<i className="material-icons bottom trusted">verified_user</i> :
-												<i className="material-icons bottom untrusted">lock_open</i>
-										}</span>
-									</td>
-								</tr>;
-							})}
-						</tbody>
-					</table>
-				</section>
+				{
+					ownClients.length > 0 &&
+					
+					<section>
+						<h2>OAuth clients</h2>
+						<table className="client-list styled clickable-rows">
+							<thead>
+								<tr><th>Name</th><th>Trusted</th></tr>
+							</thead>
+							<tbody>
+								{ownClients.map((client) => {
+									return <tr onClick={this.onClientRowClick} key={client._id} data-client-id={client._id}>
+										<td>{client.name}</td>
+										<td><span className="rel hint-right-middle hint-anim" data-hint={client.trusted ? "Trusted" : "Untrusted"}>{
+												client.trusted ?
+													<i className="material-icons bottom trusted">verified_user</i> :
+													<i className="material-icons bottom untrusted">lock_open</i>
+											}</span>
+										</td>
+									</tr>;
+								})}
+							</tbody>
+						</table>
+					</section>
+				}
 				
 				<section className="json-tree">
 					<h2>Raw JSON</h2>
 					<JSONTree
-						data={userId === "new" ? newUser : user}
+						data={user}
 						theme={JSONTreeTheme}
 						invertTheme={false}
 						hideRoot={true}

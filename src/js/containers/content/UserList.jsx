@@ -8,6 +8,7 @@ import {push}				from 'react-router-redux';
 
 import RefreshButton		from '../../components/RefreshButton.jsx';
 
+import {API_URL}			from '../../Constants.js';
 import Utilities			from '../../Utilities.js';
 
 import {invalidateUsers, fetchUsersIfNeeded}	
@@ -98,7 +99,7 @@ class UserList extends React.Component{
 										<img
 											height="20"
 											width="20"
-											src={"/img/language-flags/" + user.locale + ".svg"}
+											src={API_URL + "/static/res/img/locales/" + user.locale + ".svg"}
 										/>
 									</span>
 								</td>

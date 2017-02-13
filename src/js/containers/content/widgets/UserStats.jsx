@@ -36,7 +36,7 @@ class UserWidget extends React.Component{
 		const {users} = this.props;
 		
 		const newUsers = users.filter((user) => {
-			return user.created >= (Date.now() - 1000 * 60 * 60 * 24 * 7);
+			return new Date(user.created).getTime() >= (Date.now() - 1000 * 60 * 60 * 24 * 7);
 		});
 		
 		return (

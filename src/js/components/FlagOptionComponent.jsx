@@ -1,9 +1,11 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
 
+import {API_URL}			from '../Constants.js';
+
 const FlagOptionComponent = ({option, isFocused, onFocus, onSelect}) => {
 	
-	let url = "/img/language-flags/" + option.value + ".svg";
+	let url = API_URL + "/static/res/img/locales/" + option.value + ".svg";
 	
 	const
 	handleMouseDown		= (event) => {

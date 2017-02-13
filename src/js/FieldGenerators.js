@@ -4,7 +4,7 @@ import TagInput				from './containers/TagInput.jsx';
 import SelectInput			from './containers/SelectInput.jsx';
 //import TableInput			from './containers/TableInput.jsx';
 
-export const selectGenerator = (props, onSelect) => {
+export const selectGenerator = (props, onSelect = null) => {
 	
 	return (id, value, handleOnChange) => {
 		
@@ -12,7 +12,10 @@ export const selectGenerator = (props, onSelect) => {
 			let val = option && option.value ? option.value : '';
 			
 			handleOnChange(id, val);
-			onSelect(val);
+			
+			if(onSelect){
+				onSelect(val);
+			}
 		};
 		
 		return <SelectInput

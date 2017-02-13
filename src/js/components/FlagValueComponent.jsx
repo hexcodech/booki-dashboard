@@ -1,9 +1,11 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
 
+import {API_URL}			from '../Constants.js';
+
 const FlagValueComponent = ({value}) => {
 	
-	let url = "/img/language-flags/" + value.value + ".svg";
+	let url = API_URL + "/static/res/img/locales/" + value.value + ".svg";
 	
 	return (
 		<span className="flag flag-value">

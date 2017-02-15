@@ -1,45 +1,43 @@
-import React														from "react";
-import ReactDOM														from "react-dom";
-import {createStore, combineReducers, applyMiddleware, compose}		from "redux"
-import {Provider}													from "react-redux";
-import {Router, Route, IndexRoute, browserHistory}					from "react-router";
-import {syncHistoryWithStore, routerReducer, routerMiddleware}		from "react-router-redux";
-import thunkMiddleware												from "redux-thunk";
-import throttle														from "lodash/throttle";
+import React														from 'react';
+import ReactDOM														from 'react-dom';
+import {createStore, combineReducers, applyMiddleware, compose}		from 'redux'
+import {Provider}													from 'react-redux';
+import {Router, Route, IndexRoute, browserHistory}					from 'react-router';
+import {syncHistoryWithStore, routerReducer, routerMiddleware}		from 'react-router-redux';
+import thunkMiddleware												from 'redux-thunk';
+import throttle														from 'lodash/throttle';
 
-import {loadState, saveState}										from "./LocalStorage.js";
+import {loadState, saveState}										from 'utilities/LocalStorage.js';
 
 //reducer(s)
 
-import appReducer													from "./reducers/appReducer.js";
+import appReducer													from 'reducers/appReducer.js';
 
 //React Components
 
-import Wrapper														from "./containers/Wrapper.jsx";
+import Wrapper														from 'containers/layout/Wrapper.jsx';
 
 //Dev
 
-import DevTools														from "./containers/DevTools.jsx";
+import DevTools														from 'containers/dev/DevTools.jsx';
 
 //Containers
 
 
-import Login														from "./containers/auth/Login.jsx";
-import OAuthCallback												from "./containers/auth/OAuthCallback.jsx";
+import Login														from 'components/auth/Login.jsx';
+import OAuthCallback												from 'components/auth/OAuthCallback.jsx';
 
-import Dashboard													from "./containers/Dashboard.jsx";
-
-import Content														from './containers/Content.jsx';
-	import DashboardContent											from './containers/content/DashboardContent.jsx';
+import Content														from 'containers/content/Content.jsx';
+	import DashboardContent											from 'containers/content/dashboard/Dashboard.jsx';
 	
-	import UserList													from './containers/content/UserList.jsx';
-	import User														from './containers/content/User.jsx';
+	import UserList													from 'containers/content/user/UserList.jsx';
+	import User														from 'containers/content/user/User.jsx';
 	
-	import ClientList												from './containers/content/ClientList.jsx';
-	import Client													from './containers/content/Client.jsx';
+	import ClientList												from 'containers/content/client/ClientList.jsx';
+	import Client													from 'containers/content/client/Client.jsx';
 	
-	import BookList													from './containers/content/BookList.jsx';
-	import Book														from './containers/content/Book.jsx';
+	import BookList													from 'containers/content/book/BookList.jsx';
+	import Book														from 'containers/content/book/Book.jsx';
 
 
 
@@ -82,22 +80,22 @@ ReactDOM.render(
 		{ /* Tell the Router to use our enhanced history */ }		
 		
 		<Router history={history}>
-			<Route path="/" component={Wrapper}>
+			<Route path='/'>
 				<IndexRoute component={Login} />
-				<Route path="auth/callback" component={OAuthCallback} />
+				<Route path='auth/callback' component={OAuthCallback} />
 				
-				<Route component={Dashboard}>
-					<Route path="dashboard/" component={Content} >
+				<Route component={Wrapper}>
+					<Route path='dashboard/' component={Content} >
 						<IndexRoute component={DashboardContent} />
 						
-						<Route path="users/" component={UserList} />
-						<Route path="user/:userId/" component={User} />
+						<Route path='users/' component={UserList} />
+						<Route path='user/:userId/' component={User} />
 						
-						<Route path="clients/" component={ClientList} />
-						<Route path="client/:clientId/" component={Client} />
+						<Route path='clients/' component={ClientList} />
+						<Route path='client/:clientId/' component={Client} />
 						
-						<Route path="books/" component={BookList} />
-						<Route path="book/:bookId/" component={Book} />
+						<Route path='books/' component={BookList} />
+						<Route path='book/:bookId/' component={Book} />
 						
 						
 					</Route>

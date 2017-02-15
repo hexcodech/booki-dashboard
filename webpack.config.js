@@ -17,6 +17,25 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
     ],
+    
+    resolve: {
+	    root: path.resolve(__dirname),
+	    
+	    alias: {
+		    js			: 'web/js',
+		    
+		    utilities	: 'app/utilities',
+		    constants	: 'app/Constants.js',
+		    
+		    actions		: 'app/actions',
+		    reducers	: 'app/reducers',
+		    
+		    components	: 'web/js/components',
+		    containers	: 'web/js/containers',
+		},
+		
+		extensions: ['', '.js', '.jsx']
+	},
 	
 	module: {
 		loaders: [

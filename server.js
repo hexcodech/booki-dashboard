@@ -12,12 +12,12 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.use("/css", express.static(__dirname + "/src/css/"));
-app.use("/img", express.static(__dirname + "/src/img/"));
-app.use("/js", express.static(__dirname + "/src/js/"));
+app.use("/css", express.static(__dirname + "/web/css/"));
+app.use("/img", express.static(__dirname + "/web/img/"));
+app.use("/js", express.static(__dirname + "/web/js/"));
 
 app.get('*', function(req, res) {
-	res.sendFile(path.join(__dirname, '/src/index.html'));
+	res.sendFile(path.join(__dirname, '/web/index.html'));
 });
 
 app.listen(8080, function(err) {

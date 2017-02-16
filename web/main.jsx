@@ -11,33 +11,33 @@ import {loadState, saveState}										from 'utilities/local-storage';
 
 //reducer(s)
 
-import appReducer													from 'reducers/appReducer.js';
+import appReducer													from 'reducers/app';
 
 //React Components
 
-import Wrapper														from 'web/containers/layout/Wrapper.jsx';
+import Wrapper														from 'web/containers/layout/Wrapper';
 
 //Dev
 
-import DevTools														from 'web/containers/dev/DevTools.jsx';
+import DevTools														from 'web/containers/dev/DevTools';
 
 //Containers
 
 
-import Login														from 'web/components/auth/Login.jsx';
-import OAuthCallback												from 'web/components/auth/OAuthCallback.jsx';
+import Login														from 'web/components/auth/Login';
+import OAuthCallback												from 'web/components/auth/OAuthCallback';
 
-import Content														from 'web/containers/content/Content.jsx';
-	import DashboardContent											from 'web/containers/content/dashboard/Dashboard.jsx';
+import Content														from 'web/containers/content/Content';
+	import DashboardContent											from 'web/containers/content/dashboard/Dashboard';
 	
-	import UserList													from 'web/containers/content/user/UserList.jsx';
-	import User														from 'web/containers/content/user/User.jsx';
+	import UserList													from 'web/containers/content/user/UserList';
+	import User														from 'web/containers/content/user/User';
 	
-	import ClientList												from 'web/containers/content/client/ClientList.jsx';
-	import Client													from 'web/containers/content/client/Client.jsx';
+	import ClientList												from 'web/containers/content/client/ClientList';
+	import Client													from 'web/containers/content/client/Client';
 	
-	import BookList													from 'web/containers/content/book/BookList.jsx';
-	import Book														from 'web/containers/content/book/Book.jsx';
+	import BookList													from 'web/containers/content/book/BookList';
+	import Book														from 'web/containers/content/book/Book';
 
 
 

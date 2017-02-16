@@ -8,7 +8,7 @@ import {bindAll}			from 'utilities/object';
 import {invalidateClients, fetchClientsIfNeeded}
 							from 'actions/client';
 
-import RefreshButton		from 'web/components/RefreshButton.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
 
 class ClientList extends React.Component{
 	

@@ -9,7 +9,7 @@ import {bindAll}			from 'utilities/object';
 import {invalidateUsers, fetchUsersIfNeeded}
 							from 'actions/user';
 
-import RefreshButton		from 'web/components/RefreshButton.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
 
 
 class UserList extends React.Component{

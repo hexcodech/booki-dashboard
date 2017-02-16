@@ -23,11 +23,11 @@ import {fetchUsersIfNeeded}	from 'actions/user';
 import {addNotification}	from 'actions/notification';
 							
 							
-import RefreshButton		from 'web/components/RefreshButton.jsx';
-import FormGroups			from 'web/components/form/FormGroups.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
+import FormGroups			from 'web/components/form/FormGroups';
 
-import BookOptionComponent	from 'web/components/form/input/select/BookOptionComponent.jsx';
-import BookValueComponent	from 'web/components/form/input/select/BookValueComponent.jsx';
+import BookOptionComponent	from 'web/components/form/input/select/BookOptionComponent';
+import BookValueComponent	from 'web/components/form/input/select/BookValueComponent';
 
 class Book extends React.Component{
 	

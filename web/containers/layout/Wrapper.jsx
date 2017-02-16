@@ -1,10 +1,10 @@
 import React		from 'react';
 import {connect}	from 'react-redux';
-import Sidebar		from 'web/containers/layout/Sidebar.jsx';
+import Sidebar		from 'web/containers/layout/Sidebar';
 
-import DevTools		from 'web/containers/dev/DevTools.jsx';
+import DevTools		from 'web/containers/dev/DevTools';
 import Notifications
-					from 'web/containers/Notifications.jsx';
+					from 'web/containers/Notifications';
 
 const Wrapper = ({children}) => {
 	

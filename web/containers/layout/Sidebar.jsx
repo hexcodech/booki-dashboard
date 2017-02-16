@@ -2,7 +2,7 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {push}				from 'react-router-redux';
 
-import SidebarListElement	from 'web/components/sidebar/SidebarListElement.jsx';
+import SidebarListElement	from 'web/components/sidebar/SidebarListElement';
 
 const Sidebar = ({userId, name, profilePictureUrl, dispatch}) => {
 	

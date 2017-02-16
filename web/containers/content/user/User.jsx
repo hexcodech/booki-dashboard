@@ -23,11 +23,11 @@ import {fetchClientsIfNeeded, postClient}
 							from 'actions/client';
 
 
-import RefreshButton		from 'web/components/RefreshButton.jsx';
-import FormGroups			from 'web/components/form/FormGroups.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
+import FormGroups			from 'web/components/form/FormGroups';
 
-import FlagOptionComponent	from 'web/components/form/input/select/FlagOptionComponent.jsx';
-import FlagValueComponent	from 'web/components/form/input/select/FlagValueComponent.jsx';
+import FlagOptionComponent	from 'web/components/form/input/select/FlagOptionComponent';
+import FlagValueComponent	from 'web/components/form/input/select/FlagValueComponent';
 
 
 class User extends React.Component{

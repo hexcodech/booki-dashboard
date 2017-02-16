@@ -23,8 +23,8 @@ import {fetchUsersIfNeeded}
 import {addNotification}
 							from 'actions/notification';
 
-import RefreshButton		from 'web/components/RefreshButton.jsx';
-import FormGroups			from 'web/components/form/FormGroups.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
+import FormGroups			from 'web/components/form/FormGroups';
 
 class Client extends React.Component{
 	

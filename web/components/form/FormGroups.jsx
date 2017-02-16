@@ -1,7 +1,7 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
 
-import FormField			from 'web/components/form/FormField.jsx';
+import FormField			from 'web/components/form/FormField';
 
 const FormGroups = ({object, keyPaths, handleOnChange}) => {
 	

@@ -2,7 +2,7 @@ import React		from 'react';
 import {connect}	from 'react-redux';
 import TimeAgo		from 'react-timeago';
 
-import Notification	from 'web/components/notifications/Notification.jsx';
+import Notification	from 'web/components/notifications/Notification';
 
 import {addNotification}
 					from 'actions/notification';

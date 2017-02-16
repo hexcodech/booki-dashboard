@@ -2,7 +2,7 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {Doughnut}			from 'react-chartjs-2';
 
-import RefreshButton		from 'web/components/RefreshButton.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
 
 import {bindAll}			from 'utilities/object';
 import {formatBytes}		from 'utilities/format';

@@ -8,7 +8,7 @@ import {bindAll}			from 'utilities/object';
 import {invalidateBooks, fetchBooksIfNeeded}
 							from 'actions/book';
 
-import RefreshButton		from 'web/components/RefreshButton.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
 
 class BookList extends React.Component{
 	

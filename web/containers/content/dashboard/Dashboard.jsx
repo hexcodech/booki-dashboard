@@ -1,10 +1,10 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
 
-import GeneralStats			from 'web/containers/content/dashboard/widgets/GeneralStats.jsx';
-import MemoryStats			from 'web/containers/content/dashboard/widgets/MemoryStats.jsx';
-import CpuStats				from 'web/containers/content/dashboard/widgets/CpuStats.jsx';
-import UserStats			from 'web/containers/content/dashboard/widgets/UserStats.jsx';
+import GeneralStats			from 'web/containers/content/dashboard/widgets/GeneralStats';
+import MemoryStats			from 'web/containers/content/dashboard/widgets/MemoryStats';
+import CpuStats				from 'web/containers/content/dashboard/widgets/CpuStats';
+import UserStats			from 'web/containers/content/dashboard/widgets/UserStats';
 
 const DashboardContent = ({children}) => {
 	

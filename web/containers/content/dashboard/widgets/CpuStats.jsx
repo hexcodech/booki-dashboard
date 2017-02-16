@@ -7,7 +7,7 @@ import {bindAll}			from 'utilities/object';
 import {invalidateSystemStats, fetchSystemStatsIfNeeded}	
 							from 'actions/system-stats';
 							
-import RefreshButton		from 'web/components/RefreshButton.jsx';
+import RefreshButton		from 'web/components/RefreshButton';
 
 class CpuStatsWidget extends React.Component{
 	

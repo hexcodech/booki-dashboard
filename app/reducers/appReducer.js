@@ -1,21 +1,21 @@
-import {combineReducers}	from 'redux'
+import {combineReducers}	from 'redux';
 
 //import reducers
-import authentication		from "./authReducer.js";
-import dashboard			from "./dashboardReducer.js";
+import authentication		from 'reducers/auth/authReducer.js';
+import dashboard			from 'reducers/dashboard/dashboardReducer.js';
 
-import newUser				from "./newUserReducer.js";
-import users				from "./usersReducer.js";
+import newUser				from 'reducers/user/newUserReducer.js';
+import users				from 'reducers/user/usersReducer.js';
 
-import newClient			from "./newClientReducer.js";
-import clients				from "./clientsReducer.js";
+import newClient			from 'reducers/client/newClientReducer.js';
+import clients				from 'reducers/client/clientsReducer.js';
 
-import newBook				from "./newBookReducer.js";
-import books				from "./booksReducer.js";
+import newBook				from 'reducers/book/newBookReducer.js';
+import books				from 'reducers/book/booksReducer.js';
 
-import lookedUpBooks		from "./bookLookupReducer.js";
+import lookedUpBooks		from 'reducers/book/bookLookupReducer.js';
 
-import notifications		from "./notificationReducer.js";
+import notifications		from 'reducers/notification/notificationReducer.js';
 
 export default combineReducers({
 	authentication,

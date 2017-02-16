@@ -9,6 +9,267 @@
 	],
 "creatorBuild": "25504",
 "files": {
+	"\/components\/auth\/Login.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/auth\/min\/Login-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/auth\/OAuthCallback.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/auth\/min\/OAuthCallback-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/FormField.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/min\/FormField-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/FormGroups.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/min\/FormGroups-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/input\/select\/BookOptionComponent.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/input\/select\/min\/BookOptionComponent-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/input\/select\/BookValueComponent.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/input\/select\/min\/BookValueComponent-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/input\/select\/FlagOptionComponent.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/input\/select\/min\/FlagOptionComponent-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/input\/select\/FlagValueComponent.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/input\/select\/min\/FlagValueComponent-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/input\/select\/SelectInput.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/input\/select\/min\/SelectInput-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/form\/input\/TagInput.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/form\/input\/min\/TagInput-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/notifications\/Notification.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/notifications\/min\/Notification-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/RefreshButton.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/min\/RefreshButton-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/sidebar\/SidebarListElement.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/sidebar\/min\/SidebarListElement-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/book\/Book.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/book\/min\/Book-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/book\/BookList.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/book\/min\/BookList-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/client\/Client.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/client\/min\/Client-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/client\/ClientList.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/client\/min\/ClientList-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/Content.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/min\/Content-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/dashboard\/Dashboard.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/dashboard\/min\/Dashboard-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/dashboard\/widgets\/CpuStats.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/dashboard\/widgets\/min\/CpuStats-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/dashboard\/widgets\/GeneralStats.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/dashboard\/widgets\/min\/GeneralStats-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/dashboard\/widgets\/MemoryStats.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/dashboard\/widgets\/min\/MemoryStats-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/dashboard\/widgets\/UserStats.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/dashboard\/widgets\/min\/UserStats-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/user\/User.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/user\/min\/User-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/user\/UserList.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/user\/min\/UserList-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/dev\/DevTools.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/dev\/min\/DevTools-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/layout\/Sidebar.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/layout\/min\/Sidebar-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/layout\/Wrapper.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/layout\/min\/Wrapper-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/Notifications.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/min\/Notifications-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/css\/booki-dashboard.min.css": {
 		"aP": 1,
 		"bl": 0,
@@ -30,276 +291,6 @@
 		"oA": 2,
 		"oAP": "\/index.html",
 		"oF": 0
-		},
-	"\/js\/components\/auth\/Login.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/auth\/min\/Login-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/auth\/OAuthCallback.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/auth\/min\/OAuthCallback-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/FormField.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/min\/FormField-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/FormGroups.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/min\/FormGroups-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/input\/select\/BookOptionComponent.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/input\/select\/min\/BookOptionComponent-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/input\/select\/BookValueComponent.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/input\/select\/min\/BookValueComponent-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/input\/select\/FlagOptionComponent.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/input\/select\/min\/FlagOptionComponent-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/input\/select\/FlagValueComponent.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/input\/select\/min\/FlagValueComponent-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/input\/select\/SelectInput.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/input\/select\/min\/SelectInput-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/form\/input\/TagInput.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/form\/input\/min\/TagInput-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/notifications\/Notification.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/notifications\/min\/Notification-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/RefreshButton.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/min\/RefreshButton-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/components\/sidebar\/SidebarListElement.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/components\/sidebar\/min\/SidebarListElement-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/book\/Book.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/book\/min\/Book-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/book\/BookList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/book\/min\/BookList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/client\/Client.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/client\/min\/Client-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/client\/ClientList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/client\/min\/ClientList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/Content.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/min\/Content-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/dashboard\/Dashboard.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/dashboard\/min\/Dashboard-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/dashboard\/widgets\/CpuStats.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/dashboard\/widgets\/min\/CpuStats-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/dashboard\/widgets\/GeneralStats.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/dashboard\/widgets\/min\/GeneralStats-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/dashboard\/widgets\/MemoryStats.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/dashboard\/widgets\/min\/MemoryStats-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/dashboard\/widgets\/UserStats.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/dashboard\/widgets\/min\/UserStats-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/user\/User.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/user\/min\/User-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/content\/user\/UserList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/content\/user\/min\/UserList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/dev\/DevTools.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/dev\/min\/DevTools-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/layout\/Sidebar.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/layout\/min\/Sidebar-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/layout\/Wrapper.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/layout\/min\/Wrapper-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/containers\/Notifications.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/containers\/min\/Notifications-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/main.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/js\/min\/main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
 		},
 	"\/lib\/simple-hint\/.gitignore": {
 		"ft": 8192,
@@ -364,6 +355,15 @@
 		"oS": 3,
 		"uL": 1
 		},
+	"\/main.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/min\/main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/scss\/booki-dashboard.scss": {
 		"aP": 1,
 		"bl": 0,
@@ -376,6 +376,15 @@
 		"oF": 0,
 		"oS": 3,
 		"uL": 1
+		},
+	"\/utilities\/field-generators.js": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/utilities\/min\/field-generators-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		}
 	},
 "hooks": [

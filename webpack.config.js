@@ -4,7 +4,7 @@ const webpack	= require('webpack');
 module.exports = {
 	entry: [
 		'webpack-hot-middleware/client',
-		path.join(__dirname, 'web/js/main.jsx')
+		path.join(__dirname, 'web/main.jsx')
 	],
 	
 	output: {
@@ -21,17 +21,15 @@ module.exports = {
     resolve: {
 	    root: path.resolve(__dirname),
 	    
-	    alias: {
-		    js			: 'web/js',
-		    
+	    alias: {		    
 		    utilities	: 'app/utilities',
-		    constants	: 'app/Constants.js',
+		    constants	: 'app/constants',
 		    
 		    actions		: 'app/actions',
 		    reducers	: 'app/reducers',
 		    
-		    components	: 'web/js/components',
-		    containers	: 'web/js/containers',
+		    /*components	: 'web/components',
+		    containers	: 'web/containers',*/
 		},
 		
 		extensions: ['', '.js', '.jsx']

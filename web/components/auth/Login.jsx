@@ -1,11 +1,11 @@
 import React									from 'react';
 import {connect}								from 'react-redux';
-import {API_URL, CLIENT_ID, REDIRECT_URI}		from 'constants/rest';
+import {API_URL, CLIENT_ID, REDIRECT_URI}		from 'config.json';
 
 const Login = () => {
 	
-	let width	= window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-	let height	= window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	let width	= window.innerWidth		|| document.documentElement.clientWidth		|| document.body.clientWidth;
+	let height	= window.innerHeight	|| document.documentElement.clientHeight	|| document.body.clientHeight;
 	
 	let bgStyles = {
 		background: 'linear-gradient(rgba(255, 173, 57, 0.45), rgba(255, 173, 57, 0.45)),' + 

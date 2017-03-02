@@ -2,35 +2,18 @@ import React		from 'react';
 import {connect}	from 'react-redux';
 import TimeAgo		from 'react-timeago';
 
+import {addNotification}
+					from 'core/actions/notification';
+
 import Notification	from 'web/components/notifications/Notification';
 
-import {addNotification}
-					from 'actions/notification';
-
-const onMouseEnter = (color) => {
-	return (e) => {
-		e.target.setAttribute("style", "color: " + color);
-	};
-}
-
-const onMouseLeave = (e) => {
-	e.target.removeAttribute("style");
-}
-
-const onMouseClick = (action, notification) => {
-	return (e) => {
-		action.action(e, notification);
-	};
-}
-
 const Notifications = ({notifications, dispatch}) => {
-	
 	return (
 		<div className="notifications">
 			{notifications.sort((a, b) => {
 				return b.timestamp - a.timestamp
 			}).map((notification, index) => {
-				return <Notification {...notification} />;
+				return <Notification key={index} notification={notification} />;
 			})}
 		</div>
 	);

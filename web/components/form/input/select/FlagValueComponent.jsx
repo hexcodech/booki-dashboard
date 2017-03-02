@@ -1,7 +1,7 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
 
-import {API_URL}			from 'constants/rest';
+import {API_URL}			from 'config.json';
 
 const FlagValueComponent = ({value}) => {
 	

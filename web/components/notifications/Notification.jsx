@@ -1,7 +1,25 @@
 import React		from 'react';
 import {connect}	from 'react-redux';
 
-const Notification = ({uuid, fadeIn, fadeOut, color, icon, title, text, hideDelay, timestamp, actions}) => {
+const onMouseEnter = (color) => {
+	return (e) => {
+		e.target.setAttribute("style", "color: " + color);
+	};
+}
+
+const onMouseLeave = (e) => {
+	e.target.removeAttribute("style");
+}
+
+const onMouseClick = (action, notification) => {
+	return (e) => {
+		action.action(e, notification);
+	};
+}
+
+const Notification = ({notification}) => {
+	
+	const {uuid, fadeIn, fadeOut, color, icon, title, text, hideDelay, timestamp, actions} = notification;
 	
 	return (
 		<div

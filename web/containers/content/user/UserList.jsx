@@ -2,12 +2,12 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {Link}				from 'react-router';
 import {push}				from 'react-router-redux';
+import bindAll				from 'lodash/bindAll';
 
-import {API_URL}			from 'constants/rest';
-import {bindAll}			from 'utilities/object';
+import {API_URL}			from 'config.json';
 
 import {invalidateUsers, fetchUsersIfNeeded}
-							from 'actions/user';
+							from 'core/actions/user';
 
 import RefreshButton		from 'web/components/RefreshButton';
 

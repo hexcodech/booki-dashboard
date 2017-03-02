@@ -3,25 +3,25 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {push}				from 'react-router-redux';
 import set					from 'lodash/set';
+import bindAll				from 'lodash/bindAll';
 import JSONTree				from 'react-json-tree';
 
-import {bindAll}			from 'utilities/object';
-import {selectGenerator, arrayGenerator}
-							from 'web/utilities/field-generators';
-
 import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
-							from 'constants/color';
+							from 'core/constants/color';
 import {PERMISSIONS, LANGUAGES}
-							from 'constants/select-options';
+							from 'core/constants/select-options';
 
 import {invalidateUsers, clearNewUser, updateNewUser, fetchUsersIfNeeded, putUser, postUser, deleteUser}
-							from 'actions/user';
+							from 'core/actions/user';
 							
-import {addNotification}	from 'actions/notification';
+import {addNotification}	from 'core/actions/notification';
 							
 import {fetchClientsIfNeeded, postClient}
-							from 'actions/client';
+							from 'core/actions/client';
 
+
+import {selectGenerator, arrayGenerator}
+							from 'web/utilities/field-generators';
 
 import RefreshButton		from 'web/components/RefreshButton';
 import FormGroups			from 'web/components/form/FormGroups';

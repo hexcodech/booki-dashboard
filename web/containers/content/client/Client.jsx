@@ -2,27 +2,22 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {push}				from 'react-router-redux';
 import set					from 'lodash/set';
+import bindAll				from 'lodash/bindAll';
 import JSONTree				from 'react-json-tree';
 
+import {CLIENT_ID}			from 'config.json';
 
-import {bindAll}			from 'utilities/object';
+import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
+							from 'core/constants/color';
+
+import {invalidateClients, clearNewClient, updateNewClient, fetchClientsIfNeeded, putClient, postClient, deleteClient}
+							from 'core/actions/client';
+import {fetchUsersIfNeeded}	from 'core/actions/user';							
+import {addNotification}	from 'core/actions/notification';
 
 import {arrayGenerator, checkboxGenerator}
 							from 'web/utilities/field-generators';
-
-import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
-							from 'constants/color';
-import {CLIENT_ID}
-							from 'constants/rest';
-
-import {invalidateClients, clearNewClient, updateNewClient, fetchClientsIfNeeded, putClient, postClient, deleteClient}
-							from 'actions/client';
-import {fetchUsersIfNeeded}
-							from 'actions/user';
 							
-import {addNotification}
-							from 'actions/notification';
-
 import RefreshButton		from 'web/components/RefreshButton';
 import FormGroups			from 'web/components/form/FormGroups';
 

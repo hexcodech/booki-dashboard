@@ -1,10 +1,9 @@
 import React		from 'react';
 import {connect}	from 'react-redux';
+import bindAll		from 'lodash/bindAll';
 
 import {WithContext as ReactTags}
 					from 'react-tag-input';
-
-import {bindAll}	from 'utilities/object';
 
 class TagInput extends React.Component{
 	

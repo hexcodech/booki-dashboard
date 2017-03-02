@@ -1,13 +1,13 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
+import bindAll				from 'lodash/bindAll';
+
 import {Doughnut}			from 'react-chartjs-2';
 
-import {bindAll}			from 'utilities/object';
-
 import {invalidateSystemStats, fetchSystemStatsIfNeeded}	
-							from 'actions/system-stats';
+							from 'app/actions/system-stats';
 							
-import RefreshButton		from 'web/components/RefreshButton';
+import Widget				from 'web/containers/content/dashboard/widgets/Widget';
 
 class CpuStatsWidget extends React.Component{
 	
@@ -42,75 +42,49 @@ class CpuStatsWidget extends React.Component{
 		for(let key in systemStats.cpuAverage){
 			labels.push(key);
 			data.push(systemStats.cpuAverage[key]);
-			
-			/*switch(key){
-				case 'user':
-					colors.push('#f39c12');
-					break;
-				case 'nice':
-					colors.push('#e74c3c');
-					break;
-				case 'sys':
-					colors.push('#c0392b');
-					break;
-				case 'idle':
-					colors.push('#2ecc71');
-					break;
-				case 'irq':
-					colors.push('#34495e');
-					break;
-				default:
-					colors.push('#000');
-					break;
-			}*/
 		}
 		
 		const cpuTotal = data.reduce((a, b) => a+b, 0);
 		
 		return (
-			<div className='card dynamic'>
-				<div className='card-block'>
-					<Doughnut
-						data={
-							{
-								labels: labels,
-							    datasets: [
-							        {
-							            data: data,
-							            backgroundColor: colors,
-							            hoverBackgroundColor: colors
-							        }
-							    ]
-							}
+			<Widget lastUpdated={systemStats.lastUpdated} isFetching={systemStats.isFetching} handleRefreshClick={this.handleRefreshClick}>
+				<Doughnut
+					data={
+						{
+							labels: labels,
+						    datasets: [
+						        {
+						            data: data,
+						            backgroundColor: colors,
+						            hoverBackgroundColor: colors
+						        }
+						    ]
 						}
-						width={300}
-						height={200}
-						options={
-							{
-								title: {
-									text: 'CPU',
-									display: true
-								},
-								maintainAspectRatio: false,
-								legend: {
-								    position: 'bottom'
-							    },
-							    tooltips: {
-								    callbacks: {
-									    label: (tooltip, data) => {
-										    return data.labels[tooltip.index] + ' (' +
-										    Math.round(data.datasets[0].data[tooltip.index] / cpuTotal * 100) + '%)';
-									    }
+					}
+					width={300}
+					height={200}
+					options={
+						{
+							title: {
+								text: 'CPU',
+								display: true
+							},
+							maintainAspectRatio: false,
+							legend: {
+							    position: 'bottom'
+						    },
+						    tooltips: {
+							    callbacks: {
+								    label: (tooltip, data) => {
+									    return data.labels[tooltip.index] + ' (' +
+									    Math.round(data.datasets[0].data[tooltip.index] / cpuTotal * 100) + '%)';
 								    }
 							    }
-							}
+						    }
 						}
-						/>
-				</div>
-				<div className='card-footer text-muted'>
-					<RefreshButton date={systemStats.lastUpdated} loading={systemStats.isFetching} refreshHandler={this.handleRefreshClick} />
-				</div>
-			</div>
+					}
+				/>
+			</Widget>
 		);
 	}
 };

@@ -1,7 +1,4 @@
-import {fetchApi} from 'utilities/rest';
-
-
-//system
+import {fetchApi} from 'core/utilities/rest';
 
 export const invalidateSystemStats = () => {
 	return {

@@ -2,31 +2,36 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {push}				from 'react-router-redux';
 
-import {getParameterByName}	from 'utilities/location';
+import {getParameterByName}	from 'core/utilities/location';
 
-import {fetchUser, fetchAccessToken}
-							from 'actions/auth';
+import {fetchAuthUser, receiveAccessToken}
+							from 'core/actions/auth';
 
 class OAuthCallback extends React.Component{
 	
 	componentDidMount(){
 		
+		const	token 	= getParameterByName('token'),	clientId	= getParameterByName('clientId'), 
+				userId	= getParameterByName('userId'),	expires		= getParameterByName('expires');
+		
+		const accessToken = {
+			token,
+			clientId,
+			userId,
+			expires
+		};
+		
 		this.props.dispatch(
-			fetchAccessToken(
-				getParameterByName('code')
-			)
-		).then((accessToken) => {
-			
+			receiveAccessToken(accessToken)
+		);
+		
+		this.props.dispatch(
+			fetchUser(accessToken)
+		).then(() => {
 			this.props.dispatch(
-				fetchUser(accessToken)
-			).then(() => {
-				this.props.dispatch(
-					push('/dashboard/')
-				);
-			});
+				push('/dashboard/')
+			);
 		});
-		
-		
 	}
 	
 	

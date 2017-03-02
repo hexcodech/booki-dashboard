@@ -10,18 +10,18 @@ $gray-lightest				: rgba(0, 0, 0, 0.05);
 $color-primary-0			: #FFE7C5; //very bright
 $color-primary-1			: #FFD69B; //bright
 
-$color-primary-2			: #FFC676; // Main Primary color */
+$color-primary-2			: #FFC676; // Main Primary color
 
 $color-primary-3			: #DEA14B; //dark
 $color-primary-4			: #BF7F26; //darker
 
-$color-secondary-1			: #FFDE76;	// secondary color, yellowish */
+$color-secondary-1			: #FFDE76;	// secondary color, yellowish
 
-$color-secondary-2			: #FFA176;	// secondary color, redish */
+$color-secondary-2			: #FFA176;	// secondary color, redish
 
-$color-accent-1				: #50AC89; // accent color, turquoisish */
-$color-accent-2				: #6360B2; // accent color, dark blueish */
-$color-accent-3				: #537EA5; // accent color, light blueish */
+$color-accent-1				: #50AC89; // accent color, turquoisish
+$color-accent-2				: #6360B2; // accent color, dark blueish
+$color-accent-3				: #537EA5; // accent color, light blueish
 
 $brand-primary				: $color-primary-2;
 $brand-success				: #2ecc71;
@@ -166,10 +166,6 @@ html, body, #root, .wrapper{
 
 .bg-white{
 	background-color: #fff;
-}
-
-.pattern-background{
-	background-image: url("../img/school.png");
 }
 
 .max-block{
@@ -364,10 +360,6 @@ main.content{
 	justify-content	: space-between;
 	align-items		: flex-start;
 	align-content	: flex-start;
-}
-
-section{
-	padding: ($grid-gutter-width-base / 2) 0 ($grid-gutter-width-base / 2) 0;
 }
 
 //spinner from http://tobiasahlin.com/spinkit/

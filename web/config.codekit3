@@ -216,6 +216,15 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/content\/dashboard\/widgets\/Widget.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/dashboard\/widgets\/min\/Widget-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/containers\/content\/user\/User.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -239,6 +248,24 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/containers\/dev\/min\/DevTools-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/layout\/grid\/Column.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/layout\/grid\/min\/Column-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/layout\/grid\/Row.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/layout\/grid\/min\/Row-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2240,7 +2267,7 @@
 		"outputStyle": 0
 		},
 	"languageDefaultsSASS": {
-		"autoOutputAction": 0,
+		"autoOutputAction": 1,
 		"autoOutputPathFilenamePattern": "*.min.css",
 		"autoOutputPathRelativePath": "..\/css",
 		"autoOutputPathReplace1": "sass",

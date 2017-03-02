@@ -2,30 +2,24 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {push}				from 'react-router-redux';
 import set					from 'lodash/set';
+import bindAll				from 'lodash/bindAll';
 import JSONTree				from 'react-json-tree';
 
+import {API_URL}			from 'config.json';
 
-import {bindAll}			from 'utilities/object';
+import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
+							from 'core/constants/color';
+import {invalidateBooks, clearNewBook, updateNewBook, fetchBooksIfNeeded, putBook, postBook, deleteBook, lookUpBooks}
+							from 'core/actions/book';
+import {fetchUsersIfNeeded}	from 'core/actions/user';
+import {addNotification}	from 'core/actions/notification';
+
+
 import {arrayGenerator, selectGenerator, textAreaGenerator}
 							from 'web/utilities/field-generators';
 
-
-import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
-							from 'constants/color';
-import {API_URL}
-							from 'constants/rest';
-
-import {invalidateBooks, clearNewBook, updateNewBook, fetchBooksIfNeeded, putBook, postBook, deleteBook, lookUpBooks}
-							from 'actions/book';
-							
-import {fetchUsersIfNeeded}	from 'actions/user';
-							
-import {addNotification}	from 'actions/notification';
-							
-							
 import RefreshButton		from 'web/components/RefreshButton';
 import FormGroups			from 'web/components/form/FormGroups';
-
 import BookOptionComponent	from 'web/components/form/input/select/BookOptionComponent';
 import BookValueComponent	from 'web/components/form/input/select/BookValueComponent';
 

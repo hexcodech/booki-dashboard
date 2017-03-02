@@ -2,11 +2,10 @@ import React				from 'react';
 import {connect}			from 'react-redux';
 import {Link}				from 'react-router';
 import {push}				from 'react-router-redux';
-
-import {bindAll}			from 'utilities/object';
+import bindAll				from 'lodash/bindAll';
 
 import {invalidateBooks, fetchBooksIfNeeded}
-							from 'actions/book';
+							from 'core/actions/book';
 
 import RefreshButton		from 'web/components/RefreshButton';
 

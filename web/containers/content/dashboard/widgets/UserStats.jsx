@@ -1,15 +1,11 @@
 import React				from 'react';
 import {connect}			from 'react-redux';
+import bindAll				from 'lodash/bindAll';
 
-import RefreshButton		from 'web/components/RefreshButton';
+import {fetchUsersIfNeeded}	from 'core/actions/user';
+import {invalidateUsers}	from 'app/actions/system-stats';
 
-import {bindAll}			from 'utilities/object';
-
-import {invalidateUsers}
-							from 'actions/system-stats';
-							
-import {fetchUsersIfNeeded}
-							from 'actions/user';
+import Widget				from 'web/containers/content/dashboard/widgets/Widget';
 
 class UserWidget extends React.Component{
 	
@@ -42,17 +38,12 @@ class UserWidget extends React.Component{
 		});
 		
 		return (
-			<div className='card dynamic'>
-				<div className='card-block'>
-					<p>{users.length} Users registered</p>
-					<small>
-						{newUsers.length} within the last week
-					</small>
-				</div>
-				<div className='card-footer text-muted'>
-					<RefreshButton refreshHandler={this.handleRefreshClick} />
-				</div>
-			</div>
+			<Widget handleRefreshClick={this.handleRefreshClick}>
+				<p>{users.length} Users registered</p>
+				<small>
+					{newUsers.length} within the last week
+				</small>
+			</Widget>
 		);
 	}
 };

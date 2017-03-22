@@ -1,17 +1,23 @@
-import React				from 'react';
-import {connect}			from 'react-redux';
+import React
+       from 'react';
 
-import {API_URL}			from 'config.json';
+import {API_URL}
+       from 'config.json';
+
+import CSSModules
+       from 'react-css-modules';
+import styles
+       from './FlagComponent.scss';
 
 const FlagOptionComponent = ({option, isFocused, onFocus, onSelect}) => {
-	
+
 	let url = API_URL + '/static/res/img/locales/' + option.value + '.svg';
-	
+
 	const
-	handleMouseDown		= (event) => {
+	handleMouseDown	= (event) => {
 		event.preventDefault();
 		event.stopPropagation();
-		
+
 		onSelect(option, event);
 	},
 	handleMouseEnter	= (event) => {
@@ -21,10 +27,10 @@ const FlagOptionComponent = ({option, isFocused, onFocus, onSelect}) => {
 		if(isFocused){return;}
 		onFocus(option, event);
 	};
-	
+
 	return (
 		<div
-			className='flag flag-option'
+			styleName='flag-option'
 			onMouseDown={handleMouseDown}
 			onMouseEnter={handleMouseEnter}
 			onMouseMove={handleMouseMove}
@@ -34,4 +40,4 @@ const FlagOptionComponent = ({option, isFocused, onFocus, onSelect}) => {
 	);
 };
 
-export default connect()(FlagOptionComponent);
+export default CSSModules(FlagOptionComponent, styles);

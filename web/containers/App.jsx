@@ -4,10 +4,14 @@ import {createStore, combineReducers, applyMiddleware, compose}
        from 'redux';
 import {Provider}
        from 'react-redux';
-import {BrowserRouter as Router, Route, Link}
+
+import {Route}
        from 'react-router-dom';
-import {syncHistoryWithStore, routerReducer, routerMiddleware}
+import createHistory
+       from 'history/createBrowserHistory'
+import {ConnectedRouter, routerReducer, routerMiddleware}
        from 'react-router-redux';
+
 import thunkMiddleware
        from 'redux-thunk';
 import throttle
@@ -20,10 +24,6 @@ import {loadState, saveState}
 
 import appReducer        from 'app/reducers/app';
 
-//Components
-
-import Wrapper           from 'web/containers/layout/Wrapper';
-
 //Containers
 
 import DevTools          from 'web/containers/dev/DevTools';
@@ -34,8 +34,7 @@ import OAuthCallback     from 'web/components/auth/OAuthCallback';
 import Content           from 'web/containers/content/Content';
 import Dashboard         from 'web/containers/content/dashboard/Dashboard';
 
-import UserList          from 'web/containers/content/user/UserList';
-import User              from 'web/containers/content/user/User';
+import UserRouter        from 'web/containers/content/user/UserRouter';
 
 import ClientList        from 'web/containers/content/client/ClientList';
 import Client            from 'web/containers/content/client/Client';
@@ -45,11 +44,12 @@ import Book              from 'web/containers/content/book/Book';
 
 
 const presistedState = loadState();
+const history        = createHistory();
 
 const store = createStore(
 	combineReducers({
 		app             : appReducer,
-		//routing       : routerReducer
+		router          : routerReducer
 	}),
 
 	presistedState,
@@ -57,7 +57,7 @@ const store = createStore(
 	compose(
 		applyMiddleware(
 			thunkMiddleware,
-			//routerMiddleware(browserHistory)
+			routerMiddleware(history)
 		),
 		DevTools.instrument(),
 	),
@@ -68,28 +68,28 @@ store.subscribe(throttle(() => {
 	const state = store.getState();
 
 	saveState({
-		//routing: state.routing,
+		router: state.router,
 		app: {
-			authentication	: state.app.authentication,
-			notifications	: state.app.notifications
+			authentication  : state.app.authentication,
+			//notifications   : state.app.notifications //functions can't be stored
 		}
 	});
 
 }, 1000));
 
-//has to be after 'store' has been created
-//const history			= syncHistoryWithStore(browserHistory, store);
-
 const App = () => {
 	return (
 		<Provider store={store}>
-			<Router>
-				<div>
+			<ConnectedRouter history={history}>
+				<div className='routing'>
 					<Route exact path='/' component={Login} />
 					<Route path='/auth/callback' component={OAuthCallback} />
-					<Route path='/dasboard' component={Dashboard} />
+
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/user' component={UserRouter} />
+
 				</div>
-			</Router>
+			</ConnectedRouter>
 		</Provider>
 	);
 };

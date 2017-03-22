@@ -1,12 +1,19 @@
-import React				from 'react';
-import {connect}			from 'react-redux';
+import React
+       from 'react';
+import {connect}
+       from 'react-redux';
+
+import CSSModules
+       from 'react-css-modules';
+import styles
+       from './BookComponent.scss';
 
 const BookValueComponent = ({lookedUpBooks, value}) => {
-	
+
 	const book = lookedUpBooks.filter((book) => {
 		return book._id === value.value;
 	})[0];
-	
+
 	if(book){
 		return (
 			<div className='book-select book-value'>
@@ -21,8 +28,8 @@ const BookValueComponent = ({lookedUpBooks, value}) => {
 			</div>
 		);
 	}
-	
-	
+
+
 };
 
 const mapStateToProps = (state) => {
@@ -31,4 +38,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(BookValueComponent);
+export default connect(mapStateToProps)(
+	CSSModules(BookValueComponent, styles)
+);

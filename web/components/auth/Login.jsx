@@ -1,9 +1,12 @@
 import React
        from 'react';
-import {connect}
-       from 'react-redux';
 import {API_URL, CLIENT_ID, REDIRECT_URI}
        from 'config.json';
+
+import CSSModules
+       from 'react-css-modules';
+import styles
+       from './Login.scss';
 
 const Login = () => {
 
@@ -25,14 +28,19 @@ const Login = () => {
 	};
 
 	return (
-		<div className='wrapper' style={bgStyles}>
+		<div style={bgStyles} styleName='login'>
 			<div className='row'>
-				<div className='col-xs-12 col-sm-6 col-lg-4 offset-sm-3 offset-lg-4 login-modal'>
-					<section className=''>
+				<div
+          className='col-xs-12 col-sm-6 col-lg-4 offset-sm-3 offset-lg-4'
+          styleName='modal'
+        >
+					<section styleName='wrapper'>
 						<h1>Booki Dashboard</h1>
-						<a href={API_URL + '/oauth2/authorize?client_id=' + CLIENT_ID +
-						'&response_type=code&redirect_uri=' + REDIRECT_URI}
-							className='btn btn-primary'>
+						<a
+              href={API_URL + '/oauth2/authorize?client_id=' + CLIENT_ID +
+              '&response_type=code&redirect_uri=' + REDIRECT_URI}
+              styleName='button'
+            >
 							Login
 						</a>
 					</section>
@@ -42,4 +50,4 @@ const Login = () => {
 	);
 };
 
-export default connect()(Login);
+export default CSSModules(Login, styles);

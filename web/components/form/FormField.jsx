@@ -1,16 +1,20 @@
-import React				from 'react';
-import {connect}			from 'react-redux';
-import get					from 'lodash/get';
+import React
+       from 'react';
+import get
+       from 'lodash/get';
 
-const FormField = ({object, keyPath, fieldSize, label, labelSize, inputType, inputDisabled, inputSize, input, handleOnChange}) => {
-	
-	let onChange = (event) => {
+const FormField = ({
+	object, keyPath, fieldSize, label, labelSize, inputType,
+	inputDisabled, inputSize, input, handleOnChange
+}) => {
+
+	const onChange = (event) => {
 		handleOnChange(event.target.id, event.target.value);
 	};
-	
-	let value = get(object, keyPath);
-	
-	let inputField = input	? input(keyPath, value, handleOnChange)
+
+	const value = get(object, keyPath);
+
+	const inputField = input ? input(keyPath, value, handleOnChange)
 							: <input
 								type={inputType ? inputType : 'text'}
 								className='form-control'
@@ -20,7 +24,7 @@ const FormField = ({object, keyPath, fieldSize, label, labelSize, inputType, inp
 								autoComplete='off'
 								disabled={inputDisabled ? inputDisabled : false}
 							/>;
-	
+
 	return (
 		<div className={fieldSize}>
 			<div className='form-field row'>
@@ -35,4 +39,4 @@ const FormField = ({object, keyPath, fieldSize, label, labelSize, inputType, inp
 	);
 };
 
-export default connect()(FormField);
+export default FormField;

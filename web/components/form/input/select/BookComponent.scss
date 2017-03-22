@@ -1,0 +1,40 @@
+.book{
+  padding: .25rem;
+  display: block;
+
+  img{
+    margin-right: .5rem;
+  }
+}
+
+.book-option{
+  composes: book;
+
+  border-bottom: #eee 1px solid;
+	cursor: pointer;
+
+	&:hover{
+		background-color: #eee;
+	}
+}
+
+.book-value{
+  composes: book;
+
+}
+
+.title{
+  color: inherit;
+}
+
+.page-count{
+
+  margin-left: .25rem;
+
+  &:before{
+    content: '(';
+  }
+  &:after{
+    content: ')';
+  }
+}

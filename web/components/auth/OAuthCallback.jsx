@@ -1,7 +1,5 @@
 import React
        from 'react';
-import {connect}
-       from 'react-redux';
 import {push}
        from 'react-router-redux';
 
@@ -10,6 +8,9 @@ import {getParameterByName}
 
 import {fetchAuthUser, receiveAccessToken}
        from 'core/actions/auth';
+
+import Spinner
+       from 'web/components/Spinner';
 
 class OAuthCallback extends React.Component{
 
@@ -43,23 +44,10 @@ class OAuthCallback extends React.Component{
 
 	render(){
 		return (
-			<div className='wrapper pattern-background max-block'>
-				<div className='spinner-full-screen'>
-					<div className='spinner'>
-						<div className='rect1'></div>
-						<div className='rect2'></div>
-						<div className='rect3'></div>
-						<div className='rect4'></div>
-						<div className='rect5'></div>
-					</div>
-					<p className='text-center'>
-						Retrieving your data...
-					</p>
-				</div>
-			</div>
+      <Spinner />
 		);
 	}
 
 };
 
-export default connect()(OAuthCallback);
+export default OAuthCallback;

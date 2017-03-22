@@ -1,24 +1,34 @@
-import React		from 'react';
-import {connect}	from 'react-redux';
-import Sidebar		from 'web/containers/layout/Sidebar';
+import React
+       from 'react';
+import {connect}
+       from 'react-redux';
 
-import DevTools		from 'web/containers/dev/DevTools';
+import Row
+       from 'web/containers/layout/grid/Row';
+import Column
+      from 'web/containers/layout/grid/Column';
+
+import Sidebar
+       from 'web/containers/layout/Sidebar';
+
+import DevTools
+       from 'web/containers/dev/DevTools';
 import Notifications
-					from 'web/containers/Notifications';
+       from 'web/containers/Notifications';
 
 const Wrapper = ({children}) => {
-	
+
 	return (
-		<div className='dashboard-wrapper row'>
-			<div className='hidden-sm-down col-md-4 col-lg-3 sidebar-wrapper'>
+		<Row>
+			<Column grid='col-md-4 col-lg-3'>
 				<Sidebar />
-			</div>
-			<div className='col-xs-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3'>
+			</Column>
+			<Column grid='col-12 col-md-8 col-lg-9'>
 				{children}
-			</div>
+			</Column>
 			<Notifications />
 			<DevTools />
-		</div>
+		</Row>
 	);
 };
 

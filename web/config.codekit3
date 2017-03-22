@@ -7,7 +7,7 @@
 		"uuidString": "170B7A15-0EC9-4724-92EB-49AF329EF30A"
 		}
 	],
-"creatorBuild": "25504",
+"creatorBuild": "25704",
 "files": {
 	"\/components\/auth\/Login.jsx": {
 		"ft": 64,
@@ -18,11 +18,33 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/components\/auth\/Login.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Login.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/components\/auth\/OAuthCallback.jsx": {
 		"ft": 64,
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/components\/auth\/min\/OAuthCallback-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/Bundle.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/min\/Bundle-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -45,6 +67,19 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/components\/form\/input\/select\/BookComponent.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/BookComponent.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/components\/form\/input\/select\/BookOptionComponent.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -62,6 +97,19 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"\/components\/form\/input\/select\/FlagComponent.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/FlagComponent.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
 		},
 	"\/components\/form\/input\/select\/FlagOptionComponent.jsx": {
 		"ft": 64,
@@ -99,6 +147,28 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/components\/layout\/Table.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/layout\/min\/Table-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/layout\/Table.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Table.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/components\/notifications\/Notification.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -107,6 +177,19 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"\/components\/notifications\/Notification.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Notification.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
 		},
 	"\/components\/RefreshButton.jsx": {
 		"ft": 64,
@@ -117,11 +200,68 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/components\/RefreshButton.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/RefreshButton.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/components\/sidebar\/SidebarListElement.jsx": {
 		"ft": 64,
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/components\/sidebar\/min\/SidebarListElement-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/sidebar\/SidebarListElement.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/SidebarListElement.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
+	"\/components\/Spinner.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/min\/Spinner-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/Spinner.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Spinner.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
+	"\/containers\/App.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/min\/App-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -180,6 +320,19 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/content\/dashboard\/Dashboard.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Dashboard.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/containers\/content\/dashboard\/widgets\/CpuStats.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -207,6 +360,15 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/content\/dashboard\/widgets\/SpinnerWidget.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/dashboard\/widgets\/min\/SpinnerWidget-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/containers\/content\/dashboard\/widgets\/UserStats.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -225,6 +387,19 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/content\/dashboard\/widgets\/Widget.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Widget.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/containers\/content\/user\/User.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -239,6 +414,15 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/containers\/content\/user\/min\/UserList-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/user\/UserRouter.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/user\/min\/UserRouter-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -261,6 +445,19 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/layout\/grid\/Column.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Column.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/containers\/layout\/grid\/Row.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -270,6 +467,19 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/layout\/grid\/Row.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Row.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/containers\/layout\/Sidebar.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -278,6 +488,19 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"\/containers\/layout\/Sidebar.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Sidebar.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
 		},
 	"\/containers\/layout\/Wrapper.jsx": {
 		"ft": 64,
@@ -296,6 +519,19 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"\/containers\/Notifications.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Notifications.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
 		},
 	"\/css\/booki-dashboard.min.css": {
 		"aP": 1,
@@ -400,6 +636,19 @@
 		"ma": 1,
 		"oA": 0,
 		"oAP": "\/css\/booki-dashboard.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
+	"\/scss\/variables.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/variables.min.css",
 		"oF": 0,
 		"oS": 3,
 		"uL": 1
@@ -1094,6 +1343,10 @@
 			"active": 1,
 			"optionString": ""
 			},
+		"no-compare-neg-zero": {
+			"active": 0,
+			"optionString": ""
+			},
 		"no-cond-assign": {
 			"active": 1,
 			"optionString": "'except-parens'"
@@ -1291,6 +1544,10 @@
 			"optionString": "{'grouping': false, 'allowCall': false }"
 			},
 		"no-mixed-spaces-and-tabs": {
+			"active": 0,
+			"optionString": ""
+			},
+		"no-multi-assign": {
 			"active": 0,
 			"optionString": ""
 			},
@@ -1570,6 +1827,10 @@
 			"active": 0,
 			"optionString": ""
 			},
+		"nonblock-statement-body-position": {
+			"active": 0,
+			"optionString": "'beside'"
+			},
 		"object-curly-newline": {
 			"active": 0,
 			"optionString": "{'ObjectExpression': {'multiline': true}, 'ObjectPattern': {'multiline': true}}"
@@ -1621,6 +1882,10 @@
 		"prefer-numeric-literals": {
 			"active": 0,
 			"optionString": ""
+			},
+		"prefer-promise-reject-errors": {
+			"active": 0,
+			"optionString": "{'allowEmptyReject': false}"
 			},
 		"prefer-rest-params": {
 			"active": 0,
@@ -1715,6 +1980,10 @@
 			"optionString": ""
 			},
 		"template-curly-spacing": {
+			"active": 0,
+			"optionString": "'never'"
+			},
+		"template-tag-spacing": {
 			"active": 0,
 			"optionString": "'never'"
 			},
@@ -2161,7 +2430,8 @@
 		"autoOutputPathRelativePath": "",
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
-		"autoOutputPathStyle": 0
+		"autoOutputPathStyle": 0,
+		"quality": 100
 		},
 	"languageDefaultsJS": {
 		"autoOutputAction": 1,
@@ -2254,7 +2524,9 @@
 		"autoOutputPathRelativePath": "",
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
-		"autoOutputPathStyle": 0
+		"autoOutputPathStyle": 0,
+		"enableLossy": 1,
+		"quality": 100
 		},
 	"languageDefaultsPUG": {
 		"autoOutputAction": 1,

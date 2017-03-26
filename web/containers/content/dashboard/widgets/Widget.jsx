@@ -4,6 +4,8 @@ import React
 import {connect}
        from 'react-redux';
 
+import Card
+       from 'web/components/layout/Card';
 import RefreshButton
        from 'web/components/RefreshButton';
 
@@ -14,7 +16,7 @@ import styles
 
 const Widget = ({children, lastUpdated, isFetching, handleRefreshClick}) => {
 	return (
-		<section styleName='widget'>
+		<Card>
 			<div styleName='content'>
 				{children}
 			</div>
@@ -24,7 +26,7 @@ const Widget = ({children, lastUpdated, isFetching, handleRefreshClick}) => {
           loading={isFetching}
           refreshHandler={handleRefreshClick}/>
 			</footer>
-		</section>
+		</Card>
 	);
 };
 

@@ -14,7 +14,7 @@ import UserList
 const UserRouter = () => {
   return (
     <Wrapper>
-      <Route path='/users' component={UserList} />
+      <Route path='/user/list' component={UserList} />
       <Route path='/user/:id' component={User} />
     </Wrapper>
   );

@@ -6,9 +6,9 @@ import CSSModules
 import styles
        from './Table.scss';
 
-const Table = ({children}) => {
+const Table = ({interactive, children}) => {
   return (
-    <table styleName='table'>
+    <table styleName={'table' + (interactive ? '-interactive' : '')}>
       {children}
     </table>
   );

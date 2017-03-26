@@ -35,12 +35,8 @@ import Content           from 'web/containers/content/Content';
 import Dashboard         from 'web/containers/content/dashboard/Dashboard';
 
 import UserRouter        from 'web/containers/content/user/UserRouter';
-
-import ClientList        from 'web/containers/content/client/ClientList';
-import Client            from 'web/containers/content/client/Client';
-
-import BookList          from 'web/containers/content/book/BookList';
-import Book              from 'web/containers/content/book/Book';
+import ClientRouter      from 'web/containers/content/client/ClientRouter';
+import BookRouter        from 'web/containers/content/book/BookRouter';
 
 
 const presistedState = loadState();
@@ -87,6 +83,8 @@ const App = () => {
 
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/user' component={UserRouter} />
+          <Route path='/client' component={ClientRouter}/>
+          <Route path='/book' component={BookRouter}/>
 
 				</div>
 			</ConnectedRouter>

@@ -56,17 +56,17 @@ const Sidebar = ({user, dispatch}) => {
 				<SidebarListElement
 					text='Users'
 					icon='supervisor_account'
-					url='/users/'
+					url='/user/list'
     />
 				<SidebarListElement
 					text='OAuthClients'
 					icon='business'
-					url='/clients/'
+					url='/client/list'
     />
 				<SidebarListElement
 					text='Books'
 					icon='book'
-					url='/books/'
+					url='/book/list'
 				/>
 			</ul>
 		</aside>

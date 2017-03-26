@@ -27,10 +27,20 @@ $brand-info               : #3498db;
 $brand-warning            : #FCBF37;
 $brand-danger             : #e74c3c;
 
+
+$enable-rounded           : false;
+$enable-shadows           : false;
+$enable-hover-media-query : true;
+
+$font-family-sans-serif   : 'Roboto', 'Helvetica', 'sans-serif';
+$font-family-serif        : 'Georgia', 'Times New Roman', 'Times', 'serif';
+$font-family-monospace    : 'Menlo', 'Monaco', 'Courier New',	'monospace';
+$font-family-base         : $font-family-sans-serif;
+
 $breadcrumb-bg            : #ffffff;
 $breadcrumb-divider-color : $gray-dark;
 $breadcrumb-active-color  : $gray-dark;
-$breadcrumb-divider       : "/";
+$breadcrumb-divider       : '/';
 
 $label-default-bg         : $gray-dark;
 $label-primary-bg         : $brand-primary;
@@ -38,6 +48,23 @@ $label-success-bg         : $brand-success;
 $label-info-bg            : $brand-info;
 $label-warning-bg         : $brand-warning;
 $label-danger-bg          : $brand-danger;
+
+$label-color              : #000;
+$label-link-hover-color   : #000;
+$label-font-weight        : 300;
+
+$hr-border-color          : $gray-dark;
+
+$btn-font-weight          : 300;
+
+$btn-secondary-color      : #fff;
+$btn-secondary-bg         : $gray-dark;
+$btn-secondary-border     : $gray-dark;
+
+$input-color              : $gray-dark;
+$input-color-placeholder  : $gray-light;
+$input-border-color       : $gray-light;
+$input-border-focus       : $gray-light;
 
 $simple-y-top-shadow      : 0px -2px 2px 0px rgba(0, 0, 0, 0.05);
 $simple-y-bottom-shadow   : 0px 2px 2px 0px rgba(0, 0, 0, 0.05);

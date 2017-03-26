@@ -1,5 +1,7 @@
 import React
        from 'react';
+import {connect}
+       from 'react-redux';
 import {push}
        from 'react-router-redux';
 
@@ -50,4 +52,4 @@ class OAuthCallback extends React.Component{
 
 };
 
-export default OAuthCallback;
+export default connect()(OAuthCallback);

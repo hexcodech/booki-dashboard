@@ -4,6 +4,11 @@ import React
 import FormField
        from 'web/components/form/FormField';
 
+import CSSModules
+       from 'react-css-modules';
+import styles
+       from './FormGroups.scss';
+
 const FormGroups = ({object, keyPaths, handleOnChange}) => {
 
 	let formGroups = [];
@@ -36,13 +41,19 @@ const FormGroups = ({object, keyPaths, handleOnChange}) => {
 		}
 
 		formGroups.push(
-			<div key={i} className='form-group row'>{formGroup}</div>
+      <div
+        key={i}
+        className='row'
+        styleName='form-group'
+      >
+        {formGroup}
+      </div>
 		);
 	}
 
 	return (
-		<div className='form-groups'>{formGroups}</div>
+		<div>{formGroups}</div>
 	);
 };
 
-export default FormGroups;
+export default CSSModules(FormGroups, styles);

@@ -3,11 +3,6 @@ import React
 import {connect}
        from 'react-redux';
 
-import Row
-       from 'web/containers/layout/grid/Row';
-import Column
-      from 'web/containers/layout/grid/Column';
-
 import Sidebar
        from 'web/containers/layout/Sidebar';
 
@@ -16,20 +11,28 @@ import DevTools
 import Notifications
        from 'web/containers/Notifications';
 
+import CSSModules
+       from 'react-css-modules';
+import styles
+       from './Wrapper.scss';
+
 const Wrapper = ({children}) => {
 
 	return (
-		<Row>
-			<Column grid='col-md-4 col-lg-3'>
+		<div>
+			<div className='col-md-4 col-lg-3' styleName='sidebar'>
 				<Sidebar />
-			</Column>
-			<Column grid='col-12 col-md-8 col-lg-9'>
+			</div>
+      <div
+        className='col-12 offset-md-4 col-md-8 offset-lg-3 col-lg-9'
+        styleName='content'
+      >
 				{children}
-			</Column>
+			</div>
 			<Notifications />
 			<DevTools />
-		</Row>
+		</div>
 	);
 };
 
-export default connect()(Wrapper);
+export default CSSModules(Wrapper, styles);

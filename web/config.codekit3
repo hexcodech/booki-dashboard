@@ -67,6 +67,19 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/components\/form\/FormGroups.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/FormGroups.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
 	"\/components\/form\/input\/select\/BookComponent.scss": {
 		"aP": 1,
 		"bl": 0,
@@ -146,6 +159,50 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"\/components\/layout\/Actions.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/layout\/min\/Actions-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/layout\/Actions.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Actions.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
+		},
+	"\/components\/layout\/Card.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/components\/layout\/min\/Card-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/components\/layout\/Card.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Card.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
 		},
 	"\/components\/layout\/Table.jsx": {
 		"ft": 64,
@@ -436,50 +493,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/containers\/layout\/grid\/Column.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/layout\/grid\/min\/Column-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/containers\/layout\/grid\/Column.scss": {
-		"aP": 1,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 1,
-		"oA": 1,
-		"oAP": "\/css\/Column.min.css",
-		"oF": 0,
-		"oS": 3,
-		"uL": 1
-		},
-	"\/containers\/layout\/grid\/Row.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/layout\/grid\/min\/Row-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/containers\/layout\/grid\/Row.scss": {
-		"aP": 1,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 1,
-		"oA": 1,
-		"oAP": "\/css\/Row.min.css",
-		"oF": 0,
-		"oS": 3,
-		"uL": 1
-		},
 	"\/containers\/layout\/Sidebar.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -510,6 +523,19 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"\/containers\/layout\/Wrapper.scss": {
+		"aP": 1,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 1,
+		"oA": 1,
+		"oAP": "\/css\/Wrapper.min.css",
+		"oF": 0,
+		"oS": 3,
+		"uL": 1
 		},
 	"\/containers\/Notifications.jsx": {
 		"ft": 64,

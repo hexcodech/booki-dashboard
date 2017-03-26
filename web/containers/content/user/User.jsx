@@ -18,7 +18,7 @@ import {PERMISSIONS, LANGUAGES}
        from 'core/constants/select-options';
 
 import {invalidateUsers, clearNewUser, updateNewUser, fetchUsersIfNeeded, putUser, postUser, deleteUser}
-      from 'core/actions/user';
+       from 'core/actions/user';
 
 import {addNotification}
        from 'core/actions/notification';
@@ -32,8 +32,15 @@ import {selectGenerator, arrayGenerator}
 
 import RefreshButton
        from 'web/components/RefreshButton';
+import {Table}
+       from 'web/components/layout/Table';
+import Actions
+       from 'web/components/layout/Actions';
 import FormGroups
        from 'web/components/form/FormGroups';
+
+import Card
+       from 'web/components/layout/Card';
 
 import FlagOptionComponent
        from 'web/components/form/input/select/FlagOptionComponent';
@@ -70,7 +77,7 @@ class User extends React.Component{
 
 	handleOnChange(id, value){
 		const {
-			dispatch, accessToken, newUser, users, match: {params: {userId}}
+			dispatch, accessToken, newUser, users, match: {params: {id: userId}}
 		} = this.props;
 
 		let user;
@@ -88,14 +95,14 @@ class User extends React.Component{
 		}else{
 
 			user = Object.assign({}, users.filter((user) => {
-				return user._id === userId;
+				return user.id == userId;
 			})[0]);
 
-			if(set(user, id, value)){
-				dispatch(
-					putUser(user, accessToken)
-				);
-			}
+      set(user, id, value);
+
+      dispatch(
+        putUser(user, accessToken)
+      );
 
 		}
 	}
@@ -124,7 +131,7 @@ class User extends React.Component{
 				);
 
 				dispatch(
-					push('/dashboard/user/' + postedUser._id + '/')
+					push('/user/' + postedUser.id + '/')
 				);
 
 				dispatch(
@@ -141,11 +148,11 @@ class User extends React.Component{
 		e.stopPropagation();
 
 		const {
-			dispatch, users, accessToken, match: {params: {userId}}, clients
+			dispatch, users, accessToken, match: {params: {id: userId}}, clients
 		} = this.props;
 
 		const user = Object.assign({}, users.filter((user) => {
-			return user._id === userId;
+			return user.id == userId;
 		})[0]);
 
 		const ownClients = clients.filter((client) => {
@@ -193,7 +200,7 @@ class User extends React.Component{
 
 									if(postedUser){
 										dispatch(
-											push('/dashboard/user/' + postedUser._id + '/')
+											push('/user/' + postedUser.id + '/')
 										);
 									}
 
@@ -207,7 +214,7 @@ class User extends React.Component{
 				);
 
 				dispatch(
-					push('/dashboard/users/')
+					push('/users/')
 				);
 			}
 		});
@@ -216,8 +223,7 @@ class User extends React.Component{
 	onClientRowClick(e){
 		this.props.dispatch(
 			push(
-				'/dashboard/client/' + e.currentTarget.getAttribute('data-client-id') +
-				'/'
+				'/client/' + e.currentTarget.getAttribute('data-client-id') + '/'
 			)
 		);
 	}
@@ -237,22 +243,17 @@ class User extends React.Component{
 
 		}else{
 
-			let tmp = users.filter((user) => {
+			user = users.filter((user) => {
 				return user.id == userId;
-			});
+			})[0];
 
-			if(tmp.length === 1){
-				user = tmp[0];
-			}else{
-				user = null;
-			}
 		}
 
 		if(!user){return null;}
 
 
 		const ownClients = clients.filter((client) => {
-			return client.userId === userId;
+			return client.userId == userId;
 		});
 
 
@@ -263,8 +264,8 @@ class User extends React.Component{
 		) => {
 
 			return <div className='input-group'>
-				<div className='input-group-addon no-padding'>
-					<img className='img-thumbnail' src={value} width='50' height='50' />
+				<div className='input-group-addon'>
+					<img src={value} width='50' height='50' />
 				</div>
 				<input
 					id={id}
@@ -281,97 +282,120 @@ class User extends React.Component{
 		return (
 			<div className='user'>
 
-				<ul className='list-inline list-navigation'>
+				<Actions>
 					{userId !== 'new' &&
-						<li className='list-inline-item'>
-							<RefreshButton date={user.lastUpdated} loading={user.isFetching} refreshHandler={this.handleRefreshClick} />
+						<li>
+              <RefreshButton
+                date={user.lastUpdated}
+                loading={user.isFetching}
+                refreshHandler={this.handleRefreshClick}
+              />
 						</li>
 					}
 					{userId === 'new' &&
-						<li className='list-inline-item hint-bottom-middle hint-anim' data-hint='Create user'>
-							<a className='' href='#' onClick={this.handleOnAddNewUser}>
-								<i className='material-icons bottom'>person_add</i>
+            <li
+              className='hint-bottom-middle hint-anim'
+              data-hint='Create user'
+            >
+							<a href='#' onClick={this.handleOnAddNewUser}>
+								<i className='material-icons'>person_add</i>
 							</a>
 						</li>
 					}
-					{userId !== 'new' && userId !== currentUser._id &&
-						<li className='list-inline-item hint-bottom-middle hint-anim' data-hint='Delete user'>
-							<a className='' href='#' onClick={this.handleOnDeleteUser}>
-								<i className='material-icons bottom'>delete</i>
+					{userId !== 'new' && userId !== currentUser.id &&
+            <li
+              className='hint-bottom-middle hint-anim'
+              data-hint='Delete user'
+            >
+							<a href='#' onClick={this.handleOnDeleteUser}>
+								<i className='material-icons'>delete</i>
 							</a>
 						</li>
 					}
-					{userId === currentUser._id &&
-						<li className='list-inline-item hint-bottom-middle hint-anim' data-hint='This is your account, be careful.'>
-							<i className='material-icons bottom'>face</i>
+					{userId === currentUser.id &&
+            <li
+              className='hint-bottom-middle hint-anim'
+              data-hint='This is your account, be careful.'
+            >
+							<i className='material-icons'>face</i>
 						</li>
 					}
-				</ul>
+				</Actions>
 
 
-				<hr/>
+        <Card>
+          <h2>User form</h2>
 
-				<section>
-					<h2>User form</h2>
+          <form className='profile'>
+            <FormGroups
+              object={user}
+              keyPaths={[
+                [
+                {keyPath: 'id',	label: 'User Id', inputDisabled: true},
+                {keyPath: 'locale', label: 'Locale', input: selectGenerator({
+										options: LANGUAGES,
+										optionComponent: FlagOptionComponent,
+										valueComponent: FlagValueComponent
+                })}
+                ],
+                [
+                {keyPath: 'nameFirst', label: 'First name'},
+                {keyPath: 'nameLast',  label: 'Last name'}
+                ],
 
-					<form className='profile'>
-						<FormGroups
-							object={user}
-							keyPaths={[
-								[
-								{keyPath: 'id',	label: 'User Id', inputDisabled: true},
-								{keyPath: 'locale', label: 'Locale', input: selectGenerator({
-										options			: LANGUAGES,
-										optionComponent	: FlagOptionComponent,
-										valueComponent	: FlagValueComponent
-								})}
-								],
-								[
-								{keyPath: 'nameFirst', label: 'First name'},
-								{keyPath: 'nameLast',  label: 'Last name'}
-								],
-								[
-								{keyPath: 'nameDisplay', label: 'Display name'}
-								],
-								[
-								{keyPath: 'emailVerified',    label: 'Verified email'},
-								{keyPath: 'emailUnverified',  label: 'Unverified email'}
-								],
-								[
-								{keyPath: 'emailVerificationCode', label: 'Email verification code'}
-								],
-								[
-								{keyPath: 'passwordResetCode',  label: 'Password reset code'}
-								],
-								[
-								{
-                  keyPath: 'profilePictureUrl',
-                  label: 'Profile picture url',
-                  input: porfilePictureUrlInput
+                [
+                {keyPath: 'nameDisplay', label: 'Display name'}
+                ],
+
+                [
+                {keyPath: 'emailVerified',    label: 'Verified email'},
+                {keyPath: 'emailUnverified',  label: 'Unverified email'}
+                ],
+
+                [
+                {
+                    keyPath: 'emailVerificationCode',
+                    label: 'Email verification code'
+                }
+                ],
+                [
+                {keyPath: 'passwordResetCode',  label: 'Password reset code'}
+                ],
+
+                [
+                {
+                    keyPath: 'profilePictureUrl',
+                    label: 'Profile picture url',
+                    input: porfilePictureUrlInput
                 },
-								{
+                {
                   keyPath: 'permissions',
                   label: 'Permissions',
                   input: arrayGenerator(PERMISSIONS, true, 'Add new permission')
                 }
-								],
-								[
+                ],
+
+                [
                 {keyPath: 'placeOfResidence', label: 'Place of residence'},
-                {keyPath: 'created',          label: 'Created', inputDisabled: true}
-								],
-							]}
-							handleOnChange={this.handleOnChange}
-      />
+                ],
 
-					</form>
-				</section>
+                [
+                {keyPath: 'updatedAt', label: 'Updated', inputDisabled: true},
+                {keyPath: 'createdAt', label: 'Created', inputDisabled: true}
+                ]
+              ]}
+              handleOnChange={this.handleOnChange}
+            />
 
-				{
-					ownClients.length > 0 &&
+          </form>
+        </Card>
 
-            <section>
+        {
+          ownClients.length > 0 &&
+
+            <Card>
               <h2>OAuth clients</h2>
-              <table className='client-list styled clickable-rows'>
+              <Table interactive={true}>
                 <thead>
                   <tr><th>Name</th><th>Trusted</th></tr>
                 </thead>
@@ -380,44 +404,44 @@ class User extends React.Component{
                     return (
                       <tr
                         onClick={this.onClientRowClick}
-                        key={client._id}
-                        data-client-id={client._id}
+                        key={client.id}
+                        data-client-id={client.id}
                       >
                         <td>{client.name}</td>
                         <td>
                           <span
-                            className='rel hint-right-middle hint-anim'
+                            className='hint-right-middle hint-anim'
                             data-hint={
                               client.trusted ? 'Trusted' : 'Untrusted'
                             }
                           >
                             {client.trusted ?
-                              (<i className='material-icons bottom trusted'>
+                              (<i className='material-icons'>
                                 verified_user
                               </i>) :
-                              (<i className='material-icons bottom untrusted'>
+                              (<i className='material-icons'>
                                 lock_open
                               </i>)
                             }
                           </span>
                         </td>
-                    </tr>);
-								})}
-							</tbody>
-						</table>
-					</section>
+                      </tr>);
+                  })}
+                </tbody>
+              </Table>
+            </Card>
 				}
 
-				<section className='json-tree'>
-					<h2>Raw JSON</h2>
-					<JSONTree
-						data={user}
-						theme={JSONTreeTheme}
-						invertTheme={false}
-						hideRoot={true}
-						sortObjectKeys={true}
-					/>
-				</section>
+        <Card>
+          <h2>Raw JSON</h2>
+          <JSONTree
+            data={user}
+            theme={JSONTreeTheme}
+            invertTheme={false}
+            hideRoot={true}
+            sortObjectKeys={true}
+          />
+        </Card>
 			</div>
 		);
 	}

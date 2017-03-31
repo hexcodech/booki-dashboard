@@ -9,7 +9,9 @@ import CSSModules
 import styles
        from './FormGroups.scss';
 
-const FormGroups = ({object, keyPaths, handleOnChange}) => {
+const FormGroups = ({
+  object, keyPaths, handleOnChange, errors = {}
+}) => {
 
 	let formGroups = [];
 
@@ -20,7 +22,7 @@ const FormGroups = ({object, keyPaths, handleOnChange}) => {
 
 			formGroup.push(
 				<FormField
-					key={j}
+					key={i + '/' + j}
 					object={object}
 					keyPath={keyPaths[i][j].keyPath}
 					fieldSize={'col-' + (12 / keyPaths[i].length) }
@@ -31,9 +33,10 @@ const FormGroups = ({object, keyPaths, handleOnChange}) => {
 					inputType={keyPaths[i][j].inputType}
 					inputDisabled={keyPaths[i][j].inputDisabled}
 					inputSize={'col-' + (12 - 2 * keyPaths[i].length)}
-					input={keyPaths[i][j].input}
 
 					handleOnChange={handleOnChange}
+
+          errors={errors[keyPaths[i][j].keyPath]}
 				/>
 			);
 
@@ -49,6 +52,7 @@ const FormGroups = ({object, keyPaths, handleOnChange}) => {
         {formGroup}
       </div>
 		);
+
 	}
 
 	return (

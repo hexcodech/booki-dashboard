@@ -4,8 +4,6 @@ import React
 import {Route}
        from 'react-router-dom';
 
-import Wrapper
-      from 'web/containers/layout/Wrapper';
 import User
        from 'web/containers/content/user/User';
 import UserList
@@ -13,10 +11,10 @@ import UserList
 
 const UserRouter = () => {
   return (
-    <Wrapper>
+    <div>
       <Route path='/user/list' component={UserList} />
       <Route path='/user/:id' component={User} />
-    </Wrapper>
+    </div>
   );
 };
 

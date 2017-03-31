@@ -13,7 +13,7 @@ import CSSModules
 import styles
        from './Sidebar.scss';
 
-const Sidebar = ({user, dispatch}) => {
+const Sidebar = ({user, pathname, dispatch}) => {
 
 	let width	= window.innerWidth ||
 	            document.documentElement.clientWidth ||
@@ -28,7 +28,7 @@ const Sidebar = ({user, dispatch}) => {
 			'rgba(255, 173, 57, 1), rgba(255, 173, 57, 0.45)' +
 		'), url(' +
 			'https://source.unsplash.com/random/' + Math.round(width/3)+'x'+height +
-		')'
+		'/weekly)'
 	};
 
 	return (
@@ -48,25 +48,33 @@ const Sidebar = ({user, dispatch}) => {
 			</figure>
 
 			<ul styleName='link-list'>
-				<SidebarListElement
+        <SidebarListElement
 					text='Dashboard'
 					icon='dashboard'
 					url='/dashboard/'
-    />
-				<SidebarListElement
+          match='/dashboard/'
+          pathname={pathname}
+        />
+        <SidebarListElement
 					text='Users'
 					icon='supervisor_account'
 					url='/user/list'
-    />
-				<SidebarListElement
+          match='/user/'
+          pathname={pathname}
+        />
+        <SidebarListElement
 					text='OAuthClients'
 					icon='business'
 					url='/client/list'
-    />
-				<SidebarListElement
+          match='/client/'
+          pathname={pathname}
+        />
+        <SidebarListElement
 					text='Books'
 					icon='book'
 					url='/book/list'
+          match='/book/'
+          pathname={pathname}
 				/>
 			</ul>
 		</aside>
@@ -75,7 +83,8 @@ const Sidebar = ({user, dispatch}) => {
 
 const mapStateToProps = (state) => {
 	return {
-		user: state.app.authentication.user
+		user     : state.app.authentication.user,
+    pathname : state.router.location.pathname
 	};
 };
 

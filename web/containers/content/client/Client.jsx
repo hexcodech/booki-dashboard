@@ -27,8 +27,8 @@ import {fetchUsersIfNeeded}
 import {addNotification}
        from 'core/actions/notification';
 
-import {arrayGenerator, checkboxGenerator}
-      from 'web/utilities/field-generators';
+import {arrayInput, checkboxInput}
+      from 'web/utilities/input-types';
 
 import RefreshButton
        from 'web/components/RefreshButton';
@@ -77,7 +77,7 @@ class Client extends React.Component{
 
 		let client;
 
-		if(clientId === 'new'){
+		if(clientId == 'new'){
 
 			client = Object.assign({}, newClient);
 
@@ -145,8 +145,10 @@ class Client extends React.Component{
       dispatch, clients, accessToken, match: {params: {id: clientId}}
     } = this.props;
 
+    console.log(clientId);
+
 		let client = Object.assign({}, clients.filter((client) => {
-			return client.id === clientId;
+			return client.id == clientId;
 		})[0]);
 
 		dispatch(
@@ -186,7 +188,7 @@ class Client extends React.Component{
 				);
 
 				dispatch(
-					push('/clients/')
+					push('/client/list')
 				);
 			}
 		});
@@ -195,12 +197,13 @@ class Client extends React.Component{
 	render(){
 
 		const {
-      newClient, clients, match: {params: {id: clientId}}, users, dispatch
+      newClient, clients, match: {params: {id: clientId}}, users, dispatch,
+      errors
     } = this.props;
 
 		let client;
 
-		if(clientId === 'new'){
+		if(clientId == 'new'){
 
 			client = newClient;
 
@@ -209,7 +212,7 @@ class Client extends React.Component{
 			client = clients.filter((client) => {
 				return client.id == clientId;
 			})[0];
-      
+
 		}
 
 		if(!client){return null;}
@@ -218,7 +221,7 @@ class Client extends React.Component{
 			return user.id == client.userId;
 		})[0];
 
-		const userIdInput = (id, value='', handleOnChange) => {
+		const userIdInput = (id, value='', errors, handleOnChange) => {
 
 			return (<div className='input-group'>
         <div
@@ -262,7 +265,7 @@ class Client extends React.Component{
               />
 						</li>
 					}
-					{clientId === 'new' &&
+					{clientId == 'new' &&
             <li
               className='hint-bottom-middle hint-anim'
               data-hint='Create client'
@@ -282,7 +285,7 @@ class Client extends React.Component{
 							</a>
 						</li>
 					}
-					{clientId === CLIENT_ID &&
+					{clientId == CLIENT_ID &&
 
             <li
               className='hint-bottom-middle hint-anim'
@@ -299,6 +302,9 @@ class Client extends React.Component{
 					<form className='profile'>
             <FormGroups
 							object={client}
+
+              errors={errors.client}
+
 							keyPaths={[
 								[
                 {
@@ -309,7 +315,7 @@ class Client extends React.Component{
                 {
                   keyPath       : 'trusted',
                   label         : 'Trusted',
-                  input         : checkboxGenerator(false)
+                  inputType     : checkboxInput(false)
                 },
 								],
 								[
@@ -320,7 +326,7 @@ class Client extends React.Component{
                 {
                   keyPath       : 'redirectUris',
                   label         : 'Redirect URIs',
-                  input         : arrayGenerator(
+                  inputType     : arrayInput(
                     [], true, 'Add new redirect uri'
                   )
                 }
@@ -329,7 +335,7 @@ class Client extends React.Component{
                 {
                   keyPath       : 'userId',
                   label         : 'Owner Id',
-                  input         : userIdInput
+                  inputType     : userIdInput
                 },
 								]
 							]}
@@ -340,7 +346,7 @@ class Client extends React.Component{
 				</Card>
 
 				{
-          client && client.secret && client.secret.secret &&
+          client && client.secret &&
 
             <Card>
               <div className='col-12 col-md-2'>
@@ -352,7 +358,7 @@ class Client extends React.Component{
                   type='text'
                   disabled='disabled'
                   id='secret'
-                  value={client.secret.secret}
+                  value={client.secret}
                 />
               </div>
             </Card>
@@ -365,7 +371,7 @@ class Client extends React.Component{
 						theme={JSONTreeTheme}
 						invertTheme={false}
 						hideRoot={true}
-						sortObjectKeys={true}
+						//sortObjectKeys={true}
           />
 				</Card>
 			</div>
@@ -378,7 +384,8 @@ const mapStateToProps = (state) => {
 		accessToken : state.app.authentication.accessToken.token,
 		newClient   : state.app.newClient,
 		clients     : state.app.clients,
-		users       : state.app.users
+		users       : state.app.users,
+    errors      : state.app.validation
 	};
 }
 

@@ -11,9 +11,9 @@
 .table-interactive tr{
   cursor: pointer;
 
-  &:hover{
+  /*&:hover{
     background-color: rgba($brand-primary, 0.25);
-  }
+  }*/
 }
 
 .table thead{

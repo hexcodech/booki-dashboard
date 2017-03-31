@@ -341,6 +341,15 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/content\/book\/BookRouter.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/book\/min\/BookRouter-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/containers\/content\/client\/Client.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -355,6 +364,15 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/containers\/content\/client\/min\/ClientList-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/client\/ClientRouter.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/client\/min\/ClientRouter-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0

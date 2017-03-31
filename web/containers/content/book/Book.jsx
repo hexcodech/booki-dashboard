@@ -26,8 +26,8 @@ import {addNotification}
        from 'core/actions/notification';
 
 
-import {arrayGenerator, selectGenerator, textAreaGenerator}
-       from 'web/utilities/field-generators';
+import {arrayInput, selectInput, textAreaInput}
+       from 'web/utilities/input-types';
 
 import RefreshButton
        from 'web/components/RefreshButton';
@@ -178,7 +178,7 @@ class Book extends React.Component{
 
 									if(postedBook){
 										dispatch(
-											push('/dashboard/book/' + postedBook.id + '/')
+											push('/book/' + postedBook.id + '/')
 										);
 									}
 
@@ -192,7 +192,7 @@ class Book extends React.Component{
 				);
 
 				dispatch(
-					push('/books/')
+					push('/book/list')
 				);
 			}
 		});
@@ -236,7 +236,7 @@ class Book extends React.Component{
 	render(){
 
 		const {
-			newBook, books, users, dispatch, match: {params: {id: bookId}}
+			newBook, books, users, dispatch, match: {params: {id: bookId}}, errors
 		} = this.props;
 
 		let book;
@@ -266,14 +266,14 @@ class Book extends React.Component{
 				<div
 					className='input-group-addon'
 					onClick={() => {
-						dispatch(push('/dashboard/user/' + creator.id + '/'))}
+						dispatch(push('/user/' + creator.id + '/'))}
 					}
-				>
+    >
 					<img
 						src={creator ? creator.profilePictureUrl : ''}
 						width='50'
 						height='50'
-					/>
+     />
 				</div>
 				<input
 					id={id}
@@ -293,29 +293,29 @@ class Book extends React.Component{
 
 				<Actions>
 					{bookId !== 'new' &&
-						<li>
-							<RefreshButton
+            <li>
+              <RefreshButton
 								date={book.lastUpdated}
 								loading={book.isFetching}
 								refreshHandler={this.handleRefreshClick}
-							/>
+              />
 						</li>
 					}
 					{bookId === 'new' &&
-						<li
+            <li
 							className='hint-bottom-middle hint-anim'
 							data-hint='Create book'
-						>
+            >
 							<a href='#' onClick={this.handleOnAddNewBook}>
 								<i className='material-icons'>add_circle</i>
 							</a>
 						</li>
 					}
 					{bookId !== 'new' &&
-						<li
+            <li
 							className='hint-bottom-middle hint-anim'
 							data-hint='Delete book'
-						>
+            >
 							<a href='#' onClick={this.handleOnDeleteBook}>
 								<i className='material-icons'>delete</i>
 							</a>
@@ -329,13 +329,16 @@ class Book extends React.Component{
 					<form className='profile'>
 						<FormGroups
 							object={book}
+
+              errors={errors.book}
+
 							keyPaths={[
 								[
 								{keyPath: 'id', label: 'Book Id', inputDisabled: true},
 								{
 									keyPath: 'isbn13',
 									label: 'ISBN 13',
-									input: selectGenerator({
+									inputType: selectInput({
 										async: true,
 										creatable: true,
 										loadOptions: this.onBookSelectInput,
@@ -367,7 +370,7 @@ class Book extends React.Component{
 								{
 									keyPath: 'authors',
 									label: 'Authors',
-									input: arrayGenerator([], true, 'Add new author')
+									inputType: arrayInput([], true, 'Add new author')
 								}
 								],
 								[
@@ -376,18 +379,22 @@ class Book extends React.Component{
 								],
 								[
 								{keyPath: 'pageCount', label: 'Number of pages'},
-								{keyPath: 'createdBy', label: 'Created by', input: userIdInput},
+								{
+                  keyPath: 'createdBy',
+                  label: 'Created by',
+                  inputType: userIdInput
+                },
 								],
 								[
 								{
 									keyPath: 'description',
 									label: 'Description',
-									input: textAreaGenerator('', 'Describe the book', 4, 50)
+									inputType: textAreaInput('', 'Describe the book', 4, 50)
 								},
 								]
 							]}
 							handleOnChange={this.handleOnChange}
-						/>
+      />
 
 					</form>
 				</Card>
@@ -399,7 +406,7 @@ class Book extends React.Component{
 						theme={JSONTreeTheme}
 						invertTheme={false}
 						hideRoot={true}
-						sortObjectKeys={true}
+						//sortObjectKeys={true}
 					/>
 				</Card>
 			</div>
@@ -409,11 +416,12 @@ class Book extends React.Component{
 
 const mapStateToProps = (state) => {
 	return {
-		accessToken		: state.app.authentication.accessToken.token,
-		newBook			: state.app.newBook,
-		books			: state.app.books,
-		lookedUpBooks	: state.app.lookedUpBooks,
-		users			: state.app.users,
+		accessToken   : state.app.authentication.accessToken.token,
+		newBook       : state.app.newBook,
+		books         : state.app.books,
+		lookedUpBooks : state.app.lookedUpBooks,
+		users			    : state.app.users,
+    errors        : state.app.validation
 	};
 }
 

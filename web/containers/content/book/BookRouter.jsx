@@ -4,8 +4,6 @@ import React
 import {Route}
        from 'react-router-dom';
 
-import Wrapper
-      from 'web/containers/layout/Wrapper';
 import Book
        from 'web/containers/content/book/Book';
 import BookList
@@ -13,10 +11,10 @@ import BookList
 
 const BookRouter = () => {
   return (
-    <Wrapper>
+    <div>
       <Route path='/book/list' component={BookList} />
       <Route path='/book/:id' component={Book} />
-    </Wrapper>
+    </div>
   );
 };
 

@@ -11,7 +11,9 @@ class TagInput extends React.Component{
 	constructor(props){
 		super(props);
 
-		bindAll(this, ['handleChange', 'handleDelete', 'handleAddition', 'handleDrag']);
+		bindAll(this, [
+      'handleChange', 'handleDelete', 'handleAddition', 'handleDrag'
+    ]);
 	}
 
 	handleChange(tags){

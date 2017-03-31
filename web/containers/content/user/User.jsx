@@ -27,8 +27,8 @@ import {fetchClientsIfNeeded, postClient}
        from 'core/actions/client';
 
 
-import {selectGenerator, arrayGenerator}
-       from 'web/utilities/field-generators';
+import {selectInput, arrayInput}
+       from 'web/utilities/input-types';
 
 import RefreshButton
        from 'web/components/RefreshButton';
@@ -82,15 +82,15 @@ class User extends React.Component{
 
 		let user;
 
-		if(userId === 'new'){
+		if(userId == 'new'){
 
 			user = Object.assign({}, newUser);
 
-			if(set(user, id, value)){
-				dispatch(
-					updateNewUser(user)
-				);
-			}
+      set(user, id, value);
+
+      dispatch(
+        updateNewUser(user)
+      );
 
 		}else{
 
@@ -156,15 +156,13 @@ class User extends React.Component{
 		})[0]);
 
 		const ownClients = clients.filter((client) => {
-			return client.userId === userId;
+			return client.userId == userId;
 		});
 
 		dispatch(
 			deleteUser(user, accessToken)
 		).then((success) => {
 			if(success){
-
-
 
 				dispatch(
 					addNotification({
@@ -214,7 +212,7 @@ class User extends React.Component{
 				);
 
 				dispatch(
-					push('/users/')
+					push('/user/list')
 				);
 			}
 		});
@@ -232,12 +230,12 @@ class User extends React.Component{
 
 		const {
 			newUser, users, currentUser, match: {params: {id: userId}},
-			clients
+			clients, errors
 		} = this.props;
 
 		let user;
 
-		if(userId === 'new'){
+		if(userId == 'new'){
 
 			user = newUser;
 
@@ -260,6 +258,7 @@ class User extends React.Component{
 		const porfilePictureUrlInput = (
 			id,
 			value='https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=512',
+      errors,
 			handleOnChange
 		) => {
 
@@ -292,7 +291,7 @@ class User extends React.Component{
               />
 						</li>
 					}
-					{userId === 'new' &&
+					{userId == 'new' &&
             <li
               className='hint-bottom-middle hint-anim'
               data-hint='Create user'
@@ -312,7 +311,7 @@ class User extends React.Component{
 							</a>
 						</li>
 					}
-					{userId === currentUser.id &&
+					{userId == currentUser.id &&
             <li
               className='hint-bottom-middle hint-anim'
               data-hint='This is your account, be careful.'
@@ -329,14 +328,19 @@ class User extends React.Component{
           <form className='profile'>
             <FormGroups
               object={user}
+
+              errors={errors.user}
+
               keyPaths={[
                 [
                 {keyPath: 'id',	label: 'User Id', inputDisabled: true},
-                {keyPath: 'locale', label: 'Locale', input: selectGenerator({
+                {keyPath: 'locale', label: 'Locale', inputType: selectInput(
+                  {
 										options: LANGUAGES,
 										optionComponent: FlagOptionComponent,
 										valueComponent: FlagValueComponent
-                })}
+                  }, null)
+                }
                 ],
                 [
                 {keyPath: 'nameFirst', label: 'First name'},
@@ -366,12 +370,14 @@ class User extends React.Component{
                 {
                     keyPath: 'profilePictureUrl',
                     label: 'Profile picture url',
-                    input: porfilePictureUrlInput
+                    inputType: porfilePictureUrlInput
                 },
                 {
                   keyPath: 'permissions',
                   label: 'Permissions',
-                  input: arrayGenerator(PERMISSIONS, true, 'Add new permission')
+                  inputType: arrayInput(
+                    PERMISSIONS, true, 'Add new permission'
+                  )
                 }
                 ],
 
@@ -439,7 +445,7 @@ class User extends React.Component{
             theme={JSONTreeTheme}
             invertTheme={false}
             hideRoot={true}
-            sortObjectKeys={true}
+            //sortObjectKeys={true}
           />
         </Card>
 			</div>
@@ -449,11 +455,12 @@ class User extends React.Component{
 
 const mapStateToProps = (state) => {
 	return {
-		accessToken	: state.app.authentication.accessToken.token,
-		newUser		: state.app.newUser,
-		users		: state.app.users,
-		clients		: state.app.clients,
-		currentUser	: state.app.authentication.user
+		accessToken : state.app.authentication.accessToken.token,
+		newUser     : state.app.newUser,
+		users       : state.app.users,
+		clients     : state.app.clients,
+		currentUser : state.app.authentication.user,
+    errors      : state.app.validation
 	};
 }
 

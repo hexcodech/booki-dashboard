@@ -31,8 +31,9 @@ import DevTools          from 'web/containers/dev/DevTools';
 import Login             from 'web/components/auth/Login';
 import OAuthCallback     from 'web/components/auth/OAuthCallback';
 
-import Content           from 'web/containers/content/Content';
 import Dashboard         from 'web/containers/content/dashboard/Dashboard';
+
+import Wrapper           from 'web/containers/layout/Wrapper';
 
 import UserRouter        from 'web/containers/content/user/UserRouter';
 import ClientRouter      from 'web/containers/content/client/ClientRouter';
@@ -77,16 +78,19 @@ const App = () => {
 	return (
 		<Provider store={store}>
 			<ConnectedRouter history={history}>
-				<div className='routing'>
-					<Route exact path='/' component={Login} />
-					<Route path='/auth/callback' component={OAuthCallback} />
+        <div>
+          <Route exact path='/' component={Login} />
+          <Route path='/auth/callback' component={OAuthCallback} />
 
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/user' component={UserRouter} />
-          <Route path='/client' component={ClientRouter}/>
-          <Route path='/book' component={BookRouter}/>
+          <Wrapper>
 
-				</div>
+            <Route path='/dashboard' component={Dashboard} />
+            <Route path='/user' component={UserRouter} />
+            <Route path='/client' component={ClientRouter}/>
+            <Route path='/book' component={BookRouter}/>
+
+          </Wrapper>
+        </div>
 			</ConnectedRouter>
 		</Provider>
 	);

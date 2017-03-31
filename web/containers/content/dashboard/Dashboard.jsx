@@ -6,9 +6,6 @@ import {connect}
 import Bundle
        from 'web/components/Bundle';
 
-import Wrapper
-       from 'web/containers/layout/Wrapper';
-
 import SpinnerWidget
        from 'web/containers/content/dashboard/widgets/SpinnerWidget';
 
@@ -29,22 +26,20 @@ import styles
 const DashboardContent = ({children}) => {
 
 	return (
-    <Wrapper>
-      <div styleName='dashboard'>
-        <Bundle load={GeneralStats}>
-          {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
-        </Bundle>
-        <Bundle load={MemoryStats}>
-          {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
-        </Bundle>
-        <Bundle load={CpuStats}>
-          {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
-        </Bundle>
-        <Bundle load={UserStats}>
-          {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
-        </Bundle>
-      </div>
-    </Wrapper>
+    <div styleName='dashboard'>
+      <Bundle load={GeneralStats}>
+        {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
+      </Bundle>
+      <Bundle load={MemoryStats}>
+        {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
+      </Bundle>
+      <Bundle load={CpuStats}>
+        {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
+      </Bundle>
+      <Bundle load={UserStats}>
+        {(Comp) => Comp ? <Comp/> : <SpinnerWidget/>}
+      </Bundle>
+    </div>
   );
 };
 

@@ -31,7 +31,7 @@
 // @import '../../node_modules/bootstrap/scss/pagination';
 // @import '../../node_modules/bootstrap/scss/badge';
 // @import '../../node_modules/bootstrap/scss/jumbotron';
-// @import '../../node_modules/bootstrap/scss/alert';
+@import '../../node_modules/bootstrap/scss/alert';
 // @import '../../node_modules/bootstrap/scss/progress';
 // @import '../../node_modules/bootstrap/scss/media';
 // @import '../../node_modules/bootstrap/scss/list-group';
@@ -161,6 +161,17 @@ body{
 
 .Select-control{
   border-radius: 0;
+}
+
+//modify some bootstrap classes
+
+.has-dangers .react-select .Select-control{
+  border-color: $brand-danger;
+}
+
+.alert{
+   max-height : 150px;
+   overflow   : scroll;
 }
 
 

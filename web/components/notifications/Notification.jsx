@@ -1,5 +1,9 @@
 import React
        from 'react';
+
+import TimeAgo
+       from 'react-timeago';
+
 import CSSModules
        from 'react-css-modules';
 import styles

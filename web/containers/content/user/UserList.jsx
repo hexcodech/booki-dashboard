@@ -102,27 +102,27 @@ class UserList extends React.Component{
 							{users.map((user, index) => {
 
 								return (
-									<tr
+                  <tr
 										key={index}
 										onClick={this.handleUserRowClick}
 										data-user-id={user.id}
-         >
+                  >
 										<td>
 											{
 												user.permissions.indexOf('admin') !== -1 &&
-													<span
+                          <span
 														className='hint-bottom-middle hint-anim'
 														data-hint='Admin'
-             >
+                          >
 														<i className='material-icons'>gavel</i>
 													</span>
 											}
 											{
 												user.id == currentUser.id &&
-													<span
+                          <span
 														className='hint-bottom-middle hint-anim'
 														data-hint='This is your account.'
-             >
+                          >
 														<i className='material-icons'>face</i>
 													</span>
 											}
@@ -132,18 +132,18 @@ class UserList extends React.Component{
 										<td>{user.nameLast}</td>
 										<td>{user.emailVerified}</td>
 										<td>
-											<span
+                      <span
 												className='hint-right-middle hint-anim'
 												data-hint={user.locale}
-           >
-												<img
+                      >
+                        <img
 													height='20'
 													width='20'
 													src={
 														API_URL + '/static/res/img/locales/' + user.locale
 														+ '.svg'
 													}
-            />
+                        />
 											</span>
 										</td>
 									</tr>

@@ -1,40 +1,54 @@
-import {combineReducers}	from 'redux';
+import {combineReducers}
+       from 'redux';
 
 //import reducers
-import authentication		from 'core/reducers/auth';
+import authentication
+       from 'core/reducers/auth';
 
-import users				from 'core/reducers/users';
-import newUser				from 'core/reducers/user/new';
+import validation
+       from 'core/reducers/validation';
 
-import clients				from 'core/reducers/clients';
-import newClient			from 'core/reducers/client/new';
+import dashboard
+       from 'app/reducers/dashboard';
 
-import books				from 'core/reducers/books';
-import newBook				from 'core/reducers/book/new';
+import users
+       from 'core/reducers/users';
+import newUser
+       from 'core/reducers/user/new';
 
-import lookedUpBooks		from 'core/reducers/book/looked-up';
+import clients
+       from 'core/reducers/clients';
+import newClient
+       from 'core/reducers/client/new';
 
-import notifications		from 'core/reducers/notifications';
+import books
+       from 'core/reducers/books';
+import newBook
+       from 'core/reducers/book/new';
 
+import lookedUpBooks
+       from 'core/reducers/book/looked-up';
 
-import dashboard			from 'app/reducers/dashboard';
+import notifications
+       from 'core/reducers/notifications';
 
 
 
 export default combineReducers({
 	authentication,
+	validation,
 	dashboard,
-	
+
 	newUser,
 	users,
-	
+
 	newClient,
 	clients,
-	
+
 	newBook,
 	books,
-	
+
 	lookedUpBooks,
-	
+
 	notifications
 });

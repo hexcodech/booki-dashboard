@@ -4,8 +4,6 @@ import React
 import {Route}
        from 'react-router-dom';
 
-import Wrapper
-      from 'web/containers/layout/Wrapper';
 import Client
        from 'web/containers/content/client/Client';
 import ClientList
@@ -13,10 +11,10 @@ import ClientList
 
 const ClientRouter = () => {
   return (
-    <Wrapper>
+    <div>
       <Route path='/client/list' component={ClientList} />
       <Route path='/client/:id' component={Client} />
-    </Wrapper>
+    </div>
   );
 };
 

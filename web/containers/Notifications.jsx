@@ -2,8 +2,6 @@ import React
        from 'react';
 import {connect}
        from 'react-redux';
-import TimeAgo
-       from 'react-timeago';
 
 import {addNotification}
        from 'core/actions/notification';

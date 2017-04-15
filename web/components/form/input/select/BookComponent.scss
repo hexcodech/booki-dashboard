@@ -1,5 +1,6 @@
 .book{
-  padding: .25rem;
+  position: relative;
+  padding: .5rem;
   display: block;
 
   img{
@@ -23,18 +24,24 @@
 
 }
 
+.description{
+  position: absolute;
+  left: 50px;
+  right: .5rem;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .title{
   color: inherit;
 }
 
 .page-count{
-
-  margin-left: .25rem;
-
-  &:before{
-    content: '(';
-  }
-  &:after{
-    content: ')';
-  }
+  color: inherit;
 }

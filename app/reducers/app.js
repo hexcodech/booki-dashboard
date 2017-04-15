@@ -29,6 +29,9 @@ import newBook
 import lookedUpBooks
        from 'core/reducers/book/looked-up';
 
+import lookedUpPeople
+      from 'core/reducers/person/looked-up';
+
 import notifications
        from 'core/reducers/notifications';
 
@@ -49,6 +52,8 @@ export default combineReducers({
 	books,
 
 	lookedUpBooks,
+
+  lookedUpPeople,
 
 	notifications
 });

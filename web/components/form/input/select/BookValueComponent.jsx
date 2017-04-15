@@ -8,22 +8,28 @@ import CSSModules
 import styles
        from './BookComponent.scss';
 
-const BookValueComponent = ({lookedUpBooks, value}) => {
+const BookValueComponent = ({lookedUpBooks = [], value = {}}) => {
 
-	const book = lookedUpBooks.filter((book) => {
-		return book._id === value.value;
-	})[0];
+  let book = null;
+
+  if(lookedUpBooks && lookedUpBooks.db && lookedUpBooks.external){
+    book = [...lookedUpBooks.db, ...lookedUpBooks.external].filter((book) => {
+  		return book.isbn13 === value.value;
+  	})[0];
+  }
 
 	if(book){
 		return (
-			<div className='book-select book-value'>
-				<img src={book.images.original} width='38' height='57'/>
-				<span className='title'>{book.title}</span>
+			<div styleName='book-value'>
+				<img src={book.thumbnail} width='38' height='57'/>
+        <span styleName='description'>
+          <span styleName='title'>{book.title}</span>
+        </span>
 			</div>
 		);
 	}else{
 		return (
-			<div className='book-select book-value'>
+			<div styleName='book-value'>
 				{value.value}
 			</div>
 		);

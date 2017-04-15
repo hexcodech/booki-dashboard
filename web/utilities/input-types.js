@@ -6,6 +6,8 @@ import TagInput
 import SelectInput
        from 'web/components/form/input/select/SelectInput.jsx';
 
+import fuzzy from 'fuzzy';
+
 export const selectInput = (
   props, onSelect = null
 ) => {
@@ -32,8 +34,17 @@ export const selectInput = (
 	};
 };
 
+//fuzzySearch
+
+const fuzzySearch = (query, suggestions) => {
+  return fuzzy.filter(query, suggestions).map(function(item){
+    return item.string;
+  });
+}
+
 export const arrayInput = (
-	suggestions = [], unique = false, placeholder = 'Add new tag'
+	suggestions = [], unique = false, placeholder = 'Add new tag',
+  onInput = null
 ) => {
 
 	return (id, values = [], errors = {}, handleOnChange) => {
@@ -53,9 +64,11 @@ export const arrayInput = (
   			})}
   			id={id}
   			suggestions={suggestions}
+        handleFilterSuggestions={fuzzySearch}
   			unique={unique}
   			placeholder={placeholder}
   			handleOnChange={handleOnChange}
+        handleOnInput={onInput}
       />
     </div>);
 	};

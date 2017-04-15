@@ -12,9 +12,16 @@ class TagInput extends React.Component{
 		super(props);
 
 		bindAll(this, [
-      'handleChange', 'handleDelete', 'handleAddition', 'handleDrag'
+      'handleChange', 'handleDelete', 'handleAddition', 'handleDrag',
+      'handleOnInput'
     ]);
 	}
+
+  handleOnInput(e){
+    if(this.props.handleOnInput){
+      this.props.handleOnInput(e);
+    }
+  }
 
 	handleChange(tags){
 		if(this.props.handleOnChange){
@@ -61,15 +68,17 @@ class TagInput extends React.Component{
 	}
 
 	render(){
-		let {tags, suggestions, placeholder} = this.props;
+		let {tags, suggestions, placeholder, handleFilterSuggestions} = this.props;
 
 		return (
 			<div className='clearfix react-tags'>
 				<ReactTags tags={tags}
 					suggestions={suggestions}
+          handleFilterSuggestions={handleFilterSuggestions}
 					handleDelete={this.handleDelete}
 					handleAddition={this.handleAddition}
 					handleDrag={this.handleDrag}
+          handleInputChange={this.handleOnInput}
 					classNames={{
 						tags: 'tags-tags',
 						tagInput: 'tags-input',

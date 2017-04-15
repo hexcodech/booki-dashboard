@@ -9,7 +9,7 @@ import styles
        from './BookComponent.scss';
 
 const BookOptionComponent = ({
-	lookedUpBooks, option, isFocused, onFocus, onSelect
+	lookedUpBooks = [], option, isFocused, onFocus, onSelect
 }) => {
 
 	const handleMouseDown = (event) => {
@@ -26,23 +26,30 @@ const BookOptionComponent = ({
 		onFocus(option, event);
 	};
 
-	const book = lookedUpBooks.filter((book) => {
-		return book.isbn13 === option.value;
-	})[0];
+  let book = null;
+
+  if(lookedUpBooks && lookedUpBooks.db && lookedUpBooks.external){
+    book = [...lookedUpBooks.db, ...lookedUpBooks.external].filter((book) => {
+  		return book.isbn13 === option.value;
+  	})[0];
+  }
 
 	if(book){
 
 		return (
 
-			<div
+      <div
 				styleName='book-option'
 				onMouseDown={handleMouseDown}
 				onMouseEnter={handleMouseEnter}
 				onMouseMove={handleMouseMove}
-			>
-				<img src={book.images.original} width='57' height='86'/>
-				<span styleName='title'>{book.title}</span>
-				<span styleName='page-count'>{book.pageCount}</span>
+      >
+				<img src={book.thumbnail} width='38' height='57'/>
+        <span styleName='description'>
+          <span styleName='title'>{book.title}</span>
+          {' '}
+          <span styleName='page-count'>({book.pageCount} S.)</span>
+        </span>
 			</div>
 		);
 
@@ -50,13 +57,13 @@ const BookOptionComponent = ({
 
 		return (
 
-			<div
+      <div
 				className='book-select book-option'
 				onMouseDown={handleMouseDown}
 				onMouseEnter={handleMouseEnter}
 				onMouseMove={handleMouseMove}
-			>
-				{option.label}
+      >
+        {option.label}
 			</div>
 		);
 

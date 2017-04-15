@@ -7,7 +7,7 @@
 		"uuidString": "170B7A15-0EC9-4724-92EB-49AF329EF30A"
 		}
 	],
-"creatorBuild": "25704",
+"creatorBuild": "25813",
 "files": {
 	"\/components\/auth\/Login.jsx": {
 		"ft": 64,
@@ -377,15 +377,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/containers\/content\/Content.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/min\/Content-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"\/containers\/content\/dashboard\/Dashboard.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -697,11 +688,11 @@
 		"oS": 3,
 		"uL": 1
 		},
-	"\/utilities\/field-generators.js": {
+	"\/utilities\/input-types.js": {
 		"ft": 64,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "\/utilities\/min\/field-generators-min.js",
+		"oAP": "\/utilities\/min\/input-types-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1675,6 +1666,10 @@
 			"active": 0,
 			"optionString": ""
 			},
+		"no-prototype-builtins": {
+			"active": 0,
+			"optionString": ""
+			},
 		"no-redeclare": {
 			"active": 1,
 			"optionString": "{'builtinGlobals': false}"
@@ -2499,14 +2494,6 @@
 		"orderOutput": 0,
 		"outputStyle": 1
 		},
-	"languageDefaultsJSX": {
-		"autoOutputAction": 0,
-		"autoOutputPathFilenamePattern": "*.js",
-		"autoOutputPathRelativePath": "",
-		"autoOutputPathReplace1": "jsx",
-		"autoOutputPathReplace2": "js",
-		"autoOutputPathStyle": 0
-		},
 	"languageDefaultsKIT": {
 		"autoOutputAction": 1,
 		"autoOutputPathFilenamePattern": "*.html",
@@ -2569,7 +2556,7 @@
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
-		"enableLossy": 1,
+		"optimizerType": 1,
 		"quality": 100
 		},
 	"languageDefaultsPUG": {

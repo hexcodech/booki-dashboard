@@ -63,11 +63,12 @@ body{
 
 .react-tags{
 	margin-bottom: .5rem;
+  position: relative;
 }
 
 .tags-input input{
 	padding: 0.375rem .5rem;
-	width: 12.5rem;
+	width: 100%;
 
 	&:focus{
 		outline: none;
@@ -96,7 +97,8 @@ body{
 
 .tags-suggestions{
   position: absolute;
-  width: 12.5rem;
+  left:0;
+  right:0;
   padding: .5rem;
   overflow-y: scroll;
 
@@ -161,6 +163,7 @@ body{
 
 .Select-control{
   border-radius: 0;
+  max-width: 100%;
 }
 
 //modify some bootstrap classes

@@ -20,13 +20,15 @@ import {
 	invalidateBooks, clearNewBook, updateNewBook, fetchBooksIfNeeded,
 	putBook, postBook, deleteBook, lookUpBooks
 }      from 'core/actions/book';
+import {lookUpPeople}
+       from 'core/actions/person';
 import {fetchUsersIfNeeded}
        from 'core/actions/user';
 import {addNotification}
        from 'core/actions/notification';
 
 
-import {arrayInput, selectInput, textAreaInput}
+import {checkboxInput, arrayInput, selectInput, textAreaInput}
        from 'web/utilities/input-types';
 
 import RefreshButton
@@ -53,9 +55,9 @@ class Book extends React.Component{
 		super(props);
 
 		bindAll(this, [
-			'componentDidMount', 	'handleRefreshClick', 	'handleOnChange',
-			'handleOnAddNewBook', 	'handleOnDeleteBook',	'onBookSelectInput',
-			'onBookSelectChange'
+			'componentDidMount', 'handleRefreshClick', 'handleOnChange',
+			'handleOnAddNewBook', 'handleOnDeleteBook',	'onBookSelectInput',
+			'onBookSelectChange', 'onAuthorInput'
 		]);
 	}
 
@@ -198,33 +200,35 @@ class Book extends React.Component{
 		});
 	}
 
-	onBookSelectInput(isbn, callback){
+	onBookSelectInput(text){
 		const {dispatch, accessToken} = this.props;
 
-		isbn = isbn.replace(/[A-z\-\s]/g, '');
-
-		if(isbn.length === 13){
-			dispatch(
-				lookUpBooks('isbn', isbn, accessToken)
-			).then((books) => {
-
-				callback(null, {
-					options: books.map((book)=>{
-						return {value: book.isbn13, label: book.isbn13}
-					}),
-					complete: false
-				});
-			});
-		}else{
-			callback(null, {options: [], complete: false});
-		}
+    if(text){
+      dispatch(
+        lookUpBooks(text, accessToken)
+      );
+    }
 	}
 
 	onBookSelectChange(isbn){
 		//triggered when a lookedup book was selected
-		const book = this.props.lookedUpBooks.filter((book) => {
-			return book.isbn13 === isbn;
-		})[0];
+
+    let book = null, lookedUpBooks = this.props.lookedUpBooks;
+
+    if(lookedUpBooks && lookedUpBooks.db && lookedUpBooks.external){
+      if(lookedUpBooks.db){
+        book = lookedUpBooks.db.filter((book) => {
+          return book.isbn13 === isbn;
+        })[0];
+      }
+      if(lookedUpBooks.external){
+        //TODO: mapping external book:
+        // - mirror/upload cover
+        book = lookedUpBooks.external.filter((book) => {
+          return book.isbn13 === isbn;
+        })[0];
+      }
+    }
 
 		if(book){
 			this.props.dispatch(
@@ -233,10 +237,20 @@ class Book extends React.Component{
 		}
 	}
 
+  onAuthorInput(author){
+
+    if(author){
+      this.props.dispatch(
+        lookUpPeople(author)
+      );
+    }
+  }
+
 	render(){
 
 		const {
-			newBook, books, users, dispatch, match: {params: {id: bookId}}, errors
+			newBook, books, users, dispatch, match: {params: {id: bookId}},
+      lookedUpPeople, lookedUpBooks, errors
 		} = this.props;
 
 		let book;
@@ -263,17 +277,17 @@ class Book extends React.Component{
 		const userIdInput = (id, value='', handleOnChange) => {
 
 			return (<div className='input-group'>
-				<div
+        <div
 					className='input-group-addon'
 					onClick={() => {
 						dispatch(push('/user/' + creator.id + '/'))}
 					}
-    >
-					<img
+        >
+          <img
 						src={creator ? creator.profilePictureUrl : ''}
 						width='50'
 						height='50'
-     />
+          />
 				</div>
 				<input
 					id={id}
@@ -327,7 +341,7 @@ class Book extends React.Component{
 					<h2>Book form</h2>
 
 					<form className='profile'>
-						<FormGroups
+            <FormGroups
 							object={book}
 
               errors={errors.book}
@@ -339,18 +353,26 @@ class Book extends React.Component{
 									keyPath: 'isbn13',
 									label: 'ISBN 13',
 									inputType: selectInput({
-										async: true,
+										async: false,
 										creatable: true,
-										loadOptions: this.onBookSelectInput,
+										onInputChange: this.onBookSelectInput,
 										searchPromptText: 'DOSing book apis...',
 										minimumInput: 13,
 										autoload: false,
 										valueComponent: BookValueComponent,
 										optionComponent: BookOptionComponent,
+                    cache: false,
+                    filteredOptions: (a) => {return a;},
 
 										options: (
-											book.isbn13 ?
-											[{value: book.isbn13, label: book.isbn13}] : undefined
+                      (lookedUpBooks && lookedUpBooks.db &&
+                      lookedUpBooks.external) ?
+
+                      [
+                        ...lookedUpBooks.db, ...lookedUpBooks.external
+                      ].map((book) => {
+                        return {value: book.isbn13, label: book.title};
+                      }) : []
 										),
 										value: book.isbn13,
 
@@ -370,7 +392,12 @@ class Book extends React.Component{
 								{
 									keyPath: 'authors',
 									label: 'Authors',
-									inputType: arrayInput([], true, 'Add new author')
+									inputType: arrayInput(
+                    lookedUpPeople,
+                    true,
+                    'Add new author',
+                    this.onAuthorInput
+                  ),
 								}
 								],
 								[
@@ -391,10 +418,17 @@ class Book extends React.Component{
 									label: 'Description',
 									inputType: textAreaInput('', 'Describe the book', 4, 50)
 								},
-								]
+                ],
+                [
+                {
+                  keyPath       : 'verified',
+                  label         : 'Verified',
+                  inputType     : checkboxInput(false)
+                },
+                ]
 							]}
 							handleOnChange={this.handleOnChange}
-      />
+            />
 
 					</form>
 				</Card>
@@ -416,12 +450,13 @@ class Book extends React.Component{
 
 const mapStateToProps = (state) => {
 	return {
-		accessToken   : state.app.authentication.accessToken.token,
-		newBook       : state.app.newBook,
-		books         : state.app.books,
-		lookedUpBooks : state.app.lookedUpBooks,
-		users			    : state.app.users,
-    errors        : state.app.validation
+		accessToken    : state.app.authentication.accessToken.token,
+		newBook        : state.app.newBook,
+		books          : state.app.books,
+		lookedUpBooks  : state.app.lookedUpBooks,
+    lookedUpPeople : state.app.lookedUpPeople,
+		users			     : state.app.users,
+    errors         : state.app.validation
 	};
 }
 

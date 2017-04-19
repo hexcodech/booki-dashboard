@@ -11,6 +11,9 @@ import {Doughnut}
 import {invalidateSystemStats, fetchSystemStatsIfNeeded}
        from 'app/actions/system-stats';
 
+import {formatBytes}
+       from 'core/utilities/format';
+
 import Widget
        from 'web/containers/content/dashboard/widgets/Widget';
 
@@ -54,7 +57,7 @@ class MemoryStatsWidget extends React.Component{
 						        'Free Memory',
 						    ],
 						    datasets: [
-						        {
+              {
 						            data: [
 						            	systemStats.memoryUsage.heapUsed,
 						            	systemStats.memoryUsage.heapTotal - systemStats.memoryUsage.heapUsed,
@@ -73,7 +76,7 @@ class MemoryStatsWidget extends React.Component{
 						            	'#FFC676',
 						            	'#BF7F26'
 						            ]
-						        }
+              }
 						    ]
 						}
 					}
@@ -88,12 +91,12 @@ class MemoryStatsWidget extends React.Component{
 							maintainAspectRatio: false,
 							legend: {
 							    position: 'bottom'
-						    },
-						    tooltips: {
-							    callbacks: {
-								    label: (tooltip, data) => {
+              },
+              tooltips: {
+                callbacks: {
+                  label: (tooltip, data) => {
 									    return data.labels[tooltip.index] + ' (' +
-									    formatBytes(data.datasets[0].data[tooltip.index]) + ')';
+                    formatBytes(data.datasets[0].data[tooltip.index]) + ')';
 								    }
 							    }
 						    }

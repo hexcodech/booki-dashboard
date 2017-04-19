@@ -26,6 +26,14 @@ import books
 import newBook
        from 'core/reducers/book/new';
 
+import images
+       from 'core/reducers/images';
+
+import offers
+       from 'core/reducers/offers';
+import newOffer
+       from 'core/reducers/offer/new';
+
 import lookedUpBooks
        from 'core/reducers/book/looked-up';
 
@@ -50,6 +58,11 @@ export default combineReducers({
 
 	newBook,
 	books,
+
+  images,
+
+  newOffer,
+  offers,
 
 	lookedUpBooks,
 

@@ -30,6 +30,7 @@
     "react-chartjs-2": "^1.6.2",
     "react-css-modules": "^4.1.0",
     "react-dom": "^15.4.2",
+    "react-dropzone": "^3.12.4",
     "react-json-tree": "^0.10.0",
     "react-native": "0.41.2",
     "react-redux": "^5.0.1",

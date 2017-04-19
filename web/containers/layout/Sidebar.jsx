@@ -75,7 +75,14 @@ const Sidebar = ({user, pathname, dispatch}) => {
 					url='/book/list'
           match='/book/'
           pathname={pathname}
-				/>
+        />
+        <SidebarListElement
+					text='Images'
+					icon='image'
+					url='/image/list'
+          match='/image/'
+          pathname={pathname}
+        />
 			</ul>
 		</aside>
 	);

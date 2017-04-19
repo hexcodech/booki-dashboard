@@ -38,6 +38,7 @@ import Wrapper           from 'web/containers/layout/Wrapper';
 import UserRouter        from 'web/containers/content/user/UserRouter';
 import ClientRouter      from 'web/containers/content/client/ClientRouter';
 import BookRouter        from 'web/containers/content/book/BookRouter';
+import ImageRouter       from 'web/containers/content/image/ImageRouter';
 
 
 const presistedState = loadState();
@@ -88,6 +89,7 @@ const App = () => {
             <Route path='/user' component={UserRouter} />
             <Route path='/client' component={ClientRouter}/>
             <Route path='/book' component={BookRouter}/>
+            <Route path='/image' component={ImageRouter} />
 
           </Wrapper>
         </div>

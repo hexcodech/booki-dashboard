@@ -32,8 +32,6 @@ import {arrayInput, checkboxInput}
 
 import RefreshButton
        from 'web/components/RefreshButton';
-import {Table}
-       from 'web/components/layout/Table';
 import Actions
        from 'web/components/layout/Actions';
 import FormGroups
@@ -144,8 +142,6 @@ class Client extends React.Component{
 		const {
       dispatch, clients, accessToken, match: {params: {id: clientId}}
     } = this.props;
-
-    console.log(clientId);
 
 		let client = Object.assign({}, clients.filter((client) => {
 			return client.id == clientId;

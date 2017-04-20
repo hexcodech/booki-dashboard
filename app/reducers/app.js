@@ -40,6 +40,11 @@ import newBook
 import lookedUpBooks
        from 'core/reducers/book/looked-up';
 
+import thumbnailTypes
+       from 'core/reducers/thumbnail-types';
+import newThumbnailType
+       from 'core/reducers/thumbnail-type/new';
+
 import images
        from 'core/reducers/images';
 
@@ -75,6 +80,9 @@ export default combineReducers({
 	books,
 
   lookedUpBooks,
+
+  newThumbnailType,
+  thumbnailTypes,
 
   images,
 

@@ -91,6 +91,13 @@ const Sidebar = ({user, pathname, dispatch}) => {
           pathname={pathname}
         />
         <SidebarListElement
+					text='Thumbnail types'
+					icon='list'
+					url='/thumbnail-type/list'
+          match='/thumbnail-type/'
+          pathname={pathname}
+        />
+        <SidebarListElement
 					text='Images'
 					icon='image'
 					url='/image/list'

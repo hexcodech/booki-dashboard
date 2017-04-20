@@ -40,6 +40,7 @@ import ClientRouter      from 'web/containers/content/client/ClientRouter';
 import PersonRouter      from 'web/containers/content/person/PersonRouter';
 import ConditionRouter   from 'web/containers/content/condition/ConditionRouter';
 import BookRouter        from 'web/containers/content/book/BookRouter';
+import ThumbnailTypeRouter from 'web/containers/content/thumbnail-type/ThumbnailTypeRouter';
 import ImageRouter       from 'web/containers/content/image/ImageRouter';
 import OfferRouter       from 'web/containers/content/offer/OfferRouter';
 
@@ -93,6 +94,7 @@ const App = () => {
             <Route path='/person' component={PersonRouter}/>
             <Route path='/condition' component={ConditionRouter}/>
             <Route path='/book' component={BookRouter}/>
+            <Route path='/thumbnail-type' component={ThumbnailTypeRouter} />
             <Route path='/image' component={ImageRouter} />
             <Route path='/offer' component={OfferRouter} />
           </Wrapper>

@@ -20,7 +20,12 @@ const Notifications = ({notifications, dispatch}) => {
 			{notifications.sort((a, b) => {
 				return b.timestamp - a.timestamp
 			}).map((notification, index) => {
-				return <Notification key={index} notification={notification} />;
+				return (
+          <Notification
+            key={notification.timestamp}
+            notification={notification}
+          />
+        );
 			})}
 		</div>
 	);

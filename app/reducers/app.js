@@ -21,10 +21,24 @@ import clients
 import newClient
        from 'core/reducers/client/new';
 
+import people
+       from 'core/reducers/people';
+import newPerson
+       from 'core/reducers/person/new';
+import lookedUpPeople
+      from 'core/reducers/person/looked-up';
+
+import conditions
+       from 'core/reducers/conditions';
+import newCondition
+       from 'core/reducers/condition/new';
+
 import books
        from 'core/reducers/books';
 import newBook
        from 'core/reducers/book/new';
+import lookedUpBooks
+       from 'core/reducers/book/looked-up';
 
 import images
        from 'core/reducers/images';
@@ -33,12 +47,6 @@ import offers
        from 'core/reducers/offers';
 import newOffer
        from 'core/reducers/offer/new';
-
-import lookedUpBooks
-       from 'core/reducers/book/looked-up';
-
-import lookedUpPeople
-      from 'core/reducers/person/looked-up';
 
 import notifications
        from 'core/reducers/notifications';
@@ -56,17 +64,22 @@ export default combineReducers({
 	newClient,
 	clients,
 
+  newPerson,
+  people,
+  lookedUpPeople,
+
+  newCondition,
+  conditions,
+
 	newBook,
 	books,
+
+  lookedUpBooks,
 
   images,
 
   newOffer,
   offers,
-
-	lookedUpBooks,
-
-  lookedUpPeople,
 
 	notifications
 });

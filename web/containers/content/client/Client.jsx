@@ -223,9 +223,9 @@ class Client extends React.Component{
         <div
           className='input-group-addon'
           onClick={() => {
-            dispatch(
-              push('/user/' + creator.id + '/')
-            )
+            if(creator && creator.id){
+              dispatch(push('/user/' + creator.id + '/'))
+            }
           }}
         >
           <img

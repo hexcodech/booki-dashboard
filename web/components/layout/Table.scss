@@ -6,14 +6,10 @@
 
 .table-interactive{
   composes: table;
-}
 
-.table-interactive tr{
-  cursor: pointer;
-
-  /*&:hover{
-    background-color: rgba($brand-primary, 0.25);
-  }*/
+  tr{
+    cursor: pointer;
+  }
 }
 
 .table thead{

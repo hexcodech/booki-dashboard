@@ -43,9 +43,9 @@ import Card
        from 'web/components/layout/Card';
 
 import FlagOptionComponent
-       from 'web/components/form/input/select/FlagOptionComponent';
+       from 'web/components/form/input/select/flag/FlagOptionComponent';
 import FlagValueComponent
-       from 'web/components/form/input/select/FlagValueComponent';
+       from 'web/components/form/input/select/flag/FlagValueComponent';
 
 
 class User extends React.Component{

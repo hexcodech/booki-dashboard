@@ -9,13 +9,13 @@ import SelectInput
 import fuzzy from 'fuzzy';
 
 export const selectInput = (
-  props, onSelect = null
+  props, onSelect = null, getValue = (o) => {return o && o.value ? o.value : ''}
 ) => {
 
 	return (id, value, errors, handleOnChange) => {
 
 		const onChange = (option) => {
-			let val = option && option.value ? option.value : '';
+			let val = getValue(option);
 
 			handleOnChange(id, val);
 

@@ -1,3 +1,0 @@
-rootProject.name = 'booki_dashboard'
-
-include ':app'

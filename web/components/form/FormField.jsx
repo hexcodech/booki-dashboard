@@ -5,7 +5,7 @@ import get
 
 const FormField = ({
 	object, keyPath, fieldSize, label, labelSize, inputType,
-	inputDisabled, inputSize, handleOnChange,
+	inputDisabled, inputSize, handleOnChange, inputProps={},
   errors = []
 }) => {
 
@@ -14,12 +14,13 @@ const FormField = ({
 	};
 
 	const value = get(object, keyPath);
-  
+
 	const inputField = typeof inputType === 'function' ?
 
               inputType(keyPath, value, errors, handleOnChange) :
 
               (<input
+                {...inputProps}
 								type={inputType ? inputType : 'text'}
 								className={
                   'form-control' + (

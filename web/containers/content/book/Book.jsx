@@ -45,9 +45,9 @@ import Card
 
 
 import BookOptionComponent
-       from 'web/components/form/input/select/BookOptionComponent';
+       from 'web/components/form/input/select/book/BookOptionComponent';
 import BookValueComponent
-       from 'web/components/form/input/select/BookValueComponent';
+       from 'web/components/form/input/select/book/BookValueComponent';
 
 class Book extends React.Component{
 
@@ -215,19 +215,10 @@ class Book extends React.Component{
 
     let book = null, lookedUpBooks = this.props.lookedUpBooks;
 
-    if(lookedUpBooks && lookedUpBooks.db && lookedUpBooks.external){
-      if(lookedUpBooks.db){
-        book = lookedUpBooks.db.filter((book) => {
-          return book.isbn13 === isbn;
-        })[0];
-      }
-      if(lookedUpBooks.external){
-        //TODO: mapping external book:
-        // - mirror/upload cover
-        book = lookedUpBooks.external.filter((book) => {
-          return book.isbn13 === isbn;
-        })[0];
-      }
+    if(lookedUpBooks){
+      book = lookedUpBooks.filter((book) => {
+        return book.isbn13 === isbn;
+      })[0];
     }
 
 		if(book){
@@ -280,7 +271,9 @@ class Book extends React.Component{
         <div
 					className='input-group-addon'
 					onClick={() => {
-						dispatch(push('/user/' + creator.id + '/'))}
+						if(creator && creator.id){
+              dispatch(push('/user/' + creator.id + '/'))}
+            }
 					}
         >
           <img
@@ -353,26 +346,16 @@ class Book extends React.Component{
 									keyPath: 'isbn13',
 									label: 'ISBN 13',
 									inputType: selectInput({
-										async: false,
 										creatable: true,
 										onInputChange: this.onBookSelectInput,
-										searchPromptText: 'DOSing book apis...',
-										minimumInput: 13,
-										autoload: false,
+										searchPromptText: 'Searching for books...',
 										valueComponent: BookValueComponent,
 										optionComponent: BookOptionComponent,
                     cache: false,
                     filteredOptions: (a) => {return a;},
 
 										options: (
-                      (lookedUpBooks && lookedUpBooks.db &&
-                      lookedUpBooks.external) ?
-
-                      [
-                        ...lookedUpBooks.db, ...lookedUpBooks.external
-                      ].map((book) => {
-                        return {value: book.isbn13, label: book.title};
-                      }) : []
+                      lookedUpBooks ? lookedUpBooks : []
 										),
 										value: book.isbn13,
 

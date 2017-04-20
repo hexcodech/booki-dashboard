@@ -493,6 +493,33 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/containers\/content\/offer\/Offer.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/offer\/min\/Offer-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/offer\/OfferList.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/offer\/min\/OfferList-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/containers\/content\/offer\/OfferRouter.jsx": {
+		"ft": 64,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "\/containers\/content\/offer\/min\/OfferRouter-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/containers\/content\/user\/User.jsx": {
 		"ft": 64,
 		"mi": 0,

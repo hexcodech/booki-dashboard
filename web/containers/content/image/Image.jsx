@@ -11,7 +11,7 @@ import bindAll
 import JSONTree
        from 'react-json-tree';
 
-import {CLIENT_ID, API_URL}
+import {API_URL}
        from 'config.json';
 
 import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
@@ -25,9 +25,6 @@ import {fetchUsersIfNeeded}
        from 'core/actions/user';
 import {addNotification}
        from 'core/actions/notification';
-
-import {arrayInput, checkboxInput}
-      from 'web/utilities/input-types';
 
 import Dropzone
        from 'react-dropzone';

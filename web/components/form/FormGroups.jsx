@@ -36,6 +36,8 @@ const FormGroups = ({
 
 					handleOnChange={handleOnChange}
 
+          inputProps={keyPaths[i][j].inputProps}
+
           errors={errors[keyPaths[i][j].keyPath]}
 				/>
 			);

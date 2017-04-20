@@ -70,6 +70,20 @@ const Sidebar = ({user, pathname, dispatch}) => {
           pathname={pathname}
         />
         <SidebarListElement
+					text='People'
+					icon='nature_people'
+					url='/person/list'
+          match='/person/'
+          pathname={pathname}
+        />
+        <SidebarListElement
+					text='Conditions'
+					icon='check_circle'
+					url='/condition/list'
+          match='/condition/'
+          pathname={pathname}
+        />
+        <SidebarListElement
 					text='Books'
 					icon='book'
 					url='/book/list'
@@ -81,6 +95,13 @@ const Sidebar = ({user, pathname, dispatch}) => {
 					icon='image'
 					url='/image/list'
           match='/image/'
+          pathname={pathname}
+        />
+        <SidebarListElement
+					text='Offers'
+					icon='local_offer'
+					url='/offer/list'
+          match='/offer/'
           pathname={pathname}
         />
 			</ul>

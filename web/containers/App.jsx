@@ -37,8 +37,11 @@ import Wrapper           from 'web/containers/layout/Wrapper';
 
 import UserRouter        from 'web/containers/content/user/UserRouter';
 import ClientRouter      from 'web/containers/content/client/ClientRouter';
+import PersonRouter      from 'web/containers/content/person/PersonRouter';
+import ConditionRouter   from 'web/containers/content/condition/ConditionRouter';
 import BookRouter        from 'web/containers/content/book/BookRouter';
 import ImageRouter       from 'web/containers/content/image/ImageRouter';
+import OfferRouter       from 'web/containers/content/offer/OfferRouter';
 
 
 const presistedState = loadState();
@@ -84,13 +87,14 @@ const App = () => {
           <Route path='/auth/callback' component={OAuthCallback} />
 
           <Wrapper>
-
             <Route path='/dashboard' component={Dashboard} />
             <Route path='/user' component={UserRouter} />
             <Route path='/client' component={ClientRouter}/>
+            <Route path='/person' component={PersonRouter}/>
+            <Route path='/condition' component={ConditionRouter}/>
             <Route path='/book' component={BookRouter}/>
             <Route path='/image' component={ImageRouter} />
-
+            <Route path='/offer' component={OfferRouter} />
           </Wrapper>
         </div>
 			</ConnectedRouter>

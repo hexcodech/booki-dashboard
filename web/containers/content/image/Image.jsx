@@ -138,38 +138,6 @@ class Image extends React.Component{
 
 		if(!image){return null;}
 
-		let creator = users.filter((user) => {
-			return user.id == image.userId;
-		})[0];
-
-		const userIdInput = (id, value='', errors) => {
-
-			return (<div className='input-group'>
-        <div
-          className='input-group-addon'
-          onClick={() => {
-            dispatch(
-              push('/user/' + creator.id + '/')
-            )
-          }}
-        >
-          <img
-            src={creator ? creator.profilePictureUrl : ''}
-            width='50'
-            height='50'
-          />
-				</div>
-        <input
-					id={id}
-					className='form-control'
-					type='text'
-          disabled={true}
-					value={value}
-        />
-      </div>);
-
-		};
-
     const imageSrcInput = (id, value='', errors) => {
 
 			return (<div className='input-group'>
@@ -256,8 +224,8 @@ class Image extends React.Component{
 								[
                 {
                   keyPath       : 'userId',
-                  label         : 'Owner Id',
-                  inputType     : userIdInput
+                  label         : 'User Id',
+                  inputDisabled : true
                 },
                 {
                   keyPath       : 'fileId',
@@ -308,12 +276,12 @@ class Image extends React.Component{
               <tbody>
                 {image.thumbnails.map((thumbnail) => {
                   return (
-                    <tr>
+                    <tr key={thumbnail.id}>
                       <td>{thumbnail.id}</td>
                       <td>{thumbnail.url}</td>
-                      <td>{thumbnail.thumbnailType.name}</td>
-                      <td>{thumbnail.thumbnailType.width}</td>
-                      <td>{thumbnail.thumbnailType.height}</td>
+                      <td>{thumbnail.name}</td>
+                      <td>{thumbnail.width}</td>
+                      <td>{thumbnail.height}</td>
                     </tr>
                   );
                 })}

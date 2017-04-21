@@ -222,80 +222,6 @@ class Offer extends React.Component{
 
 		if(!offer){return null;}
 
-		let creator = users.filter((user) => {
-			return user.id == offer.userId;
-		})[0];
-
-		const userIdInput = (id, value='', errors, handleOnChange) => {
-
-			return (<div className='input-group'>
-        <div
-          className='input-group-addon'
-          onClick={() => {
-            if(creator && creator.id){
-              dispatch(
-                push('/user/' + creator.id + '/')
-              )
-            }
-          }}
-        >
-          <img
-            src={creator ? creator.profilePictureUrl : ''}
-            width='50'
-            height='50'
-          />
-				</div>
-        <input
-					id={id}
-					className='form-control'
-					type='text'
-					onChange={
-            (event) => {
-              handleOnChange(event.target.id, event.target.value)
-            }
-          }
-					value={value}
-        />
-      </div>);
-		};
-
-    let book = books.filter((book) => {
-			return book.id == offer.bookId;
-		})[0];
-
-    const bookIdInput = (id, value='', errors, handleOnChange) => {
-
-			return (<div className='input-group'>
-        <div
-          className='input-group-addon'
-          onClick={() => {
-            if(book && book.id){
-              dispatch(
-                push('/book/' + book.id + '/')
-              )
-            }
-          }}
-        >
-          <img
-            src={book ? book.coverUrl : ''}
-            width='50'
-            height='50'
-          />
-				</div>
-        <input
-					id={id}
-					className='form-control'
-					type='text'
-					onChange={
-            (event) => {
-              handleOnChange(event.target.id, event.target.value)
-            }
-          }
-					value={value}
-        />
-      </div>);
-		};
-
 		return (
 			<div className='offer'>
 
@@ -384,13 +310,38 @@ class Offer extends React.Component{
 								[
                 {
                   keyPath       : 'userId',
-                  label         : 'Owner Id',
-                  inputType     : userIdInput
+                  label         : 'User Id',
+                  inputType     : selectInput({
+										searchPromptText: 'Searching for users...',
+                    options: users.map((user) => {
+                      return {
+                        ...user,
+                        value: user.id,
+                        label: user.nameDisplay + ' (' + ([
+                                  user.nameTitle,
+                                  user.nameFirst,
+                                  user.nameMiddle,
+                                  user.nameLast
+                        ]).join(' ').trim() + ')'
+                      };
+                    }),
+										value: offer.userId,
+                  }, null, (user) => {return user && user.id ? user.id : ''})
                 },
                 {
                   keyPath       : 'bookId',
                   label         : 'Book Id',
-                  inputType     : bookIdInput
+                  inputType     : selectInput({
+										searchPromptText: 'Searching for books...',
+                    options: books.map((book) => {
+                      return {
+                        ...book,
+                        value: book.id,
+                        label: book.title + ' (' + book.pageCount + ')'
+                      };
+                    }),
+										value: offer.userId,
+                  }, null, (user) => {return user && user.id ? user.id : ''})
                 },
 								]
 							]}

@@ -76,7 +76,7 @@ class BookList extends React.Component{
 				</Actions>
 
         <Card>
-          <Table>
+          <Table interactive={true}>
             <thead>
               <tr>
                 <th>ID</th>

@@ -27,7 +27,7 @@ import {fetchUsersIfNeeded}
 import {addNotification}
        from 'core/actions/notification';
 
-import {arrayInput, checkboxInput}
+import {selectInput, arrayInput, checkboxInput}
       from 'web/utilities/input-types';
 
 import RefreshButton
@@ -213,41 +213,6 @@ class Client extends React.Component{
 
 		if(!client){return null;}
 
-		let creator = users.filter((user) => {
-			return user.id == client.userId;
-		})[0];
-
-		const userIdInput = (id, value='', errors, handleOnChange) => {
-
-			return (<div className='input-group'>
-        <div
-          className='input-group-addon'
-          onClick={() => {
-            if(creator && creator.id){
-              dispatch(push('/user/' + creator.id + '/'))
-            }
-          }}
-        >
-          <img
-            src={creator ? creator.profilePictureUrl : ''}
-            width='50'
-            height='50'
-          />
-				</div>
-        <input
-					id={id}
-					className='form-control'
-					type='text'
-					onChange={
-            (event) => {
-              handleOnChange(event.target.id, event.target.value)
-            }
-          }
-					value={value}
-        />
-      </div>);
-		};
-
 		return (
 			<div className='client'>
 
@@ -331,7 +296,22 @@ class Client extends React.Component{
                 {
                   keyPath       : 'userId',
                   label         : 'Owner Id',
-                  inputType     : userIdInput
+                  inputType     : selectInput({
+										searchPromptText: 'Searching for users...',
+										options: users.map((user) => {
+                      return {
+                        ...user,
+                        value: user.id,
+                        label: user.nameDisplay + ' (' + ([
+                                  user.nameTitle,
+                                  user.nameFirst,
+                                  user.nameMiddle,
+                                  user.nameLast
+                        ]).join(' ').trim() + ')'
+                      };
+                    }),
+										value: client.userId,
+									}, null, (user) => {return user && user.id ? user.id : ''})
                 },
 								]
 							]}

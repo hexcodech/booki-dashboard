@@ -43,12 +43,6 @@ import FormGroups
 import Card
       from 'web/components/layout/Card';
 
-
-import BookOptionComponent
-       from 'web/components/form/input/select/book/BookOptionComponent';
-import BookValueComponent
-       from 'web/components/form/input/select/book/BookValueComponent';
-
 class Book extends React.Component{
 
 	constructor(props){
@@ -205,7 +199,7 @@ class Book extends React.Component{
 
     if(text){
       dispatch(
-        lookUpBooks(text, accessToken)
+        lookUpBooks(text, false, accessToken)
       );
     }
 	}
@@ -253,47 +247,12 @@ class Book extends React.Component{
 		}else{
 
 			book = books.filter((book) => {
-				return book.id === bookId;
+				return book.id == bookId;
 			})[0];
 
 		}
 
 		if(!book){return null;}
-
-		let creator = users.filter((user) => {
-			return user.id === book.createdBy;
-		})[0];
-
-
-		const userIdInput = (id, value='', handleOnChange) => {
-
-			return (<div className='input-group'>
-        <div
-					className='input-group-addon'
-					onClick={() => {
-						if(creator && creator.id){
-              dispatch(push('/user/' + creator.id + '/'))}
-            }
-					}
-        >
-          <img
-						src={creator ? creator.profilePictureUrl : ''}
-						width='50'
-						height='50'
-          />
-				</div>
-				<input
-					id={id}
-					className='form-control'
-					type='text'
-					onChange={(event) => {
-						handleOnChange(event.target.id, event.target.value)
-					}}
-					value={value}
-				/>
-
-			</div>);
-		};
 
 		return (
 			<div className='book'>
@@ -349,19 +308,21 @@ class Book extends React.Component{
 										creatable: true,
 										onInputChange: this.onBookSelectInput,
 										searchPromptText: 'Searching for books...',
-										valueComponent: BookValueComponent,
-										optionComponent: BookOptionComponent,
                     cache: false,
                     filteredOptions: (a) => {return a;},
 
 										options: (
-                      lookedUpBooks ? lookedUpBooks : []
+                      [...lookedUpBooks, ...books].map((book) => {
+                        return {
+                          ...book, value: book.isbn13, label: book.isbn13
+                        }
+                      })
 										),
 										value: book.isbn13,
 
 										isValidNewOption: (label) => {
 											return (label.label &&
-												label.label.replace(/[A-z\-\s]/g, '').length === 13);
+                      label.label.length === 13);//replace(/[A-z\-\s]/g, '').
 										},
 									}, this.onBookSelectChange)
 								},
@@ -389,10 +350,25 @@ class Book extends React.Component{
 								],
 								[
 								{keyPath: 'pageCount', label: 'Number of pages'},
-								{
-                  keyPath: 'createdBy',
-                  label: 'Created by',
-                  inputType: userIdInput
+                {
+                  keyPath       : 'userId',
+                  label         : 'User Id',
+                  inputType     : selectInput({
+										searchPromptText: 'Searching for users...',
+										options: users.map((user) => {
+                      return {
+                        ...user,
+                        value: user.id,
+                        label: user.nameDisplay + ' (' + ([
+                                  user.nameTitle,
+                                  user.nameFirst,
+                                  user.nameMiddle,
+                                  user.nameLast
+                        ]).join(' ').trim() + ')'
+                      };
+                    }),
+										value: book.userId,
+									}, null, (user) => {return user && user.id ? user.id : ''})
                 },
 								],
 								[

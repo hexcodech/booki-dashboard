@@ -102,10 +102,10 @@ class PersonList extends React.Component{
 										<td>{person.id}</td>
 										<td>
                       {(
-                        person.nameTitle   + ' ' +
-                        person.nameFirst   + ' ' +
-                        person.nameMiddle  + ' ' +
-                        person.nameLast
+                        (person.nameTitle ? person.nameTitle: '')   + ' ' +
+                        (person.nameFirst ? person.nameFirst : '')   + ' ' +
+                        (person.nameMiddle ? person.nameMiddle : '')  + ' ' +
+                        (person.nameLast ? person.nameLast : '')
                       ).trim()}
                     </td>
                     <td>

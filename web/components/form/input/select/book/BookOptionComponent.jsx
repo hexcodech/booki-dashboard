@@ -33,20 +33,19 @@ const BookOptionComponent = ({
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
     >
-      <img src={book.thumbnail} width='38' height='57'/>
-      <span styleName='description'>
-        <span styleName='title'>{book.title}</span>
-        {' '}
-        <span styleName='page-count'>({book.pageCount} S.)</span>
-      </span>
+      {book.thumbnail &&
+        <img src={book.thumbnail} width='38' height='57'/>
+      }
+      {book.title &&
+        <span styleName='description'>
+          <span styleName='title'>{book.title}</span>
+          {' '}
+          <span styleName='page-count'>({book.pageCount} S.)</span>
+        </span>
+      }
+      {!book.title && <span>{book.value}</span>}
     </div>
   );
-};
-
-const mapStateToProps = (state) => {
-	return {
-		lookedUpBooks	: state.app.lookedUpBooks,
-	};
 };
 
 export default CSSModules(BookOptionComponent, styles);

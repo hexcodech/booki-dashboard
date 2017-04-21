@@ -87,8 +87,8 @@ class OfferList extends React.Component{
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Name</th>
-								<th>Trusted</th>
+								<th>Price</th>
+								<th>Description</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -100,22 +100,8 @@ class OfferList extends React.Component{
 										data-offer-id={offer.id}
                   >
 										<td>{offer.id}</td>
-										<td>{offer.name}</td>
-										<td>
-                      <span
-												className='hint-right-middle hint-anim'
-												data-hint={offer.trusted ? 'Trusted' : 'Untrusted'}
-                      >{
-                        offer.trusted ?
-                        (<i className='material-icons'>
-                          verified_user
-                        </i>) :
-                        (<i className='material-icons'>
-                          lock_open
-                        </i>)
-                      }
-											</span>
-										</td>
+										<td>{offer.price} CHF</td>
+										<td>{offer.description.substring(0, 50)}</td>
 									</tr>
 								);
 							})}

@@ -177,35 +177,30 @@ class User extends React.Component{
 							color: COLOR_INFO,
 							action: (e, notification) => {
 
-								let promises = [
-									dispatch(
-										postUser(user, accessToken)
-									)
-								];
+                dispatch(
+                  postUser(user, accessToken)
+                ).then((postedUser) => {
 
-								for(let i=0;i<ownClients.length;i++){
-									promises.push(
-										dispatch(
-											postClient(ownClients[i], accessToken)
-										)
-									);
-								}
+                  if(postedUser){
+                    dispatch(
+                      push('/user/' + postedUser.id + '/')
+                    );
+                  }
 
-								Promise.all(promises).then((values) => {
+                  let promises = [];
 
-									//the first argument is the user
-									let postedUser = values[0];
+  								for(let i=0;i<ownClients.length;i++){
+  									promises.push(
+  										dispatch(
+  											postClient(ownClients[i], accessToken)
+  										)
+  									);
+  								}
 
-									if(postedUser){
-										dispatch(
-											push('/user/' + postedUser.id + '/')
-										);
-									}
-
-									notification.hide();
-
-								});
-
+  								return Promise.all(promises);
+                }).then(() => {
+                  notification.hide();
+                });
 							}
 						}]
 					})

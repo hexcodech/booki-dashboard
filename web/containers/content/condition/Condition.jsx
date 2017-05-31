@@ -243,7 +243,8 @@ class Condition extends React.Component{
 								[
                 {
                   keyPath       : 'id',
-                  label         : 'Condition Id'
+                  label         : 'Condition Id',
+                  inputDisabled : true
                 },
                 {
                   keyPath       : 'key',

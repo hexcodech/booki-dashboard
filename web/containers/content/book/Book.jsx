@@ -1,393 +1,409 @@
-import React
-       from 'react';
-import {connect}
-       from 'react-redux';
-import {push}
-       from 'react-router-redux';
-import set
-       from 'lodash/set';
-import bindAll
-       from 'lodash/bindAll';
-import JSONTree
-       from 'react-json-tree';
+import React from "react";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
+import set from "lodash/set";
+import bindAll from "lodash/bindAll";
+import JSONTree from "react-json-tree";
 
-import {API_URL}
-       from 'config.json';
+import { API_URL } from "config.json";
 
-import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
-       from 'core/constants/color';
 import {
-	invalidateBooks, clearNewBook, updateNewBook, fetchBooksIfNeeded,
-	putBook, postBook, deleteBook, lookUpBooks
-}      from 'core/actions/book';
-import {lookUpPeople}
-       from 'core/actions/person';
-import {fetchUsersIfNeeded}
-       from 'core/actions/user';
-import {addNotification}
-       from 'core/actions/notification';
+	JSONTreeTheme,
+	COLOR_SUCCESS,
+	COLOR_FAILURE,
+	COLOR_INFO
+} from "core/constants/color";
+import {
+	invalidateBooks,
+	clearNewBook,
+	updateNewBook,
+	fetchBooksIfNeeded,
+	putBook,
+	postBook,
+	deleteBook,
+	lookUpBooks
+} from "core/actions/book";
+import { lookUpPeople } from "core/actions/person";
+import { fetchUsersIfNeeded } from "core/actions/user";
+import { fetchImagesIfNeeded } from "core/actions/image";
+import { addNotification } from "core/actions/notification";
 
+import {
+	checkboxInput,
+	arrayInput,
+	selectInput,
+	textAreaInput
+} from "web/utilities/input-types";
 
-import {checkboxInput, arrayInput, selectInput, textAreaInput}
-       from 'web/utilities/input-types';
+import RefreshButton from "web/components/RefreshButton";
+import { Table } from "web/components/layout/Table";
+import Actions from "web/components/layout/Actions";
+import FormGroups from "web/components/form/FormGroups";
 
-import RefreshButton
-       from 'web/components/RefreshButton';
-import {Table}
-       from 'web/components/layout/Table';
-import Actions
-       from 'web/components/layout/Actions';
-import FormGroups
-       from 'web/components/form/FormGroups';
+import Card from "web/components/layout/Card";
 
-import Card
-      from 'web/components/layout/Card';
-
-class Book extends React.Component{
-
-	constructor(props){
+class Book extends React.Component {
+	constructor(props) {
 		super(props);
 
 		bindAll(this, [
-			'componentDidMount', 'handleRefreshClick', 'handleOnChange',
-			'handleOnAddNewBook', 'handleOnDeleteBook',	'onBookSelectInput',
-			'onBookSelectChange', 'onAuthorInput'
+			"componentDidMount",
+			"handleRefreshClick",
+			"handleOnChange",
+			"handleOnAddNewBook",
+			"handleOnDeleteBook",
+			"onBookSelectInput",
+			"onBookSelectChange",
+			"onAuthorInput"
 		]);
 	}
 
 	componentDidMount() {
-		const {dispatch, accessToken} = this.props;
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchBooksIfNeeded(accessToken));
 		dispatch(fetchUsersIfNeeded(accessToken));
+		dispatch(fetchImagesIfNeeded(accessToken));
 	}
 
 	handleRefreshClick(e) {
 		e.preventDefault();
 
-		const {dispatch, accessToken} = this.props;
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateBooks());
 		dispatch(fetchBooksIfNeeded(accessToken));
 	}
 
-	handleOnChange(id, value){
+	handleOnChange(id, value) {
 		const {
-			dispatch, accessToken, newBook, books, match: {params: {id: bookId}}
+			dispatch,
+			accessToken,
+			newBook,
+			books,
+			match: { params: { id: bookId } }
 		} = this.props;
 
 		let book;
 
-		if(bookId === 'new'){
-
+		if (bookId === "new") {
 			book = Object.assign({}, newBook);
 
-			if(set(book, id, value)){
-				dispatch(
-					updateNewBook(book)
-				);
+			if (set(book, id, value)) {
+				dispatch(updateNewBook(book));
 			}
+		} else {
+			book = Object.assign(
+				{},
+				books.filter(book => {
+					return book.id == bookId;
+				})[0]
+			);
 
-		}else{
-
-			book = Object.assign({}, books.filter((book) => {
-				return book.id == bookId;
-			})[0]);
-
-			if(set(book, id, value)){
-				dispatch(
-					putBook(book, accessToken)
-				);
+			if (set(book, id, value)) {
+				dispatch(putBook(book, accessToken));
 			}
-
 		}
 	}
 
-	handleOnAddNewBook(e){
+	handleOnAddNewBook(e) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		const {dispatch, accessToken, newBook} = this.props;
+		const { dispatch, accessToken, newBook } = this.props;
 		const book = Object.assign({}, newBook);
 
-		dispatch(
-			postBook(book, accessToken)
-		).then((postedBook) => {
-
-			if(postedBook){
-
+		dispatch(postBook(book, accessToken)).then(postedBook => {
+			if (postedBook) {
 				dispatch(
 					addNotification({
-						title		: 'Created',
-						text		: 'The book was successfully created',
-						hideDelay	: 5000,
-						icon		: 'check_circle',
-						color		: COLOR_SUCCESS,
+						title: "Created",
+						text: "The book was successfully created",
+						hideDelay: 5000,
+						icon: "check_circle",
+						color: COLOR_SUCCESS
 					})
 				);
 
-				dispatch(
-					push('/book/' + postedBook.id + '/')
-				);
+				dispatch(push("/book/" + postedBook.id + "/"));
 
-				dispatch(
-					clearNewBook()
-				);
-
+				dispatch(clearNewBook());
 			}
-
 		});
 	}
 
-	handleOnDeleteBook(e){
+	handleOnDeleteBook(e) {
 		e.preventDefault();
 		e.stopPropagation();
 
 		const {
-			dispatch, books, accessToken, match: {params: {id: bookId}}
+			dispatch,
+			books,
+			accessToken,
+			match: { params: { id: bookId } }
 		} = this.props;
 
-		let book = Object.assign({}, books.filter((book) => {
-			return book.id == bookId;
-		})[0]);
+		let book = Object.assign(
+			{},
+			books.filter(book => {
+				return book.id == bookId;
+			})[0]
+		);
 
-		dispatch(
-			deleteBook(book, accessToken)
-		).then((success) => {
-			if(success){
-
+		dispatch(deleteBook(book, accessToken)).then(success => {
+			if (success) {
 				dispatch(
 					addNotification({
-						title		: 'Deleted',
-						text		: 'The book was successfully deleted',
-						icon		: 'check_circle',
-						color		: COLOR_SUCCESS,
+						title: "Deleted",
+						text: "The book was successfully deleted",
+						icon: "check_circle",
+						color: COLOR_SUCCESS,
 
-						actions		: [{
-							text: 'Undo',
-							color: COLOR_INFO,
-							action: (e, notification) => {
+						actions: [
+							{
+								text: "Undo",
+								color: COLOR_INFO,
+								action: (e, notification) => {
+									dispatch(postBook(book, accessToken)).then(postedBook => {
+										if (postedBook) {
+											dispatch(push("/book/" + postedBook.id + "/"));
+										}
 
-								dispatch(
-									postBook(book, accessToken)
-								).then((postedBook) => {
-
-									if(postedBook){
-										dispatch(
-											push('/book/' + postedBook.id + '/')
-										);
-									}
-
-									notification.hide();
-
-								});
-
+										notification.hide();
+									});
+								}
 							}
-						}]
+						]
 					})
 				);
 
-				dispatch(
-					push('/book/list')
-				);
+				dispatch(push("/book/list"));
 			}
 		});
 	}
 
-	onBookSelectInput(text){
-		const {dispatch, accessToken} = this.props;
+	onBookSelectInput(text) {
+		const { dispatch, accessToken } = this.props;
 
-    if(text){
-      dispatch(
-        lookUpBooks(text, false, accessToken)
-      );
-    }
-	}
-
-	onBookSelectChange(isbn){
-		//triggered when a lookedup book was selected
-
-    let book = null, lookedUpBooks = this.props.lookedUpBooks;
-
-    if(lookedUpBooks){
-      book = lookedUpBooks.filter((book) => {
-        return book.isbn13 === isbn;
-      })[0];
-    }
-
-		if(book){
-			this.props.dispatch(
-				updateNewBook(book)
-			);
+		if (text) {
+			dispatch(lookUpBooks(text, "local", accessToken));
 		}
 	}
 
-  onAuthorInput(author){
+	onBookSelectChange(isbn) {
+		//triggered when a lookedup book was selected
 
-    if(author){
-      this.props.dispatch(
-        lookUpPeople(author)
-      );
-    }
-  }
+		let book = null, lookedUpBooks = this.props.lookedUpBooks;
 
-	render(){
+		if (lookedUpBooks) {
+			book = lookedUpBooks.filter(book => {
+				return book.isbn13 === isbn;
+			})[0];
+		}
 
+		if (book) {
+			this.props.dispatch(updateNewBook(book));
+		}
+	}
+
+	onAuthorInput(author) {
+		if (author) {
+			this.props.dispatch(lookUpPeople(author));
+		}
+	}
+
+	render() {
 		const {
-			newBook, books, users, dispatch, match: {params: {id: bookId}},
-      lookedUpPeople, lookedUpBooks, errors
+			newBook,
+			books,
+			users,
+			images,
+			dispatch,
+			match: { params: { id: bookId } },
+			lookedUpPeople,
+			lookedUpBooks,
+			errors
 		} = this.props;
 
 		let book;
 
-		if(bookId === 'new'){
-
+		if (bookId === "new") {
 			book = newBook;
-
-		}else{
-
-			book = books.filter((book) => {
+		} else {
+			book = books.filter(book => {
 				return book.id == bookId;
 			})[0];
-
 		}
 
-		if(!book){return null;}
+		if (!book) {
+			return null;
+		}
 
 		return (
-			<div className='book'>
+			<div className="book">
 
 				<Actions>
-					{bookId !== 'new' &&
-            <li>
-              <RefreshButton
+					{bookId !== "new" &&
+						<li>
+							<RefreshButton
 								date={book.lastUpdated}
 								loading={book.isFetching}
 								refreshHandler={this.handleRefreshClick}
-              />
-						</li>
-					}
-					{bookId === 'new' &&
-            <li
-							className='hint-bottom-middle hint-anim'
-							data-hint='Create book'
-            >
-							<a href='#' onClick={this.handleOnAddNewBook}>
-								<i className='material-icons'>add_circle</i>
+							/>
+						</li>}
+					{bookId === "new" &&
+						<li
+							className="hint-bottom-middle hint-anim"
+							data-hint="Create book"
+						>
+							<a href="#" onClick={this.handleOnAddNewBook}>
+								<i className="material-icons">add_circle</i>
 							</a>
-						</li>
-					}
-					{bookId !== 'new' &&
-            <li
-							className='hint-bottom-middle hint-anim'
-							data-hint='Delete book'
-            >
-							<a href='#' onClick={this.handleOnDeleteBook}>
-								<i className='material-icons'>delete</i>
+						</li>}
+					{bookId !== "new" &&
+						<li
+							className="hint-bottom-middle hint-anim"
+							data-hint="Delete book"
+						>
+							<a href="#" onClick={this.handleOnDeleteBook}>
+								<i className="material-icons">delete</i>
 							</a>
-						</li>
-					}
+						</li>}
 				</Actions>
 
 				<Card>
 					<h2>Book form</h2>
 
-					<form className='profile'>
-            <FormGroups
+					<form className="profile">
+						<FormGroups
 							object={book}
-
-              errors={errors.book}
-
+							errors={errors.book}
 							keyPaths={[
 								[
-								{keyPath: 'id', label: 'Book Id', inputDisabled: true},
-								{
-									keyPath: 'isbn13',
-									label: 'ISBN 13',
-									inputType: selectInput({
-										creatable: true,
-										onInputChange: this.onBookSelectInput,
-										searchPromptText: 'Searching for books...',
-                    cache: false,
-                    filteredOptions: (a) => {return a;},
+									{ keyPath: "id", label: "Book Id", inputDisabled: true },
+									{
+										keyPath: "isbn13",
+										label: "ISBN 13",
+										inputType: selectInput(
+											{
+												creatable: true,
+												onInputChange: this.onBookSelectInput,
+												searchPromptText: "Searching for books...",
+												cache: false,
+												filteredOptions: a => {
+													return a;
+												},
 
-										options: (
-                      [...lookedUpBooks, ...books].map((book) => {
-                        return {
-                          ...book, value: book.isbn13, label: book.isbn13
-                        }
-                      })
-										),
-										value: book.isbn13,
+												options: [...lookedUpBooks, ...books].map(book => {
+													return {
+														...book,
+														value: book.isbn13,
+														label: book.isbn13
+													};
+												}),
+												value: book.isbn13,
 
-										isValidNewOption: (label) => {
-											return (label.label &&
-                      label.label.length === 13);//replace(/[A-z\-\s]/g, '').
-										},
-									}, this.onBookSelectChange)
-								},
+												isValidNewOption: label => {
+													return label.label && label.label.length === 13; //replace(/[A-z\-\s]/g, '').
+												}
+											},
+											this.onBookSelectChange
+										)
+									}
 								],
 								[
-								{keyPath: 'title', label: 'Title'},
-								{keyPath: 'subtitle', label: 'Subtitle'}
+									{ keyPath: "title", label: "Title" },
+									{ keyPath: "subtitle", label: "Subtitle" }
 								],
 								[
-								{keyPath: 'language', label: 'Language'},
-								{
-									keyPath: 'authors',
-									label: 'Authors',
-									inputType: arrayInput(
-                    lookedUpPeople,
-                    true,
-                    'Add new author',
-                    this.onAuthorInput
-                  ),
-								}
+									{ keyPath: "language", label: "Language" },
+									{
+										keyPath: "authors",
+										label: "Authors",
+										inputType: arrayInput(
+											lookedUpPeople,
+											true,
+											"Add new author",
+											this.onAuthorInput
+										)
+									}
 								],
 								[
-								{keyPath: 'publisher', label: 'Publisher'},
-								{keyPath: 'publicationDate', label: 'Publication Date'},
+									{ keyPath: "publisher", label: "Publisher" },
+									{ keyPath: "publicationDate", label: "Publication Date" }
 								],
 								[
-								{keyPath: 'pageCount', label: 'Number of pages'},
-                {
-                  keyPath       : 'userId',
-                  label         : 'User Id',
-                  inputType     : selectInput({
-										searchPromptText: 'Searching for users...',
-										options: users.map((user) => {
-                      return {
-                        ...user,
-                        value: user.id,
-                        label: user.nameDisplay + ' (' + ([
-                                  user.nameTitle,
-                                  user.nameFirst,
-                                  user.nameMiddle,
-                                  user.nameLast
-                        ]).join(' ').trim() + ')'
-                      };
-                    }),
-										value: book.userId,
-									}, null, (user) => {return user && user.id ? user.id : ''})
-                },
+									{ keyPath: "pageCount", label: "Number of pages" },
+									{
+										keyPath: "userId",
+										label: "User Id",
+										inputType: selectInput(
+											{
+												searchPromptText: "Searching for users...",
+												options: users.map(user => {
+													return {
+														...user,
+														value: user.id,
+														label: user.nameDisplay +
+															" (" +
+															[
+																user.nameTitle,
+																user.nameFirst,
+																user.nameMiddle,
+																user.nameLast
+															]
+																.join(" ")
+																.trim() +
+															")"
+													};
+												}),
+												value: book.userId
+											},
+											null,
+											user => {
+												return user && user.id ? user.id : "";
+											}
+										)
+									}
 								],
 								[
-								{
-									keyPath: 'description',
-									label: 'Description',
-									inputType: textAreaInput('', 'Describe the book', 4, 50)
-								},
-                ],
-                [
-                {
-                  keyPath       : 'verified',
-                  label         : 'Verified',
-                  inputType     : checkboxInput(false)
-                },
-                ]
+									{
+										keyPath: "coverId",
+										label: "Cover Id",
+										inputType: selectInput(
+											{
+												searchPromptText: "Searching for images...",
+												options: images.map(image => {
+													return {
+														...image,
+														value: image.id,
+														label: image.id
+													};
+												}),
+												value: book.coverId
+											},
+											null,
+											image => {
+												return image && image.id ? image.id : "";
+											}
+										)
+									},
+									{
+										keyPath: "verified",
+										label: "Verified",
+										inputType: checkboxInput(false)
+									}
+								],
+								[
+									{
+										keyPath: "description",
+										label: "Description",
+										inputType: textAreaInput("", "Describe the book", 4, 50)
+									}
+								]
 							]}
 							handleOnChange={this.handleOnChange}
-            />
+						/>
 
 					</form>
 				</Card>
@@ -405,18 +421,19 @@ class Book extends React.Component{
 			</div>
 		);
 	}
-};
-
-const mapStateToProps = (state) => {
-	return {
-		accessToken    : state.app.authentication.accessToken.token,
-		newBook        : state.app.newBook,
-		books          : state.app.books,
-		lookedUpBooks  : state.app.lookedUpBooks,
-    lookedUpPeople : state.app.lookedUpPeople,
-		users			     : state.app.users,
-    errors         : state.app.validation
-	};
 }
+
+const mapStateToProps = state => {
+	return {
+		accessToken: state.app.authentication.accessToken.token,
+		newBook: state.app.newBook,
+		books: state.app.books,
+		lookedUpBooks: state.app.lookedUpBooks,
+		lookedUpPeople: state.app.lookedUpPeople,
+		users: state.app.users,
+		images: state.app.images,
+		errors: state.app.validation
+	};
+};
 
 export default connect(mapStateToProps)(Book);

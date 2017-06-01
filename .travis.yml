@@ -1,0 +1,51 @@
+language: node_js
+node_js:
+- '7'
+notifications:
+  email: false
+  webhooks:
+    urls:
+    - https://server.tyratox.ch/webhooks/travis/
+    on_success: always
+    on_failure: always
+    on_start: never
+    on_cancel: never
+    on_error: always
+env:
+  global:
+    - CM_MESSAGE="Automated travis build"
+    - secure: "azSVVL1byDnFDPRZVn5jGwFS1ZFgkyMZNOt/tX8drz1H9M5mhFXkJwuvOsmqrNvCcJUX1Kse8JhidCgrbV4dh5v7Czn9k3rX2SFaj364FyjZhrzPAjycpqnovaA9at4nQgr6W4SmxyUphFZBklQ5/loxZtUaVtGS1JTnlm+AAHO95Cn1Ft4le2wMDSkHQNuqY/SHxlKhloRz7PghgUSphkS10gG8AL8LZQnNt61QQ/BiH4PIFQLRMRqAOe0Zn9HzJnbmDTt5N1y2VEzxEzMFaYwuSSBVwmJW3o5DHrVfbWia8SXffblaZIqh/1BKwnL3CG0B27Qrg+D2Rz25/h8lQffvmEQ4NVCsIkvfN8PGblarLp91GHXbaX4GUABpNpCdEQH2wgx/9Eu8TfMdfK/EU+fk0ulxbs78BALROHMWV7h/zxI8MdbL0pw4KXEZv2TByAY9VnwiDg9GHwsvJyiNOeZoEy1yoxK78wDWspYoEJGUuPBi3dKnjloemDVVKLgS6Lvie8rXrMcCNInnDvADOK+Mg9tgnIlXOPTWjgPsTkJzBlbePvys6lIiwQp0WUbmCD/crRos3VKx7EbEfscW8vNPU6CjAQCl7QunT7EnTANXv0AouI5c0CK5cQbtKfUiv6cQGu3M4PD/3jIm9DrHLNR70WMb4ciAArYDNBQZMZc="
+branches:
+  except:
+  - "/^build-[0-9A-z\\-]*/"
+before_install:
+  - if [ "$TRAVIS_COMMIT_MESSAGE" = "$CM_MESSAGE" ]; then travis cancel; fi
+install:
+- yarn install
+before_script:
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" == "release" ]; then
+  echo "{\"API_URL:\":\"https://api.booki.me\", \"API_VERSION:\":\"1\", \"CLIENT_ID:\":\"2\",
+  \"REDIRECT_URI:\":\"https://booki.me/oauth-callback\"}" > config.json; fi
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
+  echo "{\"API_URL:\":\"https://beta-api.booki.me\", \"API_VERSION:\":\"1\", \"CLIENT_ID:\":\"2\",
+  \"REDIRECT_URI:\":\"https://beta.booki.me/oauth-callback\"}" > config.json; fi
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" == "dev" ]; then echo
+  "{\"API_URL:\":\"https://dev-api.booki.me\", \"API_VERSION:\":\"1\", \"CLIENT_ID:\":\"2\",
+  \"REDIRECT_URI:\":\"https://dev.booki.me/oauth-callback\"}" > config.json; fi
+- yarn test
+script:
+- yarn run build
+after_success:
+- cd build && ls -la
+- export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
+- git remote add origin-frontend https://${GH_TOKEN}@github.com/hexcodech/booki-frontend.git > /dev/null 2>&1
+- git config --global user.email "builds@travis-ci.org"
+- git config --global user.name "Travis CI"
+- git config --global push.default simple
+- git commit -a -m "$CM_MESSAGE"
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" == "release" ]; then
+    git tag $GIT_TAG -a -m "Generated tag from Travis CI build $TRAVIS_BUILD_NUMBER";
+    git push --quiet origin-frontend HEAD:$TRAVIS_BRANCH $GIT_TAG > /dev/null 2>&1;
+  else
+    git push --quiet origin-frontend HEAD:$TRAVIS_BRANCH > /dev/null 2>&1;
+  fi

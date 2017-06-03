@@ -14,7 +14,7 @@ notifications:
 env:
   global:
     - CM_MESSAGE="Automated travis build"
-    - secure: "IYm6hUv94Tk7wirtN+1PCoYfF+dCS3pBINcbQmh2Ijr7dUboAfazokyruoOu8AwFqi+JPTN5VJhhd7q9TLcpWX/V/P63TB9Kh/6H+gUuWyYbaMx9pN2+kDDERyfebAJ2v5hpxLO7qijMdF8fKdSNBKZaTO6EpYUJtr+np8XEuFBypXWJpjDElYsIh/P/2tWTYv7NwtjRT/ps9K44XHTZcTV5zCMuMqeHI8iw12xR7qH66Lpvhux7RtO+Se34yCaa/zra/k/d2OXz/O2LKRBULImLn3vf4f9N1v88aKyn0xV52XJHFdOTZLIl4+5HNEI1KLpIdYuENTGI88HexPgRaAEMKU/Jhmi+oI3ZcTZXQi8fJu+jqDH/raXERyH3wk/hT0PCtwA9X/gSMrOCU6jasXqAeAj1Dsb9PoTd9VsEtWTsA8QgGcTQQ5xkO7uyxn6A3cjbUgsX5s78haYA9GvIgiMZgRUtOmahp3kVXzWZy4IALzG6kJRGTf7f89EjPQTIq3TEA5UZ+TCD+bni+zrltRkmkOHzKz0klX9bqQpTv6BJy71MIoQRVs7eEbqr/NaXsShaPOyv7uTfvempClf+ek0bpGT645Lm+FGt+ndGmjU+9dl7fDk1Sg8Z4qSYFMssVF1m/k9r9ftOVNJl5ob6PCpzoGnU/5g6T8lM9/CwMvI="
+    - secure: "azSVVL1byDnFDPRZVn5jGwFS1ZFgkyMZNOt/tX8drz1H9M5mhFXkJwuvOsmqrNvCcJUX1Kse8JhidCgrbV4dh5v7Czn9k3rX2SFaj364FyjZhrzPAjycpqnovaA9at4nQgr6W4SmxyUphFZBklQ5/loxZtUaVtGS1JTnlm+AAHO95Cn1Ft4le2wMDSkHQNuqY/SHxlKhloRz7PghgUSphkS10gG8AL8LZQnNt61QQ/BiH4PIFQLRMRqAOe0Zn9HzJnbmDTt5N1y2VEzxEzMFaYwuSSBVwmJW3o5DHrVfbWia8SXffblaZIqh/1BKwnL3CG0B27Qrg+D2Rz25/h8lQffvmEQ4NVCsIkvfN8PGblarLp91GHXbaX4GUABpNpCdEQH2wgx/9Eu8TfMdfK/EU+fk0ulxbs78BALROHMWV7h/zxI8MdbL0pw4KXEZv2TByAY9VnwiDg9GHwsvJyiNOeZoEy1yoxK78wDWspYoEJGUuPBi3dKnjloemDVVKLgS6Lvie8rXrMcCNInnDvADOK+Mg9tgnIlXOPTWjgPsTkJzBlbePvys6lIiwQp0WUbmCD/crRos3VKx7EbEfscW8vNPU6CjAQCl7QunT7EnTANXv0AouI5c0CK5cQbtKfUiv6cQGu3M4PD/3jIm9DrHLNR70WMb4ciAArYDNBQZMZc="
 branches:
   except:
   - "/^build-[0-9A-z\\-]*/"
@@ -47,5 +47,5 @@ after_success:
     git tag $GIT_TAG -a -m "Generated tag from Travis CI build $TRAVIS_BUILD_NUMBER";
     git push --quiet origin-dashboard HEAD:$TRAVIS_BRANCH $GIT_TAG > /dev/null 2>&1;
   else
-    git push origin-dashboard HEAD:$TRAVIS_BRANCH;
+    git push --quiet origin-dashboard HEAD:$TRAVIS_BRANCH > /dev/null 2>&1;
   fi

@@ -17243,7 +17243,7 @@ function stubFalse() {
 
 module.exports = isEqual;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49), __webpack_require__(122)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48), __webpack_require__(121)(module)))
 
 /***/ }),
 
@@ -17523,7 +17523,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactDom = __webpack_require__(89);
+var _reactDom = __webpack_require__(88);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -18061,7 +18061,7 @@ var _reactChartjs = __webpack_require__(1080);
 
 var _systemStats = __webpack_require__(913);
 
-var _Widget = __webpack_require__(341);
+var _Widget = __webpack_require__(340);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
@@ -18081,12 +18081,12 @@ var CpuStatsWidget = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (CpuStatsWidget.__proto__ || Object.getPrototypeOf(CpuStatsWidget)).call(this, props));
 
-		(0, _bindAll2.default)(_this, ['componentDidMount', 'handleRefreshClick']);
+		(0, _bindAll2.default)(_this, ["componentDidMount", "handleRefreshClick"]);
 		return _this;
 	}
 
 	_createClass(CpuStatsWidget, [{
-		key: 'componentDidMount',
+		key: "componentDidMount",
 		value: function componentDidMount() {
 			var _props = this.props,
 			    dispatch = _props.dispatch,
@@ -18096,7 +18096,7 @@ var CpuStatsWidget = function (_React$Component) {
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'handleRefreshClick',
+		key: "handleRefreshClick",
 		value: function handleRefreshClick(e) {
 			e.preventDefault();
 
@@ -18109,14 +18109,14 @@ var CpuStatsWidget = function (_React$Component) {
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'render',
+		key: "render",
 		value: function render() {
 			var systemStats = this.props.systemStats;
 
 
 			var labels = [],
 			    data = [],
-			    colors = ['#FFE7C5', '#FFD69B', '#FFC676', '#DEA14B', '#BF7F26'];
+			    colors = ["#FFE7C5", "#FFD69B", "#FFC676", "#DEA14B", "#BF7F26"];
 
 			for (var key in systemStats.cpuAverage) {
 				labels.push(key);
@@ -18129,7 +18129,11 @@ var CpuStatsWidget = function (_React$Component) {
 
 			return _react2.default.createElement(
 				_Widget2.default,
-				{ lastUpdated: systemStats.lastUpdated, isFetching: systemStats.isFetching, handleRefreshClick: this.handleRefreshClick },
+				{
+					lastUpdated: systemStats.lastUpdated,
+					isFetching: systemStats.isFetching,
+					handleRefreshClick: this.handleRefreshClick
+				},
 				_react2.default.createElement(_reactChartjs.Doughnut, {
 					data: {
 						labels: labels,
@@ -18143,17 +18147,17 @@ var CpuStatsWidget = function (_React$Component) {
 					height: 200,
 					options: {
 						title: {
-							text: 'CPU',
+							text: "CPU",
 							display: true
 						},
 						maintainAspectRatio: false,
 						legend: {
-							position: 'bottom'
+							position: "bottom"
 						},
 						tooltips: {
 							callbacks: {
 								label: function label(tooltip, data) {
-									return data.labels[tooltip.index] + ' (' + Math.round(data.datasets[0].data[tooltip.index] / cpuTotal * 100) + '%)';
+									return data.labels[tooltip.index] + " (" + Math.round(data.datasets[0].data[tooltip.index] / cpuTotal * 100) + "%)";
 								}
 							}
 						}
@@ -18165,8 +18169,6 @@ var CpuStatsWidget = function (_React$Component) {
 
 	return CpuStatsWidget;
 }(_react2.default.Component);
-
-;
 
 var mapStateToProps = function mapStateToProps(state) {
 	return {
@@ -22646,7 +22648,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(122)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(121)(module)))
 
 /***/ }),
 
@@ -22665,27 +22667,27 @@ var _rest = __webpack_require__(35);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {
-		type: 'INVALIDATE_SYSTEM_STATS'
+		type: "INVALIDATE_SYSTEM_STATS"
 	};
 };
 
 var requestSystemStats = function requestSystemStats(accessToken) {
 	return {
-		type: 'REQUEST_SYSTEM_STATS',
+		type: "REQUEST_SYSTEM_STATS",
 		accessToken: accessToken
 	};
 };
 
 var failSystemStatsRequest = function failSystemStatsRequest(error) {
 	return {
-		type: 'FAIL_SYSTEM_STATS_REQUEST',
+		type: "FAIL_SYSTEM_STATS_REQUEST",
 		error: error
 	};
 };
 
 var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 	return {
-		type: 'RECEIVE_SYSTEM_STATS',
+		type: "RECEIVE_SYSTEM_STATS",
 		systemStats: systemStats,
 		receivedAt: receivedAt
 	};
@@ -22693,17 +22695,14 @@ var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 
 var fetchSystemStats = function fetchSystemStats(accessToken) {
 	return function (dispatch) {
-
 		dispatch(requestSystemStats(accessToken));
 
-		return (0, _rest.fetchApi)('system/stats', 'GET', {}, accessToken).then(function (stats) {
-
+		return (0, _rest.fetchApi)("system/stats", "GET", {}, accessToken).then(function (stats) {
 			dispatch(receiveSystemStats(stats, Date.now()));
 		}).catch(function (error) {
-
 			dispatch(failSystemStatsRequest(error));
 
-			dispatch(push('/'));
+			dispatch(push("/"));
 		});
 	};
 };
@@ -22721,7 +22720,6 @@ var shouldFetchSystemStats = function shouldFetchSystemStats(state, accessToken)
 };
 
 var fetchSystemStatsIfNeeded = exports.fetchSystemStatsIfNeeded = function fetchSystemStatsIfNeeded(accessToken) {
-
 	return function (dispatch, getState) {
 		if (shouldFetchSystemStats(getState(), accessToken)) {
 			// Dispatch a thunk from thunk!

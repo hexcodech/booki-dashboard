@@ -10,13 +10,13 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 var formatBytes = exports.formatBytes = function formatBytes(bytes, decimals) {
-	if (bytes == 0) return '0 Byte';
+	if (bytes == 0) return "0 Byte";
 	var k = 1000; // or 1024 for binary
 	var dm = decimals + 1 || 3;
-	var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	var sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 	var i = Math.floor(Math.log(bytes) / Math.log(k));
 
-	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 };
 
 /***/ }),
@@ -47,7 +47,7 @@ var _format = __webpack_require__(1030);
 
 var _systemStats = __webpack_require__(913);
 
-var _Widget = __webpack_require__(341);
+var _Widget = __webpack_require__(340);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
@@ -69,12 +69,12 @@ var GeneralStatsWidget = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (GeneralStatsWidget.__proto__ || Object.getPrototypeOf(GeneralStatsWidget)).call(this, props));
 
-		(0, _bindAll2.default)(_this, ['componentdidMount', 'handleRefreshClick']);
+		(0, _bindAll2.default)(_this, ["componentdidMount", "handleRefreshClick"]);
 		return _this;
 	}
 
 	_createClass(GeneralStatsWidget, [{
-		key: 'componentdidMount',
+		key: "componentdidMount",
 		value: function componentdidMount() {
 			var _props = this.props,
 			    dispatch = _props.dispatch,
@@ -84,7 +84,7 @@ var GeneralStatsWidget = function (_React$Component) {
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'handleRefreshClick',
+		key: "handleRefreshClick",
 		value: function handleRefreshClick(e) {
 			e.preventdefault();
 
@@ -97,106 +97,108 @@ var GeneralStatsWidget = function (_React$Component) {
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'render',
+		key: "render",
 		value: function render() {
 			var systemStats = this.props.systemStats;
 
 
 			return _react2.default.createElement(
 				_Widget2.default,
-				{ lastUpdated: systemStats.lastUpdated,
+				{
+					lastUpdated: systemStats.lastUpdated,
 					isFetching: systemStats.isFetching,
-					handleRefreshClick: this.handleRefreshClick },
+					handleRefreshClick: this.handleRefreshClick
+				},
 				_react2.default.createElement(
 					_Table.Table,
 					null,
 					_react2.default.createElement(
-						'thead',
+						"thead",
 						null,
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'th',
+								"th",
 								null,
-								'Key'
+								"Key"
 							),
 							_react2.default.createElement(
-								'th',
+								"th",
 								null,
-								'Value'
+								"Value"
 							)
 						)
 					),
 					_react2.default.createElement(
-						'tbody',
+						"tbody",
 						null,
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'OS'
+								"OS"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								systemStats.os
 							)
 						),
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'Platform'
+								"Platform"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								systemStats.platform
 							)
 						),
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'Hostname'
+								"Hostname"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								systemStats.hostname
 							)
 						),
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'PID'
+								"PID"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								systemStats.pid
 							)
 						),
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'Node Version'
+								"Node Version"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								systemStats.nodeVersion
 							)
@@ -205,55 +207,55 @@ var GeneralStatsWidget = function (_React$Component) {
 							_Table.Seperator,
 							null,
 							_react2.default.createElement(
-								'td',
-								{ colSpan: '2' },
-								'Bandwidth data of the last',
-								' ' + systemStats.bandwidth.interval / 1000 / 60,
-								' minutes'
+								"td",
+								{ colSpan: "2" },
+								"Bandwidth data of the last",
+								" " + systemStats.bandwidth.interval / 1000 / 60,
+								" minutes"
 							)
 						),
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'Requests served'
+								"Requests served"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								systemStats.bandwidth.requestsServed
 							)
 						),
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'Data sent'
+								"Data sent"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								(0, _format.formatBytes)(systemStats.bandwidth.bytesServed / (systemStats.bandwidth.interval / 1000)),
-								'/s'
+								"/s"
 							)
 						),
 						_react2.default.createElement(
-							'tr',
+							"tr",
 							null,
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
-								'Data received'
+								"Data received"
 							),
 							_react2.default.createElement(
-								'td',
+								"td",
 								null,
 								(0, _format.formatBytes)(systemStats.bandwidth.bytesReceived / (systemStats.bandwidth.interval / 1000)),
-								'/s'
+								"/s"
 							)
 						)
 					)
@@ -264,8 +266,6 @@ var GeneralStatsWidget = function (_React$Component) {
 
 	return GeneralStatsWidget;
 }(_react2.default.Component);
-
-;
 
 var mapStateToProps = function mapStateToProps(state) {
 	return {
@@ -293,27 +293,27 @@ var _rest = __webpack_require__(35);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {
-		type: 'INVALIDATE_SYSTEM_STATS'
+		type: "INVALIDATE_SYSTEM_STATS"
 	};
 };
 
 var requestSystemStats = function requestSystemStats(accessToken) {
 	return {
-		type: 'REQUEST_SYSTEM_STATS',
+		type: "REQUEST_SYSTEM_STATS",
 		accessToken: accessToken
 	};
 };
 
 var failSystemStatsRequest = function failSystemStatsRequest(error) {
 	return {
-		type: 'FAIL_SYSTEM_STATS_REQUEST',
+		type: "FAIL_SYSTEM_STATS_REQUEST",
 		error: error
 	};
 };
 
 var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 	return {
-		type: 'RECEIVE_SYSTEM_STATS',
+		type: "RECEIVE_SYSTEM_STATS",
 		systemStats: systemStats,
 		receivedAt: receivedAt
 	};
@@ -321,17 +321,14 @@ var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 
 var fetchSystemStats = function fetchSystemStats(accessToken) {
 	return function (dispatch) {
-
 		dispatch(requestSystemStats(accessToken));
 
-		return (0, _rest.fetchApi)('system/stats', 'GET', {}, accessToken).then(function (stats) {
-
+		return (0, _rest.fetchApi)("system/stats", "GET", {}, accessToken).then(function (stats) {
 			dispatch(receiveSystemStats(stats, Date.now()));
 		}).catch(function (error) {
-
 			dispatch(failSystemStatsRequest(error));
 
-			dispatch(push('/'));
+			dispatch(push("/"));
 		});
 	};
 };
@@ -349,7 +346,6 @@ var shouldFetchSystemStats = function shouldFetchSystemStats(state, accessToken)
 };
 
 var fetchSystemStatsIfNeeded = exports.fetchSystemStatsIfNeeded = function fetchSystemStatsIfNeeded(accessToken) {
-
 	return function (dispatch, getState) {
 		if (shouldFetchSystemStats(getState(), accessToken)) {
 			// Dispatch a thunk from thunk!

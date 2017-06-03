@@ -22,11 +22,11 @@ var _bindAll = __webpack_require__(16);
 
 var _bindAll2 = _interopRequireDefault(_bindAll);
 
-var _user = __webpack_require__(59);
+var _user = __webpack_require__(58);
 
 var _systemStats = __webpack_require__(913);
 
-var _Widget = __webpack_require__(341);
+var _Widget = __webpack_require__(340);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
@@ -46,12 +46,12 @@ var UserWidget = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (UserWidget.__proto__ || Object.getPrototypeOf(UserWidget)).call(this, props));
 
-		(0, _bindAll2.default)(_this, ['componentDidMount', 'handleRefreshClick']);
+		(0, _bindAll2.default)(_this, ["componentDidMount", "handleRefreshClick"]);
 		return _this;
 	}
 
 	_createClass(UserWidget, [{
-		key: 'componentDidMount',
+		key: "componentDidMount",
 		value: function componentDidMount() {
 			var _props = this.props,
 			    dispatch = _props.dispatch,
@@ -61,7 +61,7 @@ var UserWidget = function (_React$Component) {
 			dispatch((0, _user.fetchUsersIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'handleRefreshClick',
+		key: "handleRefreshClick",
 		value: function handleRefreshClick(e) {
 			e.preventDefault();
 
@@ -74,7 +74,7 @@ var UserWidget = function (_React$Component) {
 			dispatch((0, _user.fetchUsersIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'render',
+		key: "render",
 		value: function render() {
 			var users = this.props.users;
 
@@ -87,16 +87,16 @@ var UserWidget = function (_React$Component) {
 				_Widget2.default,
 				{ handleRefreshClick: this.handleRefreshClick },
 				_react2.default.createElement(
-					'p',
+					"p",
 					null,
 					users.length,
-					' Users registered'
+					" Users registered"
 				),
 				_react2.default.createElement(
-					'small',
+					"small",
 					null,
 					newUsers.length,
-					' within the last week'
+					" within the last week"
 				)
 			);
 		}
@@ -104,8 +104,6 @@ var UserWidget = function (_React$Component) {
 
 	return UserWidget;
 }(_react2.default.Component);
-
-;
 
 var mapStateToProps = function mapStateToProps(state) {
 	return {
@@ -133,27 +131,27 @@ var _rest = __webpack_require__(35);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {
-		type: 'INVALIDATE_SYSTEM_STATS'
+		type: "INVALIDATE_SYSTEM_STATS"
 	};
 };
 
 var requestSystemStats = function requestSystemStats(accessToken) {
 	return {
-		type: 'REQUEST_SYSTEM_STATS',
+		type: "REQUEST_SYSTEM_STATS",
 		accessToken: accessToken
 	};
 };
 
 var failSystemStatsRequest = function failSystemStatsRequest(error) {
 	return {
-		type: 'FAIL_SYSTEM_STATS_REQUEST',
+		type: "FAIL_SYSTEM_STATS_REQUEST",
 		error: error
 	};
 };
 
 var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 	return {
-		type: 'RECEIVE_SYSTEM_STATS',
+		type: "RECEIVE_SYSTEM_STATS",
 		systemStats: systemStats,
 		receivedAt: receivedAt
 	};
@@ -161,17 +159,14 @@ var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 
 var fetchSystemStats = function fetchSystemStats(accessToken) {
 	return function (dispatch) {
-
 		dispatch(requestSystemStats(accessToken));
 
-		return (0, _rest.fetchApi)('system/stats', 'GET', {}, accessToken).then(function (stats) {
-
+		return (0, _rest.fetchApi)("system/stats", "GET", {}, accessToken).then(function (stats) {
 			dispatch(receiveSystemStats(stats, Date.now()));
 		}).catch(function (error) {
-
 			dispatch(failSystemStatsRequest(error));
 
-			dispatch(push('/'));
+			dispatch(push("/"));
 		});
 	};
 };
@@ -189,7 +184,6 @@ var shouldFetchSystemStats = function shouldFetchSystemStats(state, accessToken)
 };
 
 var fetchSystemStatsIfNeeded = exports.fetchSystemStatsIfNeeded = function fetchSystemStatsIfNeeded(accessToken) {
-
 	return function (dispatch, getState) {
 		if (shouldFetchSystemStats(getState(), accessToken)) {
 			// Dispatch a thunk from thunk!

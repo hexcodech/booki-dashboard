@@ -2867,13 +2867,13 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 var formatBytes = exports.formatBytes = function formatBytes(bytes, decimals) {
-	if (bytes == 0) return '0 Byte';
+	if (bytes == 0) return "0 Byte";
 	var k = 1000; // or 1024 for binary
 	var dm = decimals + 1 || 3;
-	var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	var sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 	var i = Math.floor(Math.log(bytes) / Math.log(k));
 
-	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 };
 
 /***/ }),
@@ -17264,7 +17264,7 @@ function stubFalse() {
 
 module.exports = isEqual;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49), __webpack_require__(122)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48), __webpack_require__(121)(module)))
 
 /***/ }),
 
@@ -17544,7 +17544,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactDom = __webpack_require__(89);
+var _reactDom = __webpack_require__(88);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -18084,7 +18084,7 @@ var _systemStats = __webpack_require__(913);
 
 var _format = __webpack_require__(1030);
 
-var _Widget = __webpack_require__(341);
+var _Widget = __webpack_require__(340);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
@@ -18104,12 +18104,12 @@ var MemoryStatsWidget = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (MemoryStatsWidget.__proto__ || Object.getPrototypeOf(MemoryStatsWidget)).call(this, props));
 
-		(0, _bindAll2.default)(_this, ['componentDidMount', 'handleRefreshClick']);
+		(0, _bindAll2.default)(_this, ["componentDidMount", "handleRefreshClick"]);
 		return _this;
 	}
 
 	_createClass(MemoryStatsWidget, [{
-		key: 'componentDidMount',
+		key: "componentDidMount",
 		value: function componentDidMount() {
 			var _props = this.props,
 			    dispatch = _props.dispatch,
@@ -18119,7 +18119,7 @@ var MemoryStatsWidget = function (_React$Component) {
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'handleRefreshClick',
+		key: "handleRefreshClick",
 		value: function handleRefreshClick(e) {
 			e.preventDefault();
 
@@ -18132,38 +18132,42 @@ var MemoryStatsWidget = function (_React$Component) {
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
 		}
 	}, {
-		key: 'render',
+		key: "render",
 		value: function render() {
 			var systemStats = this.props.systemStats;
 
 
 			return _react2.default.createElement(
 				_Widget2.default,
-				{ lastUpdated: systemStats.lastUpdated, isFetching: systemStats.isFetching, handleRefreshClick: this.handleRefreshClick },
+				{
+					lastUpdated: systemStats.lastUpdated,
+					isFetching: systemStats.isFetching,
+					handleRefreshClick: this.handleRefreshClick
+				},
 				_react2.default.createElement(_reactChartjs.Doughnut, {
 					data: {
-						labels: ['Used Heap', 'Unused Heap', 'Other processes', 'Free Memory'],
+						labels: ["Used Heap", "Unused Heap", "Other processes", "Free Memory"],
 						datasets: [{
 							data: [systemStats.memoryUsage.heapUsed, systemStats.memoryUsage.heapTotal - systemStats.memoryUsage.heapUsed, systemStats.totalMemory - systemStats.freeMemory - systemStats.memoryUsage.rss, systemStats.freeMemory],
-							backgroundColor: ['#FFE7C5', '#FFD69B', '#FFC676', '#BF7F26'],
-							hoverBackgroundColor: ['#FFE7C5', '#FFD69B', '#FFC676', '#BF7F26']
+							backgroundColor: ["#FFE7C5", "#FFD69B", "#FFC676", "#BF7F26"],
+							hoverBackgroundColor: ["#FFE7C5", "#FFD69B", "#FFC676", "#BF7F26"]
 						}]
 					},
 					width: 300,
 					height: 200,
 					options: {
 						title: {
-							text: 'Memory',
+							text: "Memory",
 							display: true
 						},
 						maintainAspectRatio: false,
 						legend: {
-							position: 'bottom'
+							position: "bottom"
 						},
 						tooltips: {
 							callbacks: {
 								label: function label(tooltip, data) {
-									return data.labels[tooltip.index] + ' (' + (0, _format.formatBytes)(data.datasets[0].data[tooltip.index]) + ')';
+									return data.labels[tooltip.index] + " (" + (0, _format.formatBytes)(data.datasets[0].data[tooltip.index]) + ")";
 								}
 							}
 						}
@@ -18175,8 +18179,6 @@ var MemoryStatsWidget = function (_React$Component) {
 
 	return MemoryStatsWidget;
 }(_react2.default.Component);
-
-;
 
 var mapStateToProps = function mapStateToProps(state) {
 	return {
@@ -22656,7 +22658,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(122)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(121)(module)))
 
 /***/ }),
 
@@ -22675,27 +22677,27 @@ var _rest = __webpack_require__(35);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {
-		type: 'INVALIDATE_SYSTEM_STATS'
+		type: "INVALIDATE_SYSTEM_STATS"
 	};
 };
 
 var requestSystemStats = function requestSystemStats(accessToken) {
 	return {
-		type: 'REQUEST_SYSTEM_STATS',
+		type: "REQUEST_SYSTEM_STATS",
 		accessToken: accessToken
 	};
 };
 
 var failSystemStatsRequest = function failSystemStatsRequest(error) {
 	return {
-		type: 'FAIL_SYSTEM_STATS_REQUEST',
+		type: "FAIL_SYSTEM_STATS_REQUEST",
 		error: error
 	};
 };
 
 var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 	return {
-		type: 'RECEIVE_SYSTEM_STATS',
+		type: "RECEIVE_SYSTEM_STATS",
 		systemStats: systemStats,
 		receivedAt: receivedAt
 	};
@@ -22703,17 +22705,14 @@ var receiveSystemStats = function receiveSystemStats(systemStats, receivedAt) {
 
 var fetchSystemStats = function fetchSystemStats(accessToken) {
 	return function (dispatch) {
-
 		dispatch(requestSystemStats(accessToken));
 
-		return (0, _rest.fetchApi)('system/stats', 'GET', {}, accessToken).then(function (stats) {
-
+		return (0, _rest.fetchApi)("system/stats", "GET", {}, accessToken).then(function (stats) {
 			dispatch(receiveSystemStats(stats, Date.now()));
 		}).catch(function (error) {
-
 			dispatch(failSystemStatsRequest(error));
 
-			dispatch(push('/'));
+			dispatch(push("/"));
 		});
 	};
 };
@@ -22731,7 +22730,6 @@ var shouldFetchSystemStats = function shouldFetchSystemStats(state, accessToken)
 };
 
 var fetchSystemStatsIfNeeded = exports.fetchSystemStatsIfNeeded = function fetchSystemStatsIfNeeded(accessToken) {
-
 	return function (dispatch, getState) {
 		if (shouldFetchSystemStats(getState(), accessToken)) {
 			// Dispatch a thunk from thunk!

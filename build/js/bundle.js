@@ -139,7 +139,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/build/";
+/******/ 	__webpack_require__.p = "/js/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -3841,10 +3841,10 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"API_URL": "http://localhost:8101",
+	"API_URL": "http://localhost:8100",
 	"API_VERSION": "1",
 	"CLIENT_ID": "1",
-	"REDIRECT_URI": "http://localhost:8080/oauth-callback"
+	"REDIRECT_URI": "http://localhost:8101/oauth-callback"
 };
 
 /***/ }),

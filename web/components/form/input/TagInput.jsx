@@ -1,30 +1,29 @@
-import React
-       from 'react';
-import bindAll
-       from 'lodash/bindAll';
+import React from "react";
+import bindAll from "lodash/bindAll";
 
-import {WithContext as ReactTags}
-       from 'react-tag-input';
+import { WithContext as ReactTags } from "react-tag-input";
 
-class TagInput extends React.Component{
-
-	constructor(props){
+class TagInput extends React.Component {
+	constructor(props) {
 		super(props);
 
 		bindAll(this, [
-      'handleChange', 'handleDelete', 'handleAddition', 'handleDrag',
-      'handleOnInput'
-    ]);
+			"handleChange",
+			"handleDelete",
+			"handleAddition",
+			"handleDrag",
+			"handleOnInput"
+		]);
 	}
 
-  handleOnInput(e){
-    if(this.props.handleOnInput){
-      this.props.handleOnInput(e);
-    }
-  }
+	handleOnInput(e) {
+		if (this.props.handleOnInput) {
+			this.props.handleOnInput(e);
+		}
+	}
 
-	handleChange(tags){
-		if(this.props.handleOnChange){
+	handleChange(tags) {
+		if (this.props.handleOnChange) {
 			this.props.handleOnChange(this.props.id, tags.map(el => el.text));
 		}
 	}
@@ -39,10 +38,9 @@ class TagInput extends React.Component{
 	handleAddition(tag) {
 		let tags = this.props.tags;
 
-		if(this.props.unique){
-
-			for(let i=0;i<tags.length;i++){
-				if(tags[i].text === tag){
+		if (this.props.unique) {
+			for (let i = 0; i < tags.length; i++) {
+				if (tags[i].text === tag) {
 					return;
 				}
 			}
@@ -67,33 +65,38 @@ class TagInput extends React.Component{
 		this.handleChange(tags);
 	}
 
-	render(){
-		let {tags, suggestions, placeholder, handleFilterSuggestions} = this.props;
+	render() {
+		let {
+			tags,
+			suggestions,
+			placeholder,
+			handleFilterSuggestions
+		} = this.props;
 
 		return (
-			<div className='clearfix react-tags'>
-				<ReactTags tags={tags}
+			<div className="clearfix react-tags">
+				<ReactTags
+					tags={tags}
 					suggestions={suggestions}
-          handleFilterSuggestions={handleFilterSuggestions}
+					handleFilterSuggestions={handleFilterSuggestions}
 					handleDelete={this.handleDelete}
 					handleAddition={this.handleAddition}
 					handleDrag={this.handleDrag}
-          handleInputChange={this.handleOnInput}
+					handleInputChange={this.handleOnInput}
 					classNames={{
-						tags: 'tags-tags',
-						tagInput: 'tags-input',
-						tagInputField: 'tags-input-field',
-						selected: 'tags-selected',
-						tag: 'tags-tag',
-						remove: 'tags-remove',
-						suggestions: 'tags-suggestions',
+						tags: "tags-tags",
+						tagInput: "tags-input",
+						tagInputField: "tags-input-field",
+						selected: "tags-selected",
+						tag: "tags-tag",
+						remove: "tags-remove",
+						suggestions: "tags-suggestions"
 					}}
 					placeholder={placeholder}
 				/>
 			</div>
-		)
+		);
 	}
-
 }
 
 export default TagInput;

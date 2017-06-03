@@ -36,7 +36,7 @@ const Login = () => {
 					styleName="modal"
 				>
 					<section styleName="wrapper">
-						<h1>📚 Booki Dashboard</h1>
+						<h1>Booki Dashboard</h1>
 						<a
 							href={
 								API_URL +

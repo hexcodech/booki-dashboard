@@ -29098,7 +29098,7 @@ var Login = function Login() {
 					_react2.default.createElement(
 						"h1",
 						null,
-						"Booki Dashboard"
+						"\uD83D\uDCDA Booki Dashboard"
 					),
 					_react2.default.createElement(
 						"a",

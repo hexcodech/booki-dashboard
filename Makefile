@@ -9,7 +9,6 @@ all:
 		mkdir $(BUILD); \
 		cp web/index.html $(BUILD)/index.html; \
 		cp -r web/css/ $(BUILD)/css/; \
-		#cp -r web/img $(BUILD)/img; \
 		$(WEBPACK) --config "$(BUILD_CONFIG)"; \
 	else \
 		echo "config.json doesn't exist!"; \

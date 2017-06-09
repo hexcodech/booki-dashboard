@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { DEV_TOOLS } from "config.json";
+
 import Sidebar from "web/containers/layout/Sidebar";
 
 import DevTools from "web/containers/dev/DevTools";
@@ -22,7 +24,7 @@ const Wrapper = ({ children }) => {
 				{children}
 			</div>
 			<Notifications />
-			<DevTools />
+			{DEV_TOOLS && <DevTools />}
 		</div>
 	);
 };

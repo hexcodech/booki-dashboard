@@ -5,7 +5,7 @@ process.traceDeprecation = true; //https://github.com/webpack/loader-utils/issue
 
 module.exports = {
 	entry: [
-		//'react-hot-loader/patch',
+		"react-hot-loader/patch",
 		"webpack-hot-middleware/client",
 		path.join(__dirname, "web/main.jsx")
 	],
@@ -35,24 +35,32 @@ module.exports = {
 		rules: [
 			{
 				test: /\.jsx?$/,
-				exclude: /node_modules(\/|\\)(?!booki-frontend-core(\/|\\))/,
+				include: [
+					path.resolve(__dirname, "app"),
+					path.resolve(__dirname, "web"),
+					path.resolve(__dirname, "node_modules", "booki-frontend-core"),
+					path.resolve(__dirname, "node_modules", "react-icons")
+				],
 
 				use: [
 					{
-						loader: "react-hot-loader" // /webpack
+						loader: "react-hot-loader/webpack"
 					},
 					{
 						loader: "babel-loader",
 						options: {
 							presets: ["es2015", "es2016", "es2017", "react"],
-							plugins: ["transform-object-rest-spread"]
+							plugins: [
+								"transform-object-rest-spread",
+								"transform-class-properties"
+							]
 						}
 					}
 				]
 			},
 			{
 				test: /\.css$/,
-				exclude: /node_modules(\/|\\)(?!booki-frontend-core(\/|\\))/,
+				include: [path.resolve(__dirname, "web")],
 
 				use: [
 					{
@@ -73,7 +81,7 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-				exclude: /node_modules(\/|\\)(?!booki-frontend-core(\/|\\))/,
+				include: [path.resolve(__dirname, "web")],
 
 				use: [
 					{

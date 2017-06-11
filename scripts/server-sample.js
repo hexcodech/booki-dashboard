@@ -1,6 +1,6 @@
 const apiConfig = require("../config.json");
-//this can't be read by the client (btw this is just a local dev secret
-const CLIENT_SECRET = "jbRA3q/ibi6A0FS4yL7sV3UAf6rtjO";
+//this can't be read by the client
+const CLIENT_SECRET = "";
 
 const path = require("path");
 const express = require("express");

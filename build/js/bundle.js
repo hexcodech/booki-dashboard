@@ -2588,7 +2588,7 @@ exports.Seperator = StyledSeperator;
 module.exports = {
 	"API_URL": "https://dev-api.booki.me",
 	"API_VERSION": "1",
-	"CLIENT_ID": "2",
+	"CLIENT_ID": "1",
 	"REDIRECT_URI": "https://dev-dashboard.booki.me/oauth-callback",
 	"DEV_TOOLS": true
 };

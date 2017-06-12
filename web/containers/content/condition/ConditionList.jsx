@@ -8,12 +8,9 @@ import {
 	fetchConditionsIfNeeded
 } from "core/actions/condition";
 
+import { Table, Tr, Td } from "reactable";
 import Card from "web/components/layout/Card";
-
-import { Table } from "web/components/layout/Table";
-
 import Actions from "web/components/layout/Actions";
-
 import RefreshButton from "web/components/RefreshButton";
 
 class ConditionList extends React.Component {
@@ -62,30 +59,27 @@ class ConditionList extends React.Component {
 					</li>
 				</Actions>
 
-				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Price Factor</th>
-							</tr>
-						</thead>
-						<tbody>
-							{conditions.map((condition, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handleConditionRowClick}
-										data-condition-id={condition.id}
-									>
-										<td>{condition.id}</td>
-										<td>{condition.key}</td>
-										<td>{condition.priceFactor}</td>
-									</tr>
-								);
-							})}
-						</tbody>
+				<Card
+					itemsPerPage={50}
+					sortable={true}
+					defaultSort={{ column: "ID", direction: "asc" }}
+					filterable={["Key"]}
+				>
+					<Table>
+						{conditions.map((condition, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleConditionRowClick}
+									data-condition-id={condition.id}
+									data={{
+										ID: condition.id,
+										Key: condition.key,
+										"Price Factor": condition.priceFactor
+									}}
+								/>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

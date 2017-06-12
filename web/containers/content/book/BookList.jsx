@@ -5,8 +5,8 @@ import { push } from "react-router-redux";
 
 import { invalidateBooks, fetchBooksIfNeeded } from "core/actions/book";
 
+import { Table, Tr, Td } from "reactable";
 import RefreshButton from "web/components/RefreshButton";
-import { Table } from "web/components/layout/Table";
 import Actions from "web/components/layout/Actions";
 import Card from "web/components/layout/Card";
 
@@ -55,27 +55,22 @@ class BookList extends React.Component {
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Title</th>
-							</tr>
-						</thead>
-						<tbody>
-							{books.map((book, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handleBookRowClick}
-										data-book-id={book.id}
-									>
-										<td>{book.id}</td>
-										<td>{book.title}</td>
-									</tr>
-								);
-							})}
-						</tbody>
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Title"]}
+					>
+						{books.map((book, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleBookRowClick}
+									data-book-id={book.id}
+									data={{ ID: book.id, Title: book.title }}
+								/>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

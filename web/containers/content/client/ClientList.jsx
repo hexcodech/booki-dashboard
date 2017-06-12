@@ -5,12 +5,9 @@ import { push } from "react-router-redux";
 
 import { invalidateClients, fetchClientsIfNeeded } from "core/actions/client";
 
+import { Table, Tr, Td } from "reactable";
 import Card from "web/components/layout/Card";
-
-import { Table } from "web/components/layout/Table";
-
 import Actions from "web/components/layout/Actions";
-
 import RefreshButton from "web/components/RefreshButton";
 
 class ClientList extends React.Component {
@@ -58,42 +55,45 @@ class ClientList extends React.Component {
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Trusted</th>
-							</tr>
-						</thead>
-						<tbody>
-							{clients.map((client, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handleClientRowClick}
-										data-client-id={client.id}
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Name", "Trusted"]}
+					>
+						{clients.map((client, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleClientRowClick}
+									data-client-id={client.id}
+								>
+									<Td column="ID">
+										{client.id}
+									</Td>
+									<Td column="Name">
+										{client.name}
+									</Td>
+									<Td
+										column="Trusted"
+										value={client.trusted ? "trusted" : "untrusted"}
 									>
-										<td>{client.id}</td>
-										<td>{client.name}</td>
-										<td>
-											<span
-												className="hint-right-middle hint-anim"
-												data-hint={client.trusted ? "Trusted" : "Untrusted"}
-											>
-												{client.trusted
-													? <i className="material-icons">
-															verified_user
-														</i>
-													: <i className="material-icons">
-															lock_open
-														</i>}
-											</span>
-										</td>
-									</tr>
-								);
-							})}
-						</tbody>
+										<span
+											className="hint-right-middle hint-anim"
+											data-hint={client.trusted ? "Trusted" : "Not trusted"}
+										>
+											{client.trusted
+												? <i className="material-icons">
+														verified_user
+													</i>
+												: <i className="material-icons">
+														lock_open
+													</i>}
+										</span>
+									</Td>
+								</Tr>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

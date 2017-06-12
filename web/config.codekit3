@@ -828,6 +828,18 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/oauth-callback-sample.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/oauth-callback-sample.php",
+		"oF": 0
+		},
+	"\/oauth-callback.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/oauth-callback.php",
+		"oF": 0
+		},
 	"\/scss\/booki-dashboard.scss": {
 		"aP": 1,
 		"bl": 0,

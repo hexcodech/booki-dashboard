@@ -5,12 +5,9 @@ import { push } from "react-router-redux";
 
 import { invalidatePeople, fetchPeopleIfNeeded } from "core/actions/person";
 
+import { Table, Tr, Td } from "reactable";
 import Card from "web/components/layout/Card";
-
-import { Table } from "web/components/layout/Table";
-
 import Actions from "web/components/layout/Actions";
-
 import RefreshButton from "web/components/RefreshButton";
 
 class PersonList extends React.Component {
@@ -58,50 +55,51 @@ class PersonList extends React.Component {
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Verified</th>
-							</tr>
-						</thead>
-						<tbody>
-							{people.map((person, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handlePersonRowClick}
-										data-person-id={person.id}
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Name", "Verified"]}
+					>
+						{people.map((person, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handlePersonRowClick}
+									data-person-id={person.id}
+								>
+									<Td column="ID">
+										{person.id}
+									</Td>
+									<Td column="Name">
+										{((person.nameTitle ? person.nameTitle : "") +
+											" " +
+											(person.nameFirst ? person.nameFirst : "") +
+											" " +
+											(person.nameMiddle ? person.nameMiddle : "") +
+											" " +
+											(person.nameLast ? person.nameLast : "")).trim()}
+									</Td>
+									<Td
+										column="Verified"
+										value={person.verified ? "verified" : "unverified"}
 									>
-										<td>{person.id}</td>
-										<td>
-											{((person.nameTitle ? person.nameTitle : "") +
-												" " +
-												(person.nameFirst ? person.nameFirst : "") +
-												" " +
-												(person.nameMiddle ? person.nameMiddle : "") +
-												" " +
-												(person.nameLast ? person.nameLast : "")).trim()}
-										</td>
-										<td>
-											<span
-												className="hint-right-middle hint-anim"
-												data-hint={person.verified ? "Verified" : "Unverified"}
-											>
-												{person.verified
-													? <i className="material-icons">
-															verified_user
-														</i>
-													: <i className="material-icons">
-															lock_open
-														</i>}
-											</span>
-										</td>
-									</tr>
-								);
-							})}
-						</tbody>
+										<span
+											className="hint-right-middle hint-anim"
+											data-hint={person.verified ? "Verified" : "Unverified"}
+										>
+											{person.verified
+												? <i className="material-icons">
+														verified_user
+													</i>
+												: <i className="material-icons">
+														lock_open
+													</i>}
+										</span>
+									</Td>
+								</Tr>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

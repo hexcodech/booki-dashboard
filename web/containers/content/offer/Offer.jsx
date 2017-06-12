@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
+import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
 import {

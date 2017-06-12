@@ -7,12 +7,9 @@ import { API_URL } from "config.json";
 
 import { invalidateUsers, fetchUsersIfNeeded } from "core/actions/user";
 
+import { Table, Tr, Td } from "reactable";
 import Card from "web/components/layout/Card";
-
-import { Table } from "web/components/layout/Table";
-
 import Actions from "web/components/layout/Actions";
-
 import RefreshButton from "web/components/RefreshButton";
 
 class UserList extends React.Component {
@@ -59,26 +56,24 @@ class UserList extends React.Component {
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th />
-								<th>ID</th>
-								<th>First name</th>
-								<th>Last name</th>
-								<th>Email</th>
-								<th>Locale</th>
-							</tr>
-						</thead>
-						<tbody>
-							{users.map((user, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handleUserRowClick}
-										data-user-id={user.id}
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["First Name", "Last Name", "Email"]}
+					>
+						{users.map((user, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleUserRowClick}
+									data-user-id={user.id}
+								>
+									<Td
+										column="Capabilities"
+										value={user.permissions.sort().join(" ")}
 									>
-										<td>
+										<div>
 											{user.permissions.indexOf("admin") !== -1 &&
 												<span
 													className="hint-bottom-middle hint-anim"
@@ -93,32 +88,32 @@ class UserList extends React.Component {
 												>
 													<i className="material-icons">face</i>
 												</span>}
-										</td>
-										<td>{user.id}</td>
-										<td>{user.nameFirst}</td>
-										<td>{user.nameLast}</td>
-										<td>{user.emailVerified}</td>
-										<td>
-											<span
-												className="hint-right-middle hint-anim"
-												data-hint={user.locale}
-											>
-												<img
-													height="20"
-													width="20"
-													src={
-														API_URL +
-														"/static/res/img/locales/" +
-														user.locale +
-														".svg"
-													}
-												/>
-											</span>
-										</td>
-									</tr>
-								);
-							})}
-						</tbody>
+										</div>
+									</Td>
+									<Td column="ID">{user.id}</Td>
+									<Td column="First Name">{user.nameFirst}</Td>
+									<Td column="Last Name">{user.nameLast}</Td>
+									<Td column="Email">{user.emailVerified}</Td>
+									<Td column="Locale" value={user.locale}>
+										<span
+											className="hint-right-middle hint-anim"
+											data-hint={user.locale}
+										>
+											<img
+												height="20"
+												width="20"
+												src={
+													API_URL +
+													"/static/res/img/locales/" +
+													user.locale +
+													".svg"
+												}
+											/>
+										</span>
+									</Td>
+								</Tr>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

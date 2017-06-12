@@ -5,12 +5,9 @@ import { push } from "react-router-redux";
 
 import { invalidateOffers, fetchOffersIfNeeded } from "core/actions/offer";
 
+import { Table, Tr, Td } from "reactable";
 import Card from "web/components/layout/Card";
-
-import { Table } from "web/components/layout/Table";
-
 import Actions from "web/components/layout/Actions";
-
 import RefreshButton from "web/components/RefreshButton";
 
 class OfferList extends React.Component {
@@ -58,29 +55,26 @@ class OfferList extends React.Component {
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Price</th>
-								<th>Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							{offers.map((offer, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handleOfferRowClick}
-										data-offer-id={offer.id}
-									>
-										<td>{offer.id}</td>
-										<td>{offer.price} CHF</td>
-										<td>{offer.description.substring(0, 50)}</td>
-									</tr>
-								);
-							})}
-						</tbody>
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Description"]}
+					>
+						{offers.map((offer, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleOfferRowClick}
+									data-offer-id={offer.id}
+									data={{
+										ID: offer.id,
+										Price: offer.price + " CHF",
+										Description: offer.description.substring(0, 50)
+									}}
+								/>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

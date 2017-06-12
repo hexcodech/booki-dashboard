@@ -3598,6 +3598,10 @@ react@^15.4.0:
     object-assign "^4.1.0"
     prop-types "^15.5.7"
 
+reactable@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/reactable/-/reactable-0.14.1.tgz#2ab9895e3df6da2498625de46d3691592d18c93b"
+
 reactcss@^1.0.9, reactcss@^1.1.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/reactcss/-/reactcss-1.2.2.tgz#41b0ef43e01d54880357c34b11ac1531209350ef"

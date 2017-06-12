@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
+import { API_URL } from "config.json";
+
 import SidebarListElement from "web/components/sidebar/SidebarListElement";
 
 import CSSModules from "react-css-modules";
@@ -19,14 +21,15 @@ const Sidebar = ({ user, pathname, dispatch }) => {
 		document.body.clientHeight;
 
 	let bgStyles = {
-		background: "linear-gradient(" +
-			"rgba(255, 173, 57, 1), rgba(255, 173, 57, 0.45)" +
-			"), url(" +
-			"https://source.unsplash.com/random/" +
-			Math.round(width / 3) +
-			"x" +
-			height +
-			"/weekly)"
+		background:
+			"linear-gradient(" +
+				"rgba(255, 173, 57, 1), rgba(255, 173, 57, 0.45)" +
+				"), url(" +
+				"https://source.unsplash.com/random/" +
+				Math.round(width / 3) +
+				"x" +
+				height +
+				"/weekly)"
 	};
 
 	return (
@@ -38,7 +41,16 @@ const Sidebar = ({ user, pathname, dispatch }) => {
 				}}
 			>
 
-				<img src={user.profilePictureUrl} height="100" width="100" />
+				<img
+					src={
+						API_URL +
+						user.thumbnails.filter(thumbnail => {
+							return thumbnail.name === "profile-picture-large";
+						})[0].url
+					}
+					height="100"
+					width="100"
+				/>
 				<p styleName="user-name">
 					{user.nameDisplay}
 				</p>

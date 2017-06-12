@@ -8,12 +8,9 @@ import {
 	fetchThumbnailTypesIfNeeded
 } from "core/actions/thumbnail-type";
 
+import { Table, Tr, Td } from "reactable";
 import Card from "web/components/layout/Card";
-
-import { Table } from "web/components/layout/Table";
-
 import Actions from "web/components/layout/Actions";
-
 import RefreshButton from "web/components/RefreshButton";
 
 class ThumbnailTypeList extends React.Component {
@@ -65,31 +62,27 @@ class ThumbnailTypeList extends React.Component {
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Width</th>
-								<th>Height</th>
-							</tr>
-						</thead>
-						<tbody>
-							{thumbnailTypes.map((thumbnailType, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handleThumbnailTypeRowClick}
-										data-thumbnail-type-id={thumbnailType.id}
-									>
-										<td>{thumbnailType.id}</td>
-										<td>{thumbnailType.name}</td>
-										<td>{thumbnailType.width}</td>
-										<td>{thumbnailType.height}</td>
-									</tr>
-								);
-							})}
-						</tbody>
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Name"]}
+					>
+						{thumbnailTypes.map((thumbnailType, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleThumbnailTypeRowClick}
+									data-thumbnail-type-id={thumbnailType.id}
+									data={{
+										ID: thumbnailType.id,
+										Name: thumbnailType.name,
+										Width: thumbnailType.width,
+										Height: thumbnailType.height
+									}}
+								/>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

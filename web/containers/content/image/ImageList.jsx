@@ -5,8 +5,8 @@ import { push } from "react-router-redux";
 
 import { invalidateImages, fetchImagesIfNeeded } from "core/actions/image";
 
+import { Table, Tr, Td } from "reactable";
 import RefreshButton from "web/components/RefreshButton";
-import { Table } from "web/components/layout/Table";
 import Actions from "web/components/layout/Actions";
 import Card from "web/components/layout/Card";
 
@@ -55,27 +55,21 @@ class ImageList extends React.Component {
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>URL</th>
-							</tr>
-						</thead>
-						<tbody>
-							{images.map((image, index) => {
-								return (
-									<tr
-										key={index}
-										onClick={this.handleImageRowClick}
-										data-image-id={image.id}
-									>
-										<td>{image.id}</td>
-										<td>{image.url}</td>
-									</tr>
-								);
-							})}
-						</tbody>
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+					>
+						{images.map((image, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleImageRowClick}
+									data-image-id={image.id}
+									data={{ ID: image.id, URL: image.url }}
+								/>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>

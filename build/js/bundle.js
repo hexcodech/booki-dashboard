@@ -31702,7 +31702,7 @@ var BookList = function (_React$Component) {
 									_reactable.Td,
 									{
 										column: "Verified",
-										value: book.verified ? "verified" : "unverified"
+										value: book.verified ? "#verified" : "#unverified"
 									},
 									_react2.default.createElement(
 										"span",
@@ -32312,7 +32312,7 @@ var ClientList = function (_React$Component) {
 									_reactable.Td,
 									{
 										column: "Trusted",
-										value: client.trusted ? "trusted" : "untrusted"
+										value: client.trusted ? "#trusted" : "#untrusted"
 									},
 									_react2.default.createElement(
 										"span",
@@ -34634,7 +34634,7 @@ var PersonList = function (_React$Component) {
 									_reactable.Td,
 									{
 										column: "Verified",
-										value: person.verified ? "verified" : "unverified"
+										value: person.verified ? "#verified" : "#unverified"
 									},
 									_react2.default.createElement(
 										"span",

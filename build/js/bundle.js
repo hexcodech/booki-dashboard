@@ -31668,7 +31668,8 @@ var BookList = function (_React$Component) {
 							itemsPerPage: 50,
 							sortable: true,
 							defaultSort: { column: "ID", direction: "asc" },
-							filterable: ["Title", "Verified"]
+							filterable: ["Title", "Verified"],
+							className: "clickable"
 						},
 						books.map(function (book, index) {
 							return _react2.default.createElement(
@@ -31676,7 +31677,8 @@ var BookList = function (_React$Component) {
 								{
 									key: index,
 									onClick: _this.handleBookRowClick,
-									"data-book-id": book.id
+									"data-book-id": book.id,
+									className: "clickable"
 								},
 								_react2.default.createElement(
 									_reactable.Td,
@@ -32285,7 +32287,8 @@ var ClientList = function (_React$Component) {
 								{
 									key: index,
 									onClick: _this.handleClientRowClick,
-									"data-client-id": client.id
+									"data-client-id": client.id,
+									className: "clickable"
 								},
 								_react2.default.createElement(
 									_reactable.Td,
@@ -32822,6 +32825,7 @@ var ConditionList = function (_React$Component) {
 								key: index,
 								onClick: _this.handleConditionRowClick,
 								"data-condition-id": condition.id,
+								className: "clickable",
 								data: {
 									ID: condition.id,
 									Key: condition.key,
@@ -33484,6 +33488,7 @@ var ImageList = function (_React$Component) {
 								key: index,
 								onClick: _this.handleImageRowClick,
 								"data-image-id": image.id,
+								className: "clickable",
 								data: { ID: image.id, URL: image.url }
 							});
 						})
@@ -34073,6 +34078,7 @@ var OfferList = function (_React$Component) {
 								key: index,
 								onClick: _this.handleOfferRowClick,
 								"data-offer-id": offer.id,
+								className: "clickable",
 								data: {
 									ID: offer.id,
 									Price: offer.price + " CHF",
@@ -34603,7 +34609,8 @@ var PersonList = function (_React$Component) {
 								{
 									key: index,
 									onClick: _this.handlePersonRowClick,
-									"data-person-id": person.id
+									"data-person-id": person.id,
+									className: "clickable"
 								},
 								_react2.default.createElement(
 									_reactable.Td,
@@ -35147,6 +35154,7 @@ var ThumbnailTypeList = function (_React$Component) {
 								key: index,
 								onClick: _this.handleThumbnailTypeRowClick,
 								"data-thumbnail-type-id": thumbnailType.id,
+								className: "clickable",
 								data: {
 									ID: thumbnailType.id,
 									Name: thumbnailType.name,
@@ -35836,7 +35844,8 @@ var UserList = function (_React$Component) {
 								{
 									key: index,
 									onClick: _this.handleUserRowClick,
-									"data-user-id": user.id
+									"data-user-id": user.id,
+									className: "clickable"
 								},
 								_react2.default.createElement(
 									_reactable.Td,

@@ -35551,7 +35551,7 @@ var User = function (_React$Component) {
 							_react2.default.createElement(_personAdd2.default, null)
 						)
 					),
-					userId !== "new" && userId !== currentUser.id && _react2.default.createElement(
+					userId !== "new" && userId != currentUser.id && _react2.default.createElement(
 						"li",
 						{
 							className: "hint-bottom-middle hint-anim",

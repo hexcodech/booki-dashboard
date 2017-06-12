@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 1031:
+/***/ 1053:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21,7 +21,7 @@ var formatBytes = exports.formatBytes = function formatBytes(bytes, decimals) {
 
 /***/ }),
 
-/***/ 910:
+/***/ 932:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37,15 +37,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(6);
 
-var _format = __webpack_require__(1031);
+var _format = __webpack_require__(1053);
 
-var _systemStats = __webpack_require__(914);
+var _systemStats = __webpack_require__(936);
 
-var _Widget = __webpack_require__(333);
+var _Widget = __webpack_require__(339);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
-var _Table = __webpack_require__(119);
+var _Table = __webpack_require__(123);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -266,7 +266,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(GeneralStatsWidget);
 
 /***/ }),
 
-/***/ 914:
+/***/ 936:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -277,7 +277,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchSystemStatsIfNeeded = exports.invalidateSystemStats = undefined;
 
-var _rest = __webpack_require__(34);
+var _rest = __webpack_require__(35);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {

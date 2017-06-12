@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 912:
+/***/ 934:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,11 +16,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(6);
 
-var _user = __webpack_require__(58);
+var _user = __webpack_require__(61);
 
-var _systemStats = __webpack_require__(914);
+var _systemStats = __webpack_require__(936);
 
-var _Widget = __webpack_require__(333);
+var _Widget = __webpack_require__(339);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
@@ -104,7 +104,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(UserWidget);
 
 /***/ }),
 
-/***/ 914:
+/***/ 936:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -115,7 +115,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchSystemStatsIfNeeded = exports.invalidateSystemStats = undefined;
 
-var _rest = __webpack_require__(34);
+var _rest = __webpack_require__(35);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {

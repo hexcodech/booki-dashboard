@@ -32,7 +32,7 @@ import {
 } from "core/actions/user";
 
 import { addNotification } from "core/actions/notification";
-
+import { fetchImagesIfNeeded } from "core/actions/image";
 import { fetchClientsIfNeeded, postClient } from "core/actions/client";
 
 import { selectInput, arrayInput } from "web/utilities/input-types";
@@ -53,6 +53,7 @@ class User extends React.Component {
 
 		dispatch(fetchUsersIfNeeded(accessToken));
 		dispatch(fetchClientsIfNeeded(accessToken));
+		dispatch(fetchImagesIfNeeded(accessToken));
 	};
 
 	handleRefreshClick = e => {
@@ -226,30 +227,6 @@ class User extends React.Component {
 			return client.userId == userId;
 		});
 
-		const porfilePictureUrlInput = (
-			id,
-			value = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=512",
-			errors,
-			handleOnChange
-		) => {
-			return (
-				<div className="input-group">
-					<div className="input-group-addon">
-						<img src={value} width="50" height="50" />
-					</div>
-					<input
-						id={id}
-						className="form-control"
-						type="text"
-						onChange={event => {
-							handleOnChange(event.target.id, event.target.value);
-						}}
-						value={value}
-					/>
-				</div>
-			);
-		};
-
 		return (
 			<div className="user">
 
@@ -337,9 +314,25 @@ class User extends React.Component {
 
 								[
 									{
-										keyPath: "profilePictureUrl",
-										label: "Profile picture url",
-										inputType: porfilePictureUrlInput
+										keyPath: "profilePictureId",
+										label: "Profile picture id",
+										inputType: selectInput(
+											{
+												searchPromptText: "Searching for images...",
+												options: images.map(image => {
+													return {
+														...image,
+														value: image.id,
+														label: image.id
+													};
+												}),
+												value: user.profilePictureId
+											},
+											null,
+											image => {
+												return image && image.id ? image.id : "";
+											}
+										)
 									},
 									{
 										keyPath: "permissions",

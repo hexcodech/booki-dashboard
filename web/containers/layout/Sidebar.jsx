@@ -42,6 +42,10 @@ const Sidebar = ({ user, pathname, dispatch }) => {
 				"/weekly)"
 	};
 
+	const thumbnail = user.thumbnails.filter(thumbnail => {
+		return thumbnail.name === "profile-picture-large";
+	})[0];
+
 	return (
 		<aside styleName="sidebar" style={bgStyles}>
 			<figure
@@ -53,10 +57,9 @@ const Sidebar = ({ user, pathname, dispatch }) => {
 
 				<img
 					src={
-						API_URL +
-						user.thumbnails.filter(thumbnail => {
-							return thumbnail.name === "profile-picture-large";
-						})[0].url
+						thumbnail
+							? API_URL + thumbnail.url
+							: "https://www.gravatar.com/avatar/?d=mm&s=200"
 					}
 					height="100"
 					width="100"

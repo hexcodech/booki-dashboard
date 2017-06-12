@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
 
 import MdAdd from "react-icons/lib/md/add";
+import MdVerifiedUser from "react-icons/lib/md/verified-user";
+import MdLockOpen from "react-icons/lib/md/lock-open";
 
 import { invalidateBooks, fetchBooksIfNeeded } from "core/actions/book";
 

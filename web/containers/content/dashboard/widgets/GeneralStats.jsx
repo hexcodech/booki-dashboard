@@ -1,53 +1,42 @@
-import React
-       from 'react';
-import {connect}
-       from 'react-redux';
-import bindAll
-       from 'lodash/bindAll';
+import React from "react";
+import { connect } from "react-redux";
 
-import {formatBytes}
-       from 'core/utilities/format';
+import { formatBytes } from "core/utilities/format";
 
-import {invalidateSystemStats, fetchSystemStatsIfNeeded}
-       from 'app/actions/system-stats';
+import {
+	invalidateSystemStats,
+	fetchSystemStatsIfNeeded
+} from "app/actions/system-stats";
 
-import Widget
-       from 'web/containers/content/dashboard/widgets/Widget';
+import Widget from "web/containers/content/dashboard/widgets/Widget";
 
-import {Table, Seperator}
-       from 'web/components/layout/Table';
+import { Table, Seperator } from "web/components/layout/Table";
 
-class GeneralStatsWidget extends React.Component{
-
-	constructor(props){
-		super(props);
-
-		bindAll(this, ['componentdidMount', 'handleRefreshClick']);
-	}
-
-	componentdidMount() {
-		const {dispatch, accessToken} = this.props;
+class GeneralStatsWidget extends React.Component {
+	componentdidMount = () => {
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventdefault();
 
-		const {dispatch, accessToken} = this.props;
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateSystemStats());
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	render(){
-
-		const {systemStats} = this.props;
+	render = () => {
+		const { systemStats } = this.props;
 
 		return (
-			<Widget lastUpdated={systemStats.lastUpdated}
-        isFetching={systemStats.isFetching}
-        handleRefreshClick={this.handleRefreshClick}>
+			<Widget
+				lastUpdated={systemStats.lastUpdated}
+				isFetching={systemStats.isFetching}
+				handleRefreshClick={this.handleRefreshClick}
+			>
 				<Table>
 					<thead>
 						<tr><th>Key</th><th>Value</th></tr>
@@ -59,11 +48,11 @@ class GeneralStatsWidget extends React.Component{
 						<tr><td>PID</td><td>{systemStats.pid}</td></tr>
 						<tr><td>Node Version</td><td>{systemStats.nodeVersion}</td></tr>
 						<Seperator>
-              <td colSpan='2'>
-                Bandwidth data of the last
-                {' ' + systemStats.bandwidth.interval/1000/60} minutes
-              </td>
-            </Seperator>
+							<td colSpan="2">
+								Bandwidth data of the last
+								{" " + systemStats.bandwidth.interval / 1000 / 60} minutes
+							</td>
+						</Seperator>
 						<tr>
 							<td>Requests served</td>
 							<td>{systemStats.bandwidth.requestsServed}</td>
@@ -71,30 +60,35 @@ class GeneralStatsWidget extends React.Component{
 						<tr>
 							<td>Data sent</td>
 							<td>
-                {formatBytes(
-                  systemStats.bandwidth.bytesServed /
-                  (systemStats.bandwidth.interval/1000)
-                )}/s
-              </td>
+								{formatBytes(
+									systemStats.bandwidth.bytesServed /
+										(systemStats.bandwidth.interval / 1000)
+								)}
+								/s
+							</td>
 						</tr>
 						<tr>
 							<td>Data received</td>
 							<td>
-                {formatBytes(systemStats.bandwidth.bytesReceived / (systemStats.bandwidth.interval/1000) )}/s
-              </td>
+								{formatBytes(
+									systemStats.bandwidth.bytesReceived /
+										(systemStats.bandwidth.interval / 1000)
+								)}
+								/s
+							</td>
 						</tr>
 					</tbody>
 				</Table>
 			</Widget>
 		);
-	}
-};
+	};
+}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
 		accessToken: state.app.authentication.accessToken.token,
 		systemStats: state.app.dashboard.systemStats
 	};
-}
+};
 
 export default connect(mapStateToProps)(GeneralStatsWidget);

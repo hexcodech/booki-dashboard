@@ -1,114 +1,111 @@
-import React
-       from 'react';
-import {connect}
-       from 'react-redux';
-import {Link}
-       from 'react-router-dom';
-import {push}
-       from 'react-router-redux';
-import bindAll
-       from 'lodash/bindAll';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { push } from "react-router-redux";
 
-import {invalidateBooks, fetchBooksIfNeeded}
-       from 'core/actions/book';
+import MdAdd from "react-icons/lib/md/add";
+import MdVerifiedUser from "react-icons/lib/md/verified-user";
+import MdLockOpen from "react-icons/lib/md/lock-open";
 
-import RefreshButton
-       from 'web/components/RefreshButton';
-import {Table}
-       from 'web/components/layout/Table';
-import Actions
-       from 'web/components/layout/Actions';
-import Card
-      from 'web/components/layout/Card';
+import { invalidateBooks, fetchBooksIfNeeded } from "core/actions/book";
 
-class BookList extends React.Component{
+import { Table, Tr, Td } from "reactable";
+import RefreshButton from "web/components/RefreshButton";
+import Actions from "web/components/layout/Actions";
+import Card from "web/components/layout/Card";
 
-	constructor(props){
-		super(props);
-
-		bindAll(this, [
-			'componentDidMount', 'handleRefreshClick', 'handleBookRowClick'
-		]);
-	}
-
-	componentDidMount() {
-		const {dispatch, accessToken} = this.props;
+class BookList extends React.Component {
+	componentDidMount = () => {
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchBooksIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
-		const {dispatch, accessToken} = this.props;
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateBooks());
 		dispatch(fetchBooksIfNeeded(accessToken));
-	}
+	};
 
-	handleBookRowClick(e){
+	handleBookRowClick = e => {
 		this.props.dispatch(
-			push('/book/' + e.currentTarget.getAttribute('data-book-id') + '/')
+			push("/book/" + e.currentTarget.getAttribute("data-book-id") + "/")
 		);
-	}
+	};
 
-	render(){
-
-		const {books} = this.props;
+	render = () => {
+		const { books } = this.props;
 
 		return (
-			<div className='book-list'>
+			<div className="book-list">
 				<Actions>
-          <li
-						className='hint-bottom-middle hint-anim'
-						data-hint='Refresh the book list.'
-          >
+					<li
+						className="hint-bottom-middle hint-anim"
+						data-hint="Refresh the book list."
+					>
 						<RefreshButton refreshHandler={this.handleRefreshClick} />
 					</li>
-          <li
-						className='hint-bottom-middle hint-anim'
-						data-hint='Add a new book.'
-          >
-						<Link to={'/book/new/'}>
-							<i className='material-icons'>add</i>
+					<li
+						className="hint-bottom-middle hint-anim"
+						data-hint="Add a new book."
+					>
+						<Link to={"/book/new/"}>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>
 
-        <Card>
-          <Table interactive={true}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Title</th>
-              </tr>
-            </thead>
-            <tbody>
-              {books.map((book, index) => {
-                return (
-                  <tr
-                    key={index}
-                    onClick={this.handleBookRowClick}
-                    data-book-id={book.id}
-                  >
-                    <td>{book.id}</td>
-                    <td>{book.title}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-        </Card>
+				<Card>
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Title", "Verified"]}
+						className="clickable"
+					>
+						{books.map((book, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleBookRowClick}
+									data-book-id={book.id}
+									className="clickable"
+								>
+									<Td column="ID">
+										{book.id}
+									</Td>
+									<Td column="Title">
+										{book.title}
+									</Td>
+									<Td
+										column="Verified"
+										value={book.verified ? "#verified" : "#unverified"}
+									>
+										<span
+											className="hint-right-middle hint-anim"
+											data-hint={book.verified ? "Verified" : "Unverified"}
+										>
+											{book.verified ? <MdVerifiedUser /> : <MdLockOpen />}
+										</span>
+									</Td>
+								</Tr>
+							);
+						})}
+					</Table>
+				</Card>
 			</div>
 		);
-	}
-};
-
-const mapStateToProps = (state) => {
-	return {
-		accessToken : state.app.authentication.accessToken.token,
-		books       : state.app.books
 	};
 }
+
+const mapStateToProps = state => {
+	return {
+		accessToken: state.app.authentication.accessToken.token,
+		books: state.app.books
+	};
+};
 
 export default connect(mapStateToProps)(BookList);

@@ -1,36 +1,30 @@
-import React
-       from 'react';
-import {connect}
-       from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import Sidebar
-       from 'web/containers/layout/Sidebar';
+import { DEV_TOOLS } from "config.json";
 
-import DevTools
-       from 'web/containers/dev/DevTools';
-import Notifications
-       from 'web/containers/Notifications';
+import Sidebar from "web/containers/layout/Sidebar";
 
-import CSSModules
-       from 'react-css-modules';
-import styles
-       from './Wrapper.scss';
+import DevTools from "web/containers/dev/DevTools";
+import Notifications from "web/containers/Notifications";
 
-const Wrapper = ({children}) => {
+import CSSModules from "react-css-modules";
+import styles from "./Wrapper.scss";
 
+const Wrapper = ({ children }) => {
 	return (
 		<div>
-			<div className='col-md-4 col-lg-3' styleName='sidebar'>
+			<div className="col-md-4 col-lg-3" styleName="sidebar">
 				<Sidebar />
 			</div>
-      <div
-        className='col-12 offset-md-4 col-md-8 offset-lg-3 col-lg-9'
-        styleName='content'
-      >
+			<div
+				className="col-12 offset-md-4 col-md-8 offset-lg-3 col-lg-9"
+				styleName="content"
+			>
 				{children}
 			</div>
 			<Notifications />
-			<DevTools />
+			{DEV_TOOLS && <DevTools />}
 		</div>
 	);
 };

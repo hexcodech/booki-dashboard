@@ -15,14 +15,15 @@ const Login = () => {
 		document.body.clientHeight;
 
 	let bgStyles = {
-		background: "linear-gradient(" +
-			"rgba(255, 173, 57, 0.45), rgba(255, 173, 57, 0.45)" +
-			")," +
-			"url(https://source.unsplash.com/random/" +
-			width +
-			"x" +
-			height +
-			"/weekly/)",
+		background:
+			"linear-gradient(" +
+				"rgba(255, 173, 57, 0.45), rgba(255, 173, 57, 0.45)" +
+				")," +
+				"url(https://source.unsplash.com/random/" +
+				width +
+				"x" +
+				height +
+				"/weekly/)",
 		backgroundRepeat: "no-repeat",
 		backgroundPosition: "center center",
 		backgroundSize: "cover"
@@ -40,10 +41,10 @@ const Login = () => {
 						<a
 							href={
 								API_URL +
-									"/oauth2/authorize?client_id=" +
-									CLIENT_ID +
-									"&response_type=code&redirect_uri=" +
-									REDIRECT_URI
+								"/oauth2/authorize?client_id=" +
+								CLIENT_ID +
+								"&response_type=code&redirect_uri=" +
+								REDIRECT_URI
 							}
 							styleName="button"
 						>

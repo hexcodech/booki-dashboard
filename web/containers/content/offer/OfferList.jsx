@@ -1,123 +1,95 @@
-import React
-       from 'react';
-import {connect}
-       from 'react-redux';
-import {Link}
-       from 'react-router-dom';
-import {push}
-       from 'react-router-redux';
-import bindAll
-       from 'lodash/bindAll';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { push } from "react-router-redux";
 
-import {invalidateOffers, fetchOffersIfNeeded}
-       from 'core/actions/offer';
+import MdAdd from "react-icons/lib/md/add";
 
-import Card
-      from 'web/components/layout/Card';
+import { invalidateOffers, fetchOffersIfNeeded } from "core/actions/offer";
 
-import {Table}
-       from 'web/components/layout/Table';
+import { Table, Tr, Td } from "reactable";
+import Card from "web/components/layout/Card";
+import Actions from "web/components/layout/Actions";
+import RefreshButton from "web/components/RefreshButton";
 
-import Actions
-       from 'web/components/layout/Actions';
-
-import RefreshButton
-       from 'web/components/RefreshButton';
-
-class OfferList extends React.Component{
-
-	constructor(props){
-		super(props);
-
-		bindAll(this, [
-			'componentDidMount',
-			'handleRefreshClick',
-			'handleOfferRowClick'
-		]);
-	}
-
-	componentDidMount() {
-		const {dispatch, accessToken} = this.props;
+class OfferList extends React.Component {
+	componentDidMount = () => {
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchOffersIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
-		const {dispatch, accessToken} = this.props;
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateOffers());
 		dispatch(fetchOffersIfNeeded(accessToken));
-	}
+	};
 
-	handleOfferRowClick(e){
+	handleOfferRowClick = e => {
 		this.props.dispatch(
-			push(
-				'/offer/' + e.currentTarget.getAttribute('data-offer-id') + '/'
-			)
+			push("/offer/" + e.currentTarget.getAttribute("data-offer-id") + "/")
 		);
-	}
+	};
 
-	render(){
-
-		const {offers} = this.props;
+	render = () => {
+		const { offers } = this.props;
 
 		return (
-			<div className='offer-list'>
-        <Actions>
-          <li
-						className='hint-bottom-middle hint-anim'
-						data-hint='Refresh the offer list.'
-          >
+			<div className="offer-list">
+				<Actions>
+					<li
+						className="hint-bottom-middle hint-anim"
+						data-hint="Refresh the offer list."
+					>
 						<RefreshButton refreshHandler={this.handleRefreshClick} />
 					</li>
-          <li
-						className='hint-bottom-middle hint-anim'
-						data-hint='Add a new offer.'
-          >
-						<Link to={'/offer/new/'}>
-							<i className='material-icons'>add</i>
+					<li
+						className="hint-bottom-middle hint-anim"
+						data-hint="Add a new offer."
+					>
+						<Link to={"/offer/new/"}>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>
 
 				<Card>
-					<Table interactive={true}>
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Price</th>
-								<th>Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							{offers.map((offer, index) => {
-
-								return (
-                  <tr key={index}
-										onClick={this.handleOfferRowClick}
-										data-offer-id={offer.id}
-                  >
-										<td>{offer.id}</td>
-										<td>{offer.price} CHF</td>
-										<td>{offer.description.substring(0, 50)}</td>
-									</tr>
-								);
-							})}
-						</tbody>
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Description"]}
+					>
+						{offers.map((offer, index) => {
+							return (
+								<Tr
+									key={index}
+									onClick={this.handleOfferRowClick}
+									data-offer-id={offer.id}
+									className="clickable"
+									data={{
+										ID: offer.id,
+										Price: offer.price + " CHF",
+										Description: offer.description.substring(0, 50)
+									}}
+								/>
+							);
+						})}
 					</Table>
 				</Card>
 			</div>
 		);
-	}
-};
-
-const mapStateToProps = (state) => {
-	return {
-		accessToken : state.app.authentication.accessToken.token,
-		offers     : state.app.offers
 	};
 }
+
+const mapStateToProps = state => {
+	return {
+		accessToken: state.app.authentication.accessToken.token,
+		offers: state.app.offers
+	};
+};
 
 export default connect(mapStateToProps)(OfferList);

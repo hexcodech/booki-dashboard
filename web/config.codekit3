@@ -363,15 +363,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/containers\/content\/book\/BookList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/book\/min\/BookList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"\/containers\/content\/book\/BookRouter.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -390,15 +381,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/containers\/content\/client\/ClientList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/client\/min\/ClientList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"\/containers\/content\/client\/ClientRouter.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -413,15 +395,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/containers\/content\/condition\/min\/Condition-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/containers\/content\/condition\/ConditionList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/condition\/min\/ConditionList-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -533,15 +506,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/containers\/content\/image\/ImageList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/image\/min\/ImageList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"\/containers\/content\/image\/ImageRouter.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -556,15 +520,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/containers\/content\/offer\/min\/Offer-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/containers\/content\/offer\/OfferList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/offer\/min\/OfferList-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -587,15 +542,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/containers\/content\/person\/PersonList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/person\/min\/PersonList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"\/containers\/content\/person\/PersonRouter.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -614,15 +560,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/containers\/content\/thumbnail-type\/ThumbnailTypeList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/thumbnail-type\/min\/ThumbnailTypeList-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"\/containers\/content\/thumbnail-type\/ThumbnailTypeRouter.jsx": {
 		"ft": 64,
 		"mi": 0,
@@ -637,15 +574,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "\/containers\/content\/user\/min\/User-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"\/containers\/content\/user\/UserList.jsx": {
-		"ft": 64,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "\/containers\/content\/user\/min\/UserList-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -734,22 +662,6 @@
 		"oS": 3,
 		"uL": 1
 		},
-	"\/css\/booki-dashboard.min.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/css\/booki-dashboard.min.min.css",
-		"oF": 0,
-		"oS": 0
-		},
-	"\/css\/booki-dashboard.min.css.map": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/css\/booki-dashboard.min.css.map",
-		"oF": 0
-		},
 	"\/index.html": {
 		"ft": 8192,
 		"oA": 2,
@@ -828,18 +740,17 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"\/scss\/booki-dashboard.scss": {
-		"aP": 1,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 1,
-		"oA": 0,
-		"oAP": "\/css\/booki-dashboard.min.css",
-		"oF": 0,
-		"oS": 3,
-		"uL": 1
+	"\/oauth-callback-sample.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/oauth-callback-sample.php",
+		"oF": 0
+		},
+	"\/oauth-callback.php": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/oauth-callback.php",
+		"oF": 0
 		},
 	"\/scss\/variables.scss": {
 		"aP": 1,

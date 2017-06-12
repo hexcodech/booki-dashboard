@@ -2,8 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
+import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
+
+import MdDelete from "react-icons/lib/md/delete";
+import MdAddCircle from "react-icons/lib/md/add-circle";
 
 import {
 	JSONTreeTheme,
@@ -17,6 +20,7 @@ import {
 	clearNewThumbnailType,
 	updateNewThumbnailType,
 	fetchThumbnailTypesIfNeeded,
+	updateThumbnailType,
 	putThumbnailType,
 	postThumbnailType,
 	deleteThumbnailType
@@ -31,34 +35,22 @@ import FormGroups from "web/components/form/FormGroups";
 import Card from "web/components/layout/Card";
 
 class ThumbnailType extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnChange",
-			"handleOnAddNewThumbnailType",
-			"handleOnDeleteThumbnailType"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchThumbnailTypesIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateThumbnailTypes());
 		dispatch(fetchThumbnailTypesIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value) {
+	handleOnChange = (id, value) => {
 		const {
 			dispatch,
 			accessToken,
@@ -84,12 +76,17 @@ class ThumbnailType extends React.Component {
 			);
 
 			if (set(thumbnailType, id, value)) {
-				dispatch(putThumbnailType(thumbnailType, accessToken));
+				dispatch(updateThumbnailType(thumbnailType, accessToken));
+				this.debouncedPut(thumbnailType, accessToken);
 			}
 		}
-	}
+	};
 
-	handleOnAddNewThumbnailType(e) {
+	debouncedPut = debounce((thumbnailType, accessToken) => {
+		this.props.dispatch(putThumbnailType(thumbnailType, accessToken));
+	}, 300);
+
+	handleOnAddNewThumbnailType = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -104,7 +101,6 @@ class ThumbnailType extends React.Component {
 					addNotification({
 						title: "Created",
 						text: "The thumbnail type was successfully created.",
-						icon: "check_circle",
 						color: COLOR_SUCCESS
 					})
 				);
@@ -114,9 +110,9 @@ class ThumbnailType extends React.Component {
 				dispatch(clearNewThumbnailType());
 			}
 		});
-	}
+	};
 
-	handleOnDeleteThumbnailType(e) {
+	handleOnDeleteThumbnailType = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -140,7 +136,6 @@ class ThumbnailType extends React.Component {
 					addNotification({
 						title: "Deleted",
 						text: "The thumbnail type was successfully deleted",
-						icon: "check_circle",
 						color: COLOR_SUCCESS,
 
 						actions: [
@@ -167,9 +162,9 @@ class ThumbnailType extends React.Component {
 				dispatch(push("/thumbnailType/list"));
 			}
 		});
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			newThumbnailType,
 			thumbnailTypes,
@@ -207,10 +202,10 @@ class ThumbnailType extends React.Component {
 					{thumbnailTypeId == "new" &&
 						<li
 							className="hint-bottom-middle hint-anim"
-							data-hint="Create thumbnailType"
+							data-hint="Create thumbnail type"
 						>
 							<a href="#" onClick={this.handleOnAddNewThumbnailType}>
-								<i className="material-icons">add_circle</i>
+								<MdAddCircle />
 							</a>
 						</li>}
 					{thumbnailTypeId !== "new" &&
@@ -219,7 +214,7 @@ class ThumbnailType extends React.Component {
 							data-hint="Delete thumbnailType"
 						>
 							<a href="#" onClick={this.handleOnDeleteThumbnailType}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 				</Actions>
@@ -281,7 +276,7 @@ class ThumbnailType extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

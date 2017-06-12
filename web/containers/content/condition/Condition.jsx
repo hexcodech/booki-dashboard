@@ -1,296 +1,279 @@
-import React
-       from 'react';
-import {connect}
-       from 'react-redux';
-import {push}
-       from 'react-router-redux';
-import set
-       from 'lodash/set';
-import bindAll
-       from 'lodash/bindAll';
-import JSONTree
-       from 'react-json-tree';
+import React from "react";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
+import set from "lodash/set";
+import debounce from "lodash/debounce";
+import JSONTree from "react-json-tree";
 
-import {JSONTreeTheme, COLOR_SUCCESS, COLOR_FAILURE, COLOR_INFO}
-       from 'core/constants/color';
+import MdDelete from "react-icons/lib/md/delete";
+import MdAddCircle from "react-icons/lib/md/add-circle";
 
 import {
-  invalidateConditions, clearNewCondition, updateNewCondition,
-  fetchConditionsIfNeeded, putCondition, postCondition, deleteCondition
-}      from 'core/actions/condition';
+	JSONTreeTheme,
+	COLOR_SUCCESS,
+	COLOR_FAILURE,
+	COLOR_INFO
+} from "core/constants/color";
 
-import {addNotification}
-       from 'core/actions/notification';
+import {
+	invalidateConditions,
+	clearNewCondition,
+	updateNewCondition,
+	fetchConditionsIfNeeded,
+	updateCondition,
+	putCondition,
+	postCondition,
+	deleteCondition
+} from "core/actions/condition";
 
-import RefreshButton
-       from 'web/components/RefreshButton';
-import Actions
-       from 'web/components/layout/Actions';
-import FormGroups
-       from 'web/components/form/FormGroups';
+import { addNotification } from "core/actions/notification";
 
-import Card
-       from 'web/components/layout/Card';
+import RefreshButton from "web/components/RefreshButton";
+import Actions from "web/components/layout/Actions";
+import FormGroups from "web/components/form/FormGroups";
 
-class Condition extends React.Component{
+import Card from "web/components/layout/Card";
 
-	constructor(props){
-		super(props);
-
-		bindAll(this, [
-			'componentDidMount', 	'handleRefreshClick', 	'handleOnChange',
-			'handleOnAddNewCondition', 	'handleOnDeleteCondition'
-		]);
-	}
-
-	componentDidMount() {
-		const {dispatch, accessToken} = this.props;
+class Condition extends React.Component {
+	componentDidMount = () => {
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchConditionsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
-		const {dispatch, accessToken} = this.props;
+		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateConditions());
 		dispatch(fetchConditionsIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value){
+	handleOnChange = (id, value) => {
 		const {
-      dispatch, accessToken,
-      newCondition, conditions, match: {params: {id: conditionId}}
-    } = this.props;
+			dispatch,
+			accessToken,
+			newCondition,
+			conditions,
+			match: { params: { id: conditionId } }
+		} = this.props;
 
 		let condition;
 
-		if(conditionId == 'new'){
-
+		if (conditionId == "new") {
 			condition = Object.assign({}, newCondition);
 
-			if(set(condition, id, value)){
-				dispatch(
-					updateNewCondition(condition)
-				);
+			if (set(condition, id, value)) {
+				dispatch(updateNewCondition(condition));
 			}
+		} else {
+			condition = Object.assign(
+				{},
+				conditions.filter(condition => {
+					return condition.id == conditionId;
+				})[0]
+			);
 
-		}else{
-
-			condition = Object.assign({}, conditions.filter((condition) => {
-				return condition.id == conditionId;
-			})[0]);
-
-			if(set(condition, id, value)){
-				dispatch(
-					putCondition(condition, accessToken)
-				);
+			if (set(condition, id, value)) {
+				dispatch(updateCondition(condition, accessToken));
+				this.debouncedPut(condition, accessToken);
 			}
-
 		}
-	}
+	};
 
-	handleOnAddNewCondition(e){
+	debouncedPut = debounce((condition, accessToken) => {
+		this.props.dispatch(putCondition(condition, accessToken));
+	}, 300);
+
+	handleOnAddNewCondition = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
-		const {dispatch, accessToken, newCondition} = this.props;
+		const { dispatch, accessToken, newCondition } = this.props;
 		const condition = Object.assign({}, newCondition);
 
-		dispatch(
-			postCondition(condition, accessToken)
-		).then((postedCondition) => {
-
-			if(postedCondition){
-
+		dispatch(postCondition(condition, accessToken)).then(postedCondition => {
+			if (postedCondition) {
 				dispatch(
 					addNotification({
-						title		: 'Created',
-						text		: 'The condition was successfully created.',
-						icon		: 'check_circle',
-						color		: COLOR_SUCCESS,
+						title: "Created",
+						text: "The condition was successfully created.",
+						color: COLOR_SUCCESS
 					})
 				);
 
-				dispatch(
-					push('/condition/' + postedCondition.id + '/')
-				);
+				dispatch(push("/condition/" + postedCondition.id + "/"));
 
-				dispatch(
-					clearNewCondition()
-				);
+				dispatch(clearNewCondition());
 			}
 		});
-	}
+	};
 
-	handleOnDeleteCondition(e){
+	handleOnDeleteCondition = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
 		const {
-      dispatch, conditions, accessToken, match: {params: {id: conditionId}}
-    } = this.props;
+			dispatch,
+			conditions,
+			accessToken,
+			match: { params: { id: conditionId } }
+		} = this.props;
 
-		let condition = Object.assign({}, conditions.filter((condition) => {
-			return condition.id == conditionId;
-		})[0]);
+		let condition = Object.assign(
+			{},
+			conditions.filter(condition => {
+				return condition.id == conditionId;
+			})[0]
+		);
 
-		dispatch(
-			deleteCondition(condition, accessToken)
-		).then((success) => {
-			if(success){
-
+		dispatch(deleteCondition(condition, accessToken)).then(success => {
+			if (success) {
 				dispatch(
 					addNotification({
-						title		: 'Deleted',
-						text		: 'The condition was successfully deleted',
-						icon		: 'check_circle',
-						color		: COLOR_SUCCESS,
+						title: "Deleted",
+						text: "The condition was successfully deleted",
+						color: COLOR_SUCCESS,
 
-						actions		: [{
-							text: 'Undo',
-							color: COLOR_INFO,
-							action: (e, notification) => {
-
-								dispatch(
-									postCondition(condition, accessToken)
-								).then((postedCondition) => {
-
-									if(postedCondition){
-										dispatch(
-											push('/condition/' + postedCondition.id + '/')
-										);
-									}
-									notification.hide();
-								});
+						actions: [
+							{
+								text: "Undo",
+								color: COLOR_INFO,
+								action: (e, notification) => {
+									dispatch(
+										postCondition(condition, accessToken)
+									).then(postedCondition => {
+										if (postedCondition) {
+											dispatch(push("/condition/" + postedCondition.id + "/"));
+										}
+										notification.hide();
+									});
+								}
 							}
-						}]
+						]
 					})
 				);
 
-				dispatch(
-					push('/condition/list')
-				);
+				dispatch(push("/condition/list"));
 			}
 		});
-	}
+	};
 
-	render(){
-
+	render = () => {
 		const {
-      newCondition, conditions, match: {params: {id: conditionId}},
-      dispatch, errors
-    } = this.props;
+			newCondition,
+			conditions,
+			match: { params: { id: conditionId } },
+			dispatch,
+			errors
+		} = this.props;
 
 		let condition;
 
-		if(conditionId == 'new'){
+		if (conditionId == "new") {
 			condition = newCondition;
-		}else{
-			condition = conditions.filter((condition) => {
+		} else {
+			condition = conditions.filter(condition => {
 				return condition.id == conditionId;
 			})[0];
 		}
 
-		if(!condition){return null;}
+		if (!condition) {
+			return null;
+		}
 
 		return (
-			<div className='condition'>
+			<div className="condition">
 
 				<Actions>
-					{conditionId !== 'new' &&
+					{conditionId !== "new" &&
 						<li>
-              <RefreshButton
-                date={condition.lastUpdated}
-                loading={condition.isFetching}
-                refreshHandler={this.handleRefreshClick}
-              />
-						</li>
-					}
-					{conditionId == 'new' &&
-            <li
-              className='hint-bottom-middle hint-anim'
-              data-hint='Create condition'
-            >
-							<a href='#' onClick={this.handleOnAddNewCondition}>
-								<i className='material-icons'>add_circle</i>
+							<RefreshButton
+								date={condition.lastUpdated}
+								loading={condition.isFetching}
+								refreshHandler={this.handleRefreshClick}
+							/>
+						</li>}
+					{conditionId == "new" &&
+						<li
+							className="hint-bottom-middle hint-anim"
+							data-hint="Create condition"
+						>
+							<a href="#" onClick={this.handleOnAddNewCondition}>
+								<MdAddCircle />
 							</a>
-						</li>
-					}
-					{conditionId !== 'new' &&
-            <li
-              className='hint-bottom-middle hint-anim'
-              data-hint='Delete condition'
-            >
-							<a href='#' onClick={this.handleOnDeleteCondition}>
-								<i className='material-icons'>delete</i>
+						</li>}
+					{conditionId !== "new" &&
+						<li
+							className="hint-bottom-middle hint-anim"
+							data-hint="Delete condition"
+						>
+							<a href="#" onClick={this.handleOnDeleteCondition}>
+								<MdDelete />
 							</a>
-						</li>
-					}
+						</li>}
 				</Actions>
 
 				<Card>
 					<h2>Condition form</h2>
 
-					<form className='profile'>
-            <FormGroups
+					<form className="profile">
+						<FormGroups
 							object={condition}
-
-              errors={errors.condition}
-
+							errors={errors.condition}
 							keyPaths={[
 								[
-                {
-                  keyPath       : 'id',
-                  label         : 'Condition Id',
-                  inputDisabled : true
-                },
-                {
-                  keyPath       : 'key',
-                  label         : 'Condition key'
-                },
+									{
+										keyPath: "id",
+										label: "Condition Id",
+										inputDisabled: true
+									},
+									{
+										keyPath: "key",
+										label: "Condition key"
+									}
 								],
 								[
-                {
-                  keyPath       : 'priceFactor',
-                  label         : 'Price Factor',
-                  inputType     : 'number',
-                  inputProps    : {
-                    min  : 0,
-                    step : 'any'
-                  }
-                }
+									{
+										keyPath: "priceFactor",
+										label: "Price Factor",
+										inputType: "number",
+										inputProps: {
+											min: 0,
+											step: "any"
+										}
+									}
 								]
 							]}
 							handleOnChange={this.handleOnChange}
-            />
+						/>
 
 					</form>
 				</Card>
 
-        <Card>
+				<Card>
 					<h2>Raw JSON</h2>
-          <JSONTree
+					<JSONTree
 						data={condition}
 						theme={JSONTreeTheme}
 						invertTheme={false}
 						hideRoot={true}
 						//sortObjectKeys={true}
-          />
+					/>
 				</Card>
 			</div>
 		);
-	}
-};
-
-const mapStateToProps = (state) => {
-	return {
-		accessToken   : state.app.authentication.accessToken.token,
-		newCondition  : state.app.newCondition,
-    conditions    : state.app.conditions,
-    errors        : state.app.validation
 	};
 }
+
+const mapStateToProps = state => {
+	return {
+		accessToken: state.app.authentication.accessToken.token,
+		newCondition: state.app.newCondition,
+		conditions: state.app.conditions,
+		errors: state.app.validation
+	};
+};
 
 export default connect(mapStateToProps)(Condition);

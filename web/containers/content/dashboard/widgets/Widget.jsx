@@ -1,30 +1,25 @@
-import React
-       from 'react';
+import React from "react";
 
-import {connect}
-       from 'react-redux';
+import { connect } from "react-redux";
 
-import Card
-       from 'web/components/layout/Card';
-import RefreshButton
-       from 'web/components/RefreshButton';
+import Card from "web/components/layout/Card";
+import RefreshButton from "web/components/RefreshButton";
 
-import CSSModules
-       from 'react-css-modules';
-import styles
-       from './Widget.scss';
+import CSSModules from "react-css-modules";
+import styles from "./Widget.scss";
 
-const Widget = ({children, lastUpdated, isFetching, handleRefreshClick}) => {
+const Widget = ({ children, lastUpdated, isFetching, handleRefreshClick }) => {
 	return (
 		<Card>
-			<div styleName='content'>
+			<div styleName="content">
 				{children}
 			</div>
-			<footer styleName='footer'>
+			<footer styleName="footer">
 				<RefreshButton
-          date={lastUpdated}
-          loading={isFetching}
-          refreshHandler={handleRefreshClick}/>
+					date={lastUpdated}
+					loading={isFetching}
+					refreshHandler={handleRefreshClick}
+				/>
 			</footer>
 		</Card>
 	);

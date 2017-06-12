@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
 
+import MdAdd from "react-icons/lib/md/add";
+
 import { invalidateOffers, fetchOffersIfNeeded } from "core/actions/offer";
 
 import { Table, Tr, Td } from "reactable";
@@ -49,7 +51,7 @@ class OfferList extends React.Component {
 						data-hint="Add a new offer."
 					>
 						<Link to={"/offer/new/"}>
-							<i className="material-icons">add</i>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>

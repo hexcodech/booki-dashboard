@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
 
+import MdAdd from "react-icons/lib/md/add";
+
 import { invalidateImages, fetchImagesIfNeeded } from "core/actions/image";
 
 import { Table, Tr, Td } from "reactable";
@@ -49,7 +51,7 @@ class ImageList extends React.Component {
 						data-hint="Add a new image."
 					>
 						<Link to={"/image/new/"}>
-							<i className="material-icons">add</i>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>

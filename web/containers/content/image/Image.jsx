@@ -4,6 +4,8 @@ import { push } from "react-router-redux";
 import set from "lodash/set";
 import JSONTree from "react-json-tree";
 
+import MdDelete from "react-icons/lib/md/delete";
+
 import { API_URL } from "config.json";
 
 import {
@@ -155,7 +157,7 @@ class Image extends React.Component {
 							data-hint="Delete image"
 						>
 							<a href="#" onClick={this.handleOnDeleteImage}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 				</Actions>

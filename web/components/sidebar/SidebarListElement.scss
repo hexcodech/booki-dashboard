@@ -4,12 +4,13 @@
   position: relative;
   padding: .5rem 1rem;
 
-  i, a{
+  svg, a{
     color: rgba($gray-dark, 0.65);
   }
 
-  i{
-    vertical-align: bottom;
+  svg{
+    width: 1.5rem;
+    height: 1.5rem;
     margin-right: .3rem;
   }
 

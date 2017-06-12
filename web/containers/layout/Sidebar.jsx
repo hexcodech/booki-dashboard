@@ -2,6 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
+import MdDashboard from "react-icons/md/dashboard";
+import MdSupervisorAccount from "react-icons/md/supervisor-account";
+import MdBusiness from "react-icons/md/business";
+import MdNaturePeople from "react-icons/md/nature-people";
+import MdCheckCircle from "react-icons/md/check-circle";
+import MdBook from "react-icons/md/book";
+import MdList from "react-icons/md/list";
+import MdImage from "react-icons/md/image";
+import MdLocalOffer from "react-icons/md/local-offer";
+
 import { API_URL } from "config.json";
 
 import SidebarListElement from "web/components/sidebar/SidebarListElement";
@@ -59,63 +69,63 @@ const Sidebar = ({ user, pathname, dispatch }) => {
 			<ul styleName="link-list">
 				<SidebarListElement
 					text="Dashboard"
-					icon="dashboard"
+					icon={<MdDashboard />}
 					url="/dashboard/"
 					match="/dashboard/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="Users"
-					icon="supervisor_account"
+					icon={<MdSupervisorAccount />}
 					url="/user/list"
 					match="/user/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="OAuthClients"
-					icon="business"
+					icon={<MdBusiness />}
 					url="/client/list"
 					match="/client/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="People"
-					icon="nature_people"
+					icon={<MdNaturePeople />}
 					url="/person/list"
 					match="/person/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="Conditions"
-					icon="check_circle"
+					icon={<MdCheckCircle />}
 					url="/condition/list"
 					match="/condition/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="Books"
-					icon="book"
+					icon={<MdBook />}
 					url="/book/list"
 					match="/book/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="Thumbnail types"
-					icon="list"
+					icon={<MdList />}
 					url="/thumbnail-type/list"
 					match="/thumbnail-type/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="Images"
-					icon="image"
+					icon={<MdImage />}
 					url="/image/list"
 					match="/image/"
 					pathname={pathname}
 				/>
 				<SidebarListElement
 					text="Offers"
-					icon="local_offer"
+					icon={<MdLocalOffer />}
 					url="/offer/list"
 					match="/offer/"
 					pathname={pathname}

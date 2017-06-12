@@ -5,6 +5,9 @@ import set from "lodash/set";
 import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
+import MdDelete from "react-icons/lib/md/delete";
+import MdAddCircle from "react-icons/lib/md/add-circle";
+
 import {
 	JSONTreeTheme,
 	COLOR_SUCCESS,
@@ -198,7 +201,7 @@ class Condition extends React.Component {
 							data-hint="Create condition"
 						>
 							<a href="#" onClick={this.handleOnAddNewCondition}>
-								<i className="material-icons">add_circle</i>
+								<MdAddCircle />
 							</a>
 						</li>}
 					{conditionId !== "new" &&
@@ -207,7 +210,7 @@ class Condition extends React.Component {
 							data-hint="Delete condition"
 						>
 							<a href="#" onClick={this.handleOnDeleteCondition}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 				</Actions>

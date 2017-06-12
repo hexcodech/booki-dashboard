@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
 
+import MdAdd from "react-icons/lib/md/add";
+import MdVerifiedUser from "react-icons/lib/md/verified-user";
+import MdLockOpen from "react-icons/lib/md/lock-open";
+
 import { invalidateClients, fetchClientsIfNeeded } from "core/actions/client";
 
 import { Table, Tr, Td } from "reactable";
@@ -49,7 +53,7 @@ class ClientList extends React.Component {
 						data-hint="Add a new client."
 					>
 						<Link to={"/client/new/"}>
-							<i className="material-icons">add</i>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>
@@ -82,13 +86,7 @@ class ClientList extends React.Component {
 											className="hint-right-middle hint-anim"
 											data-hint={client.trusted ? "Trusted" : "Not trusted"}
 										>
-											{client.trusted
-												? <i className="material-icons">
-														verified_user
-													</i>
-												: <i className="material-icons">
-														lock_open
-													</i>}
+											{client.trusted ? <MdVerifiedUser /> : <MdLockOpen />}
 										</span>
 									</Td>
 								</Tr>

@@ -6,6 +6,12 @@ import set from "lodash/set";
 import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
+import MdVerifiedUser from "react-icons/lib/md/verified-user";
+import MdLockOpen from "react-icons/lib/md/lock-open";
+import MdPersonAdd from "react-icons/lib/md/person-add";
+import MdDelete from "react-icons/lib/md/delete";
+import MdFace from "react-icons/lib/md/face";
+
 import {
 	JSONTreeTheme,
 	COLOR_SUCCESS,
@@ -107,7 +113,6 @@ class User extends React.Component {
 					addNotification({
 						title: "Created",
 						text: "The user was successfully created",
-						icon: "check_circle",
 						hideDelay: 5000,
 						color: COLOR_SUCCESS
 					})
@@ -149,7 +154,6 @@ class User extends React.Component {
 					addNotification({
 						title: "Deleted",
 						text: "The user was successfully deleted",
-						icon: "check_circle",
 						/*hideDelay	: 10000,*/
 						color: COLOR_SUCCESS,
 
@@ -264,7 +268,7 @@ class User extends React.Component {
 							data-hint="Create user"
 						>
 							<a href="#" onClick={this.handleOnAddNewUser}>
-								<i className="material-icons">person_add</i>
+								<MdPersonAdd />
 							</a>
 						</li>}
 					{userId !== "new" &&
@@ -274,7 +278,7 @@ class User extends React.Component {
 							data-hint="Delete user"
 						>
 							<a href="#" onClick={this.handleOnDeleteUser}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 					{userId == currentUser.id &&
@@ -282,7 +286,7 @@ class User extends React.Component {
 							className="hint-bottom-middle hint-anim"
 							data-hint="This is your account, be careful."
 						>
-							<i className="material-icons">face</i>
+							<MdFace />
 						</li>}
 				</Actions>
 
@@ -390,13 +394,7 @@ class User extends React.Component {
 													className="hint-right-middle hint-anim"
 													data-hint={client.trusted ? "Trusted" : "Untrusted"}
 												>
-													{client.trusted
-														? <i className="material-icons">
-																verified_user
-															</i>
-														: <i className="material-icons">
-																lock_open
-															</i>}
+													{client.trusted ? <MdVerifiedUser /> : <MdLockOpen />}
 												</span>
 											</td>
 										</tr>

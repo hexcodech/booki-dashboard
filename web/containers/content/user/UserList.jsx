@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
 
+import MdAdd from "react-icons/md/add";
+import MdGavel from "react-icons/md/gavel";
+import MdFace from "react-icons/md/face";
+
 import { API_URL } from "config.json";
 
 import { invalidateUsers, fetchUsersIfNeeded } from "core/actions/user";
@@ -50,7 +54,7 @@ class UserList extends React.Component {
 						data-hint="Add a new user."
 					>
 						<Link to={"/user/new/"}>
-							<i className="material-icons bottom">add</i>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>
@@ -79,14 +83,14 @@ class UserList extends React.Component {
 													className="hint-bottom-middle hint-anim"
 													data-hint="Admin"
 												>
-													<i className="material-icons">gavel</i>
+													<MdGavel />
 												</span>}
 											{user.id == currentUser.id &&
 												<span
 													className="hint-bottom-middle hint-anim"
 													data-hint="This is your account."
 												>
-													<i className="material-icons">face</i>
+													<MdFace />
 												</span>}
 										</div>
 									</Td>

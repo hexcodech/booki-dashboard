@@ -5,6 +5,10 @@ import set from "lodash/set";
 import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
+import MdDelete from "react-icons/lib/md/delete";
+import MdAddCircle from "react-icons/lib/md/add-circle";
+import MdWarning from "react-icons/lib/md/warning";
+
 import { CLIENT_ID } from "config.json";
 
 import {
@@ -211,7 +215,7 @@ class Client extends React.Component {
 							data-hint="Create client"
 						>
 							<a href="#" onClick={this.handleOnAddNewClient}>
-								<i className="material-icons">add_circle</i>
+								<MdAddCircle />
 							</a>
 						</li>}
 					{clientId !== "new" &&
@@ -221,7 +225,7 @@ class Client extends React.Component {
 							data-hint="Delete client"
 						>
 							<a href="#" onClick={this.handleOnDeleteClient}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 					{clientId == CLIENT_ID &&
@@ -229,7 +233,7 @@ class Client extends React.Component {
 							className="hint-bottom-middle hint-anim"
 							data-hint="This is the dashboard client, be careful."
 						>
-							<i className="material-icons">warning</i>
+							<MdWarning />
 						</li>}
 				</Actions>
 

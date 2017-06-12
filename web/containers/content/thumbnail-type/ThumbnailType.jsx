@@ -5,6 +5,9 @@ import set from "lodash/set";
 import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
+import MdDelete from "react-icons/lib/md/delete";
+import MdAddCircle from "react-icons/lib/md/add-circle";
+
 import {
 	JSONTreeTheme,
 	COLOR_SUCCESS,
@@ -199,10 +202,10 @@ class ThumbnailType extends React.Component {
 					{thumbnailTypeId == "new" &&
 						<li
 							className="hint-bottom-middle hint-anim"
-							data-hint="Create thumbnailType"
+							data-hint="Create thumbnail type"
 						>
 							<a href="#" onClick={this.handleOnAddNewThumbnailType}>
-								<i className="material-icons">add_circle</i>
+								<MdAddCircle />
 							</a>
 						</li>}
 					{thumbnailTypeId !== "new" &&
@@ -211,7 +214,7 @@ class ThumbnailType extends React.Component {
 							data-hint="Delete thumbnailType"
 						>
 							<a href="#" onClick={this.handleOnDeleteThumbnailType}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 				</Actions>

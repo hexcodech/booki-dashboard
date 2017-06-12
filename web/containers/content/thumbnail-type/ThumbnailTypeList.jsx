@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
 
+import MdAdd from "react-icons/lib/md/add";
+
 import {
 	invalidateThumbnailTypes,
 	fetchThumbnailTypesIfNeeded
@@ -56,7 +58,7 @@ class ThumbnailTypeList extends React.Component {
 						data-hint="Add a new thumbnailType."
 					>
 						<Link to={"/thumbnail-type/new/"}>
-							<i className="material-icons">add</i>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>

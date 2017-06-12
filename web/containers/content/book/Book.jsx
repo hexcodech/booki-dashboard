@@ -5,6 +5,9 @@ import set from "lodash/set";
 import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
+import MdDelete from "react-icons/lib/md/delete";
+import MdAddCircle from "react-icons/lib/md/add-circle";
+
 import { API_URL } from "config.json";
 
 import {
@@ -247,7 +250,7 @@ class Book extends React.Component {
 							data-hint="Create book"
 						>
 							<a href="#" onClick={this.handleOnAddNewBook}>
-								<i className="material-icons">add_circle</i>
+								<MdAddCircle />
 							</a>
 						</li>}
 					{bookId !== "new" &&
@@ -256,7 +259,7 @@ class Book extends React.Component {
 							data-hint="Delete book"
 						>
 							<a href="#" onClick={this.handleOnDeleteBook}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 				</Actions>

@@ -11,7 +11,7 @@ const SidebarElement = ({ text, icon, url, match, pathname }) => {
 			styleName={pathname.startsWith(match) ? "list-item-active" : "list-item"}
 		>
 			<div styleName="wrapper">
-				<i className="material-icons">{icon}</i>
+				{icon}
 				<Link to={url}>
 					{text}
 				</Link>

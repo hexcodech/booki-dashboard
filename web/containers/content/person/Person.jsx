@@ -5,6 +5,9 @@ import set from "lodash/set";
 import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
+import MdDelete from "react-icons/lib/md/delete";
+import MdAddCircle from "react-icons/lib/md/add-circle";
+
 import {
 	JSONTreeTheme,
 	COLOR_SUCCESS,
@@ -200,7 +203,7 @@ class Person extends React.Component {
 							data-hint="Create person"
 						>
 							<a href="#" onClick={this.handleOnAddNewPerson}>
-								<i className="material-icons">add_circle</i>
+								<MdAddCircle />
 							</a>
 						</li>}
 					{personId !== "new" &&
@@ -209,7 +212,7 @@ class Person extends React.Component {
 							data-hint="Delete person"
 						>
 							<a href="#" onClick={this.handleOnDeletePerson}>
-								<i className="material-icons">delete</i>
+								<MdDelete />
 							</a>
 						</li>}
 				</Actions>

@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
 
+import MdAdd from "react-icons/lib/md/add";
+import MdVerifiedUser from "react-icons/lib/md/verified-user";
+import MdLockOpen from "react-icons/lib/md/lock-open";
+
 import { invalidatePeople, fetchPeopleIfNeeded } from "core/actions/person";
 
 import { Table, Tr, Td } from "reactable";
@@ -49,7 +53,7 @@ class PersonList extends React.Component {
 						data-hint="Add a new person."
 					>
 						<Link to={"/person/new/"}>
-							<i className="material-icons">add</i>
+							<MdAdd />
 						</Link>
 					</li>
 				</Actions>
@@ -88,13 +92,7 @@ class PersonList extends React.Component {
 											className="hint-right-middle hint-anim"
 											data-hint={person.verified ? "Verified" : "Unverified"}
 										>
-											{person.verified
-												? <i className="material-icons">
-														verified_user
-													</i>
-												: <i className="material-icons">
-														lock_open
-													</i>}
+											{person.verified ? <MdVerifiedUser /> : <MdLockOpen />}
 										</span>
 									</Td>
 								</Tr>

@@ -2531,11 +2531,11 @@ module.exports = { debugTool: debugTool };
 /***/ (function(module, exports) {
 
 module.exports = {
-	"API_URL": "https://dev-api.booki.me",
+	"API_URL": "https://beta-api.booki.me",
 	"API_VERSION": "1",
 	"CLIENT_ID": "1",
-	"REDIRECT_URI": "https://dev-dashboard.booki.me/oauth-callback",
-	"DEV_TOOLS": true
+	"REDIRECT_URI": "https://beta-dashboard.booki.me/oauth-callback",
+	"DEV_TOOLS": false
 };
 
 /***/ }),

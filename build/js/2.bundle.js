@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 1039:
+/***/ 1031:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21,7 +21,7 @@ var formatBytes = exports.formatBytes = function formatBytes(bytes, decimals) {
 
 /***/ }),
 
-/***/ 918:
+/***/ 910:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31,27 +31,21 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(6);
 
-var _bindAll = __webpack_require__(16);
+var _format = __webpack_require__(1031);
 
-var _bindAll2 = _interopRequireDefault(_bindAll);
+var _systemStats = __webpack_require__(914);
 
-var _format = __webpack_require__(1039);
-
-var _systemStats = __webpack_require__(922);
-
-var _Widget = __webpack_require__(341);
+var _Widget = __webpack_require__(333);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
-var _Table = __webpack_require__(30);
+var _Table = __webpack_require__(119);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,42 +58,36 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var GeneralStatsWidget = function (_React$Component) {
 	_inherits(GeneralStatsWidget, _React$Component);
 
-	function GeneralStatsWidget(props) {
+	function GeneralStatsWidget() {
+		var _ref;
+
+		var _temp, _this, _ret;
+
 		_classCallCheck(this, GeneralStatsWidget);
 
-		var _this = _possibleConstructorReturn(this, (GeneralStatsWidget.__proto__ || Object.getPrototypeOf(GeneralStatsWidget)).call(this, props));
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
 
-		(0, _bindAll2.default)(_this, ["componentdidMount", "handleRefreshClick"]);
-		return _this;
-	}
-
-	_createClass(GeneralStatsWidget, [{
-		key: "componentdidMount",
-		value: function componentdidMount() {
-			var _props = this.props,
-			    dispatch = _props.dispatch,
-			    accessToken = _props.accessToken;
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = GeneralStatsWidget.__proto__ || Object.getPrototypeOf(GeneralStatsWidget)).call.apply(_ref, [this].concat(args))), _this), _this.componentdidMount = function () {
+			var _this$props = _this.props,
+			    dispatch = _this$props.dispatch,
+			    accessToken = _this$props.accessToken;
 
 
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
-		}
-	}, {
-		key: "handleRefreshClick",
-		value: function handleRefreshClick(e) {
+		}, _this.handleRefreshClick = function (e) {
 			e.preventdefault();
 
-			var _props2 = this.props,
-			    dispatch = _props2.dispatch,
-			    accessToken = _props2.accessToken;
+			var _this$props2 = _this.props,
+			    dispatch = _this$props2.dispatch,
+			    accessToken = _this$props2.accessToken;
 
 
 			dispatch((0, _systemStats.invalidateSystemStats)());
 			dispatch((0, _systemStats.fetchSystemStatsIfNeeded)(accessToken));
-		}
-	}, {
-		key: "render",
-		value: function render() {
-			var systemStats = this.props.systemStats;
+		}, _this.render = function () {
+			var systemStats = _this.props.systemStats;
 
 
 			return _react2.default.createElement(
@@ -107,7 +95,7 @@ var GeneralStatsWidget = function (_React$Component) {
 				{
 					lastUpdated: systemStats.lastUpdated,
 					isFetching: systemStats.isFetching,
-					handleRefreshClick: this.handleRefreshClick
+					handleRefreshClick: _this.handleRefreshClick
 				},
 				_react2.default.createElement(
 					_Table.Table,
@@ -261,8 +249,8 @@ var GeneralStatsWidget = function (_React$Component) {
 					)
 				)
 			);
-		}
-	}]);
+		}, _temp), _possibleConstructorReturn(_this, _ret);
+	}
 
 	return GeneralStatsWidget;
 }(_react2.default.Component);
@@ -278,7 +266,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(GeneralStatsWidget);
 
 /***/ }),
 
-/***/ 922:
+/***/ 914:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -289,7 +277,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchSystemStatsIfNeeded = exports.invalidateSystemStats = undefined;
 
-var _rest = __webpack_require__(36);
+var _rest = __webpack_require__(34);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {

@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 920:
+/***/ 912:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10,23 +10,17 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(6);
 
-var _bindAll = __webpack_require__(16);
-
-var _bindAll2 = _interopRequireDefault(_bindAll);
-
 var _user = __webpack_require__(58);
 
-var _systemStats = __webpack_require__(922);
+var _systemStats = __webpack_require__(914);
 
-var _Widget = __webpack_require__(341);
+var _Widget = __webpack_require__(333);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
@@ -41,42 +35,36 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var UserWidget = function (_React$Component) {
 	_inherits(UserWidget, _React$Component);
 
-	function UserWidget(props) {
+	function UserWidget() {
+		var _ref;
+
+		var _temp, _this, _ret;
+
 		_classCallCheck(this, UserWidget);
 
-		var _this = _possibleConstructorReturn(this, (UserWidget.__proto__ || Object.getPrototypeOf(UserWidget)).call(this, props));
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
 
-		(0, _bindAll2.default)(_this, ["componentDidMount", "handleRefreshClick"]);
-		return _this;
-	}
-
-	_createClass(UserWidget, [{
-		key: "componentDidMount",
-		value: function componentDidMount() {
-			var _props = this.props,
-			    dispatch = _props.dispatch,
-			    accessToken = _props.accessToken;
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = UserWidget.__proto__ || Object.getPrototypeOf(UserWidget)).call.apply(_ref, [this].concat(args))), _this), _this.componentDidMount = function () {
+			var _this$props = _this.props,
+			    dispatch = _this$props.dispatch,
+			    accessToken = _this$props.accessToken;
 
 
 			dispatch((0, _user.fetchUsersIfNeeded)(accessToken));
-		}
-	}, {
-		key: "handleRefreshClick",
-		value: function handleRefreshClick(e) {
+		}, _this.handleRefreshClick = function (e) {
 			e.preventDefault();
 
-			var _props2 = this.props,
-			    dispatch = _props2.dispatch,
-			    accessToken = _props2.accessToken;
+			var _this$props2 = _this.props,
+			    dispatch = _this$props2.dispatch,
+			    accessToken = _this$props2.accessToken;
 
 
 			dispatch((0, _systemStats.invalidateUsers)());
 			dispatch((0, _user.fetchUsersIfNeeded)(accessToken));
-		}
-	}, {
-		key: "render",
-		value: function render() {
-			var users = this.props.users;
+		}, _this.render = function () {
+			var users = _this.props.users;
 
 
 			var newUsers = users.filter(function (user) {
@@ -85,7 +73,7 @@ var UserWidget = function (_React$Component) {
 
 			return _react2.default.createElement(
 				_Widget2.default,
-				{ handleRefreshClick: this.handleRefreshClick },
+				{ handleRefreshClick: _this.handleRefreshClick },
 				_react2.default.createElement(
 					"p",
 					null,
@@ -99,8 +87,8 @@ var UserWidget = function (_React$Component) {
 					" within the last week"
 				)
 			);
-		}
-	}]);
+		}, _temp), _possibleConstructorReturn(_this, _ret);
+	}
 
 	return UserWidget;
 }(_react2.default.Component);
@@ -116,7 +104,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(UserWidget);
 
 /***/ }),
 
-/***/ 922:
+/***/ 914:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -127,7 +115,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchSystemStatsIfNeeded = exports.invalidateSystemStats = undefined;
 
-var _rest = __webpack_require__(36);
+var _rest = __webpack_require__(34);
 
 var invalidateSystemStats = exports.invalidateSystemStats = function invalidateSystemStats() {
 	return {

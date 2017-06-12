@@ -27,7 +27,7 @@ import { fetchUsersIfNeeded } from "core/actions/user";
 import { addNotification } from "core/actions/notification";
 
 import Dropzone from "react-dropzone";
-import { Table } from "web/components/layout/Table";
+import { Table, Tr, Td } from "reactable";
 import RefreshButton from "web/components/RefreshButton";
 import Actions from "web/components/layout/Actions";
 import FormGroups from "web/components/form/FormGroups";
@@ -235,29 +235,25 @@ class Image extends React.Component {
 				{image.thumbnails &&
 					<Card>
 						<h2>Thumbnails</h2>
-						<Table>
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>URL</th>
-									<th>Thumbnail type</th>
-									<th>Width</th>
-									<th>Height</th>
-								</tr>
-							</thead>
-							<tbody>
-								{image.thumbnails.map(thumbnail => {
-									return (
-										<tr key={thumbnail.id}>
-											<td>{thumbnail.id}</td>
-											<td>{thumbnail.url}</td>
-											<td>{thumbnail.name}</td>
-											<td>{thumbnail.width}</td>
-											<td>{thumbnail.height}</td>
-										</tr>
-									);
-								})}
-							</tbody>
+						<Table
+							itemsPerPage={10}
+							sortable={true}
+							defaultSort={{ column: "ID", direction: "asc" }}
+						>
+							{image.thumbnails.map((thumbnail, index) => {
+								return (
+									<Tr
+										key={index}
+										data={{
+											ID: thumbnail.id,
+											URL: thumbnail.url,
+											"Thumbnail type": thumbnail.name,
+											Width: thumbnail.width,
+											Height: thumbnail.height
+										}}
+									/>
+								);
+							})}
 						</Table>
 					</Card>}
 

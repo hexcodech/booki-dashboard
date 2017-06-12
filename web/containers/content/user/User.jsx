@@ -272,7 +272,7 @@ class User extends React.Component {
 							</a>
 						</li>}
 					{userId !== "new" &&
-						userId !== currentUser.id &&
+						userId != currentUser.id &&
 						<li
 							className="hint-bottom-middle hint-anim"
 							data-hint="Delete user"

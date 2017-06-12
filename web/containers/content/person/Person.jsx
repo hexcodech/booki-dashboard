@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
+import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
 import {
@@ -17,6 +17,7 @@ import {
 	clearNewPerson,
 	updateNewPerson,
 	fetchPeopleIfNeeded,
+	updatePerson,
 	putPerson,
 	postPerson,
 	deletePerson
@@ -33,34 +34,22 @@ import FormGroups from "web/components/form/FormGroups";
 import Card from "web/components/layout/Card";
 
 class Person extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnChange",
-			"handleOnAddNewPerson",
-			"handleOnDeletePerson"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchPeopleIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidatePeople());
 		dispatch(fetchPeopleIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value) {
+	handleOnChange = (id, value) => {
 		const {
 			dispatch,
 			accessToken,
@@ -86,12 +75,17 @@ class Person extends React.Component {
 			);
 
 			if (set(person, id, value)) {
-				dispatch(putPerson(person, accessToken));
+				dispatch(updatePerson(person, accessToken));
+				this.debouncedPut(person, accessToken);
 			}
 		}
-	}
+	};
 
-	handleOnAddNewPerson(e) {
+	debouncedPut = debounce((person, accessToken) => {
+		this.props.dispatch(putPerson(person, accessToken));
+	}, 300);
+
+	handleOnAddNewPerson = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -104,7 +98,6 @@ class Person extends React.Component {
 					addNotification({
 						title: "Created",
 						text: "The person was successfully created.",
-						icon: "check_circle",
 						color: COLOR_SUCCESS
 					})
 				);
@@ -114,9 +107,9 @@ class Person extends React.Component {
 				dispatch(clearNewPerson());
 			}
 		});
-	}
+	};
 
-	handleOnDeletePerson(e) {
+	handleOnDeletePerson = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -140,7 +133,6 @@ class Person extends React.Component {
 					addNotification({
 						title: "Deleted",
 						text: "The person was successfully deleted",
-						icon: "check_circle",
 						color: COLOR_SUCCESS,
 
 						actions: [
@@ -165,9 +157,9 @@ class Person extends React.Component {
 				dispatch(push("/person/list"));
 			}
 		});
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			newPerson,
 			people,
@@ -280,7 +272,7 @@ class Person extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import bindAll from "lodash/bindAll";
 
 import { Doughnut } from "react-chartjs-2";
 
@@ -12,28 +11,22 @@ import {
 import Widget from "web/containers/content/dashboard/widgets/Widget";
 
 class CpuStatsWidget extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, ["componentDidMount", "handleRefreshClick"]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateSystemStats());
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	render() {
+	render = () => {
 		const { systemStats } = this.props;
 
 		let labels = [],
@@ -93,7 +86,7 @@ class CpuStatsWidget extends React.Component {
 				/>
 			</Widget>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

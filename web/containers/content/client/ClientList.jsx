@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
-import bindAll from "lodash/bindAll";
 
 import { invalidateClients, fetchClientsIfNeeded } from "core/actions/client";
 
@@ -15,38 +14,28 @@ import Actions from "web/components/layout/Actions";
 import RefreshButton from "web/components/RefreshButton";
 
 class ClientList extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleClientRowClick"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchClientsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateClients());
 		dispatch(fetchClientsIfNeeded(accessToken));
-	}
+	};
 
-	handleClientRowClick(e) {
+	handleClientRowClick = e => {
 		this.props.dispatch(
 			push("/client/" + e.currentTarget.getAttribute("data-client-id") + "/")
 		);
-	}
+	};
 
-	render() {
+	render = () => {
 		const { clients } = this.props;
 
 		return (
@@ -109,7 +98,7 @@ class ClientList extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

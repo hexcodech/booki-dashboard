@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
+import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
 import {
@@ -17,6 +17,7 @@ import {
 	clearNewCondition,
 	updateNewCondition,
 	fetchConditionsIfNeeded,
+	updateCondition,
 	putCondition,
 	postCondition,
 	deleteCondition
@@ -31,34 +32,22 @@ import FormGroups from "web/components/form/FormGroups";
 import Card from "web/components/layout/Card";
 
 class Condition extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnChange",
-			"handleOnAddNewCondition",
-			"handleOnDeleteCondition"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchConditionsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateConditions());
 		dispatch(fetchConditionsIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value) {
+	handleOnChange = (id, value) => {
 		const {
 			dispatch,
 			accessToken,
@@ -84,12 +73,17 @@ class Condition extends React.Component {
 			);
 
 			if (set(condition, id, value)) {
-				dispatch(putCondition(condition, accessToken));
+				dispatch(updateCondition(condition, accessToken));
+				this.debouncedPut(condition, accessToken);
 			}
 		}
-	}
+	};
 
-	handleOnAddNewCondition(e) {
+	debouncedPut = debounce((condition, accessToken) => {
+		this.props.dispatch(putCondition(condition, accessToken));
+	}, 300);
+
+	handleOnAddNewCondition = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -102,7 +96,6 @@ class Condition extends React.Component {
 					addNotification({
 						title: "Created",
 						text: "The condition was successfully created.",
-						icon: "check_circle",
 						color: COLOR_SUCCESS
 					})
 				);
@@ -112,9 +105,9 @@ class Condition extends React.Component {
 				dispatch(clearNewCondition());
 			}
 		});
-	}
+	};
 
-	handleOnDeleteCondition(e) {
+	handleOnDeleteCondition = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -138,7 +131,6 @@ class Condition extends React.Component {
 					addNotification({
 						title: "Deleted",
 						text: "The condition was successfully deleted",
-						icon: "check_circle",
 						color: COLOR_SUCCESS,
 
 						actions: [
@@ -163,9 +155,9 @@ class Condition extends React.Component {
 				dispatch(push("/condition/list"));
 			}
 		});
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			newCondition,
 			conditions,
@@ -269,7 +261,7 @@ class Condition extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

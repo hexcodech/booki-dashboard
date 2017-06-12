@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
 import JSONTree from "react-json-tree";
 
 import { API_URL } from "config.json";
@@ -34,34 +33,23 @@ import FormGroups from "web/components/form/FormGroups";
 import Card from "web/components/layout/Card";
 
 class Image extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnDeleteImage",
-			"onDrop"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchImagesIfNeeded(accessToken));
 		dispatch(fetchUsersIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateImages());
 		dispatch(fetchImagesIfNeeded(accessToken));
-	}
+	};
 
-	handleOnDeleteImage(e) {
+	handleOnDeleteImage = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -85,7 +73,6 @@ class Image extends React.Component {
 					addNotification({
 						title: "Deleted",
 						text: "The image was successfully deleted",
-						icon: "check_circle",
 						color: COLOR_SUCCESS
 					})
 				);
@@ -93,9 +80,9 @@ class Image extends React.Component {
 				dispatch(push("/image/list"));
 			}
 		});
-	}
+	};
 
-	onDrop(acceptedFiles, rejectedFiles) {
+	onDrop = (acceptedFiles, rejectedFiles) => {
 		const { dispatch, accessToken } = this.props;
 
 		let formData = new FormData();
@@ -104,9 +91,9 @@ class Image extends React.Component {
 		dispatch(postImage(formData, accessToken)).then(image => {
 			dispatch(push("/image/" + image.id + "/"));
 		});
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			images,
 			match: { params: { id: imageId } },
@@ -284,7 +271,7 @@ class Image extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

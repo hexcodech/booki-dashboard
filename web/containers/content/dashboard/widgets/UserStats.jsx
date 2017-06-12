@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import bindAll from "lodash/bindAll";
 
 import { fetchUsersIfNeeded } from "core/actions/user";
 import { invalidateUsers } from "app/actions/system-stats";
@@ -8,28 +7,22 @@ import { invalidateUsers } from "app/actions/system-stats";
 import Widget from "web/containers/content/dashboard/widgets/Widget";
 
 class UserWidget extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, ["componentDidMount", "handleRefreshClick"]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchUsersIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateUsers());
 		dispatch(fetchUsersIfNeeded(accessToken));
-	}
+	};
 
-	render() {
+	render = () => {
 		const { users } = this.props;
 
 		const newUsers = users.filter(user => {
@@ -46,7 +39,7 @@ class UserWidget extends React.Component {
 				</small>
 			</Widget>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

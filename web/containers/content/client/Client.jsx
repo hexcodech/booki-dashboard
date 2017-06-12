@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
+import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
 import { CLIENT_ID } from "config.json";
@@ -19,6 +19,7 @@ import {
 	clearNewClient,
 	updateNewClient,
 	fetchClientsIfNeeded,
+	updateClient,
 	putClient,
 	postClient,
 	deleteClient
@@ -40,35 +41,23 @@ import FormGroups from "web/components/form/FormGroups";
 import Card from "web/components/layout/Card";
 
 class Client extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnChange",
-			"handleOnAddNewClient",
-			"handleOnDeleteClient"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchClientsIfNeeded(accessToken));
 		dispatch(fetchUsersIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateClients());
 		dispatch(fetchClientsIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value) {
+	handleOnChange = (id, value) => {
 		const {
 			dispatch,
 			accessToken,
@@ -94,12 +83,17 @@ class Client extends React.Component {
 			);
 
 			if (set(client, id, value)) {
-				dispatch(putClient(client, accessToken));
+				dispatch(updateClient(client, accessToken));
+				this.debouncedPut(client, accessToken);
 			}
 		}
-	}
+	};
 
-	handleOnAddNewClient(e) {
+	debouncedPut = debounce((client, accessToken) => {
+		this.props.dispatch(putClient(client, accessToken));
+	}, 300);
+
+	handleOnAddNewClient = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -111,8 +105,8 @@ class Client extends React.Component {
 				dispatch(
 					addNotification({
 						title: "Created",
-						text: "The client was successfully created. Now you should save the secret.",
-						icon: "check_circle",
+						text:
+							"The client was successfully created. Now you should save the secret.",
 						color: COLOR_SUCCESS
 					})
 				);
@@ -122,9 +116,9 @@ class Client extends React.Component {
 				dispatch(clearNewClient());
 			}
 		});
-	}
+	};
 
-	handleOnDeleteClient(e) {
+	handleOnDeleteClient = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -148,7 +142,6 @@ class Client extends React.Component {
 					addNotification({
 						title: "Deleted",
 						text: "The client was successfully deleted",
-						icon: "check_circle",
 						color: COLOR_SUCCESS,
 
 						actions: [
@@ -174,9 +167,9 @@ class Client extends React.Component {
 				dispatch(push("/client/list"));
 			}
 		});
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			newClient,
 			clients,
@@ -282,17 +275,18 @@ class Client extends React.Component {
 													return {
 														...user,
 														value: user.id,
-														label: user.nameDisplay +
-															" (" +
-															[
-																user.nameTitle,
-																user.nameFirst,
-																user.nameMiddle,
-																user.nameLast
-															]
-																.join(" ")
-																.trim() +
-															")"
+														label:
+															user.nameDisplay +
+																" (" +
+																[
+																	user.nameTitle,
+																	user.nameFirst,
+																	user.nameMiddle,
+																	user.nameLast
+																]
+																	.join(" ")
+																	.trim() +
+																")"
 													};
 												}),
 												value: client.userId
@@ -340,7 +334,7 @@ class Client extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

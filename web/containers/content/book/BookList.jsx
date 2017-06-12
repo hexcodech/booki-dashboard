@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
-import bindAll from "lodash/bindAll";
 
 import { invalidateBooks, fetchBooksIfNeeded } from "core/actions/book";
 
@@ -12,38 +11,28 @@ import Actions from "web/components/layout/Actions";
 import Card from "web/components/layout/Card";
 
 class BookList extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleBookRowClick"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchBooksIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateBooks());
 		dispatch(fetchBooksIfNeeded(accessToken));
-	}
+	};
 
-	handleBookRowClick(e) {
+	handleBookRowClick = e => {
 		this.props.dispatch(
 			push("/book/" + e.currentTarget.getAttribute("data-book-id") + "/")
 		);
-	}
+	};
 
-	render() {
+	render = () => {
 		const { books } = this.props;
 
 		return (
@@ -91,7 +80,7 @@ class BookList extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

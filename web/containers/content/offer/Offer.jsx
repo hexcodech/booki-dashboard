@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
 import JSONTree from "react-json-tree";
 
 import {
@@ -17,6 +16,7 @@ import {
 	clearNewOffer,
 	updateNewOffer,
 	fetchOffersIfNeeded,
+	updateOffer,
 	putOffer,
 	postOffer,
 	deleteOffer
@@ -36,43 +36,29 @@ import FormGroups from "web/components/form/FormGroups";
 
 import Card from "web/components/layout/Card";
 
-import ConditionOptionComponent
-	from "web/components/form/input/select/condition/ConditionOptionComponent";
-import ConditionValueComponent
-	from "web/components/form/input/select/condition/ConditionValueComponent";
+import ConditionOptionComponent from "web/components/form/input/select/condition/ConditionOptionComponent";
+import ConditionValueComponent from "web/components/form/input/select/condition/ConditionValueComponent";
 
 class Offer extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnChange",
-			"handleOnAddNewOffer",
-			"handleOnDeleteOffer"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchUsersIfNeeded(accessToken));
 		dispatch(fetchConditionsIfNeeded(accessToken));
 		dispatch(fetchBooksIfNeeded(accessToken));
 		dispatch(fetchOffersIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateOffers());
 		dispatch(fetchOffersIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value) {
+	handleOnChange = (id, value) => {
 		const {
 			dispatch,
 			accessToken,
@@ -98,12 +84,17 @@ class Offer extends React.Component {
 			);
 
 			if (set(offer, id, value)) {
-				dispatch(putOffer(offer, accessToken));
+				dispatch(updateOffer(offer, accessToken));
+				this.debouncedPut(offer, accessToken);
 			}
 		}
-	}
+	};
 
-	handleOnAddNewOffer(e) {
+	debouncedPut = debounce((offer, accessToken) => {
+		this.props.dispatch(putOffer(offer, accessToken));
+	}, 300);
+
+	handleOnAddNewOffer = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -126,9 +117,9 @@ class Offer extends React.Component {
 				dispatch(clearNewOffer());
 			}
 		});
-	}
+	};
 
-	handleOnDeleteOffer(e) {
+	handleOnDeleteOffer = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -176,9 +167,9 @@ class Offer extends React.Component {
 				dispatch(push("/offer/list"));
 			}
 		});
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			newOffer,
 			offers,
@@ -301,17 +292,18 @@ class Offer extends React.Component {
 													return {
 														...user,
 														value: user.id,
-														label: user.nameDisplay +
-															" (" +
-															[
-																user.nameTitle,
-																user.nameFirst,
-																user.nameMiddle,
-																user.nameLast
-															]
-																.join(" ")
-																.trim() +
-															")"
+														label:
+															user.nameDisplay +
+																" (" +
+																[
+																	user.nameTitle,
+																	user.nameFirst,
+																	user.nameMiddle,
+																	user.nameLast
+																]
+																	.join(" ")
+																	.trim() +
+																")"
 													};
 												}),
 												value: offer.userId
@@ -363,7 +355,7 @@ class Offer extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

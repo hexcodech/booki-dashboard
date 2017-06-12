@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import bindAll from "lodash/bindAll";
 
 import { Doughnut } from "react-chartjs-2";
 
@@ -14,28 +13,22 @@ import { formatBytes } from "core/utilities/format";
 import Widget from "web/containers/content/dashboard/widgets/Widget";
 
 class MemoryStatsWidget extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, ["componentDidMount", "handleRefreshClick"]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateSystemStats());
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	render() {
+	render = () => {
 		const { systemStats } = this.props;
 
 		return (
@@ -100,7 +93,7 @@ class MemoryStatsWidget extends React.Component {
 				/>
 			</Widget>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

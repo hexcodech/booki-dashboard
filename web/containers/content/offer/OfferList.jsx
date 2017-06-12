@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
-import bindAll from "lodash/bindAll";
 
 import { invalidateOffers, fetchOffersIfNeeded } from "core/actions/offer";
 
@@ -15,38 +14,28 @@ import Actions from "web/components/layout/Actions";
 import RefreshButton from "web/components/RefreshButton";
 
 class OfferList extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOfferRowClick"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchOffersIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateOffers());
 		dispatch(fetchOffersIfNeeded(accessToken));
-	}
+	};
 
-	handleOfferRowClick(e) {
+	handleOfferRowClick = e => {
 		this.props.dispatch(
 			push("/offer/" + e.currentTarget.getAttribute("data-offer-id") + "/")
 		);
-	}
+	};
 
-	render() {
+	render = () => {
 		const { offers } = this.props;
 
 		return (
@@ -96,7 +85,7 @@ class OfferList extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

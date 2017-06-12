@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
-import bindAll from "lodash/bindAll";
 
 import { API_URL } from "config.json";
 
@@ -17,38 +16,28 @@ import Actions from "web/components/layout/Actions";
 import RefreshButton from "web/components/RefreshButton";
 
 class UserList extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleUserRowClick"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchUsersIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateUsers());
 		dispatch(fetchUsersIfNeeded(accessToken));
-	}
+	};
 
-	handleUserRowClick(e) {
+	handleUserRowClick = e => {
 		this.props.dispatch(
 			push("/user/" + e.currentTarget.getAttribute("data-user-id") + "/")
 		);
-	}
+	};
 
-	render() {
+	render = () => {
 		const { users, currentUser } = this.props;
 		return (
 			<div className="user-list">
@@ -119,9 +108,9 @@ class UserList extends React.Component {
 													width="20"
 													src={
 														API_URL +
-															"/static/res/img/locales/" +
-															user.locale +
-															".svg"
+														"/static/res/img/locales/" +
+														user.locale +
+														".svg"
 													}
 												/>
 											</span>
@@ -134,7 +123,7 @@ class UserList extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

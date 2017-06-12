@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
+import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
 import { API_URL } from "config.json";
@@ -18,6 +18,7 @@ import {
 	clearNewBook,
 	updateNewBook,
 	fetchBooksIfNeeded,
+	updateBook,
 	putBook,
 	postBook,
 	deleteBook,
@@ -43,21 +44,6 @@ import FormGroups from "web/components/form/FormGroups";
 import Card from "web/components/layout/Card";
 
 class Book extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnChange",
-			"handleOnAddNewBook",
-			"handleOnDeleteBook",
-			"onBookSelectInput",
-			"onBookSelectChange",
-			"onAuthorInput"
-		]);
-	}
-
 	componentDidMount() {
 		const { dispatch, accessToken } = this.props;
 
@@ -66,16 +52,16 @@ class Book extends React.Component {
 		dispatch(fetchImagesIfNeeded(accessToken));
 	}
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateBooks());
 		dispatch(fetchBooksIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value) {
+	handleOnChange = (id, value) => {
 		const {
 			dispatch,
 			accessToken,
@@ -101,12 +87,17 @@ class Book extends React.Component {
 			);
 
 			if (set(book, id, value)) {
-				dispatch(putBook(book, accessToken));
+				dispatch(updateBook(book, accessToken));
+				this.debouncedPut(book, accessToken);
 			}
 		}
-	}
+	};
 
-	handleOnAddNewBook(e) {
+	debouncedPut = debounce((book, accessToken) => {
+		this.props.dispatch(putBook(book, accessToken));
+	}, 300);
+
+	handleOnAddNewBook = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -120,7 +111,6 @@ class Book extends React.Component {
 						title: "Created",
 						text: "The book was successfully created",
 						hideDelay: 5000,
-						icon: "check_circle",
 						color: COLOR_SUCCESS
 					})
 				);
@@ -130,9 +120,9 @@ class Book extends React.Component {
 				dispatch(clearNewBook());
 			}
 		});
-	}
+	};
 
-	handleOnDeleteBook(e) {
+	handleOnDeleteBook = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -156,7 +146,6 @@ class Book extends React.Component {
 					addNotification({
 						title: "Deleted",
 						text: "The book was successfully deleted",
-						icon: "check_circle",
 						color: COLOR_SUCCESS,
 
 						actions: [
@@ -180,20 +169,21 @@ class Book extends React.Component {
 				dispatch(push("/book/list"));
 			}
 		});
-	}
+	};
 
-	onBookSelectInput(text) {
+	onBookSelectInput = text => {
 		const { dispatch, accessToken } = this.props;
 
 		if (text) {
 			dispatch(lookUpBooks(text, "local", accessToken));
 		}
-	}
+	};
 
-	onBookSelectChange(isbn) {
+	onBookSelectChange = isbn => {
 		//triggered when a lookedup book was selected
 
-		let book = null, lookedUpBooks = this.props.lookedUpBooks;
+		let book = null,
+			lookedUpBooks = this.props.lookedUpBooks;
 
 		if (lookedUpBooks) {
 			book = lookedUpBooks.filter(book => {
@@ -204,15 +194,15 @@ class Book extends React.Component {
 		if (book) {
 			this.props.dispatch(updateNewBook(book));
 		}
-	}
+	};
 
-	onAuthorInput(author) {
+	onAuthorInput = author => {
 		if (author) {
 			this.props.dispatch(lookUpPeople(author));
 		}
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			newBook,
 			books,
@@ -344,17 +334,18 @@ class Book extends React.Component {
 													return {
 														...user,
 														value: user.id,
-														label: user.nameDisplay +
-															" (" +
-															[
-																user.nameTitle,
-																user.nameFirst,
-																user.nameMiddle,
-																user.nameLast
-															]
-																.join(" ")
-																.trim() +
-															")"
+														label:
+															user.nameDisplay +
+																" (" +
+																[
+																	user.nameTitle,
+																	user.nameFirst,
+																	user.nameMiddle,
+																	user.nameLast
+																]
+																	.join(" ")
+																	.trim() +
+																")"
 													};
 												}),
 												value: book.userId
@@ -420,7 +411,7 @@ class Book extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import bindAll from "lodash/bindAll";
 
 import { formatBytes } from "core/utilities/format";
 
@@ -14,28 +13,22 @@ import Widget from "web/containers/content/dashboard/widgets/Widget";
 import { Table, Seperator } from "web/components/layout/Table";
 
 class GeneralStatsWidget extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, ["componentdidMount", "handleRefreshClick"]);
-	}
-
-	componentdidMount() {
+	componentdidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventdefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateSystemStats());
 		dispatch(fetchSystemStatsIfNeeded(accessToken));
-	}
+	};
 
-	render() {
+	render = () => {
 		const { systemStats } = this.props;
 
 		return (
@@ -88,7 +81,7 @@ class GeneralStatsWidget extends React.Component {
 				</Table>
 			</Widget>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

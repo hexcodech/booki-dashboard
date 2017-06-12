@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
-import bindAll from "lodash/bindAll";
 
 import {
 	invalidateConditions,
@@ -18,40 +17,30 @@ import Actions from "web/components/layout/Actions";
 import RefreshButton from "web/components/RefreshButton";
 
 class ConditionList extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleConditionRowClick"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchConditionsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateConditions());
 		dispatch(fetchConditionsIfNeeded(accessToken));
-	}
+	};
 
-	handleConditionRowClick(e) {
+	handleConditionRowClick = e => {
 		this.props.dispatch(
 			push(
 				"/condition/" + e.currentTarget.getAttribute("data-condition-id") + "/"
 			)
 		);
-	}
+	};
 
-	render() {
+	render = () => {
 		const { conditions } = this.props;
 
 		return (
@@ -101,7 +90,7 @@ class ConditionList extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

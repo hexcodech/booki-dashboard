@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { push } from "react-router-redux";
-import bindAll from "lodash/bindAll";
 
 import {
 	invalidateThumbnailTypes,
@@ -18,32 +17,22 @@ import Actions from "web/components/layout/Actions";
 import RefreshButton from "web/components/RefreshButton";
 
 class ThumbnailTypeList extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleThumbnailTypeRowClick"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchThumbnailTypesIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateThumbnailTypes());
 		dispatch(fetchThumbnailTypesIfNeeded(accessToken));
-	}
+	};
 
-	handleThumbnailTypeRowClick(e) {
+	handleThumbnailTypeRowClick = e => {
 		this.props.dispatch(
 			push(
 				"/thumbnail-type/" +
@@ -51,9 +40,9 @@ class ThumbnailTypeList extends React.Component {
 					"/"
 			)
 		);
-	}
+	};
 
-	render() {
+	render = () => {
 		const { thumbnailTypes } = this.props;
 
 		return (
@@ -105,7 +94,7 @@ class ThumbnailTypeList extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

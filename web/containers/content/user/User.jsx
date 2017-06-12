@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import set from "lodash/set";
-import bindAll from "lodash/bindAll";
+import debounce from "lodash/debounce";
 import JSONTree from "react-json-tree";
 
 import {
@@ -19,6 +19,7 @@ import {
 	clearNewUser,
 	updateNewUser,
 	fetchUsersIfNeeded,
+	updateUser,
 	putUser,
 	postUser,
 	deleteUser
@@ -37,42 +38,27 @@ import FormGroups from "web/components/form/FormGroups";
 
 import Card from "web/components/layout/Card";
 
-import FlagOptionComponent
-	from "web/components/form/input/select/flag/FlagOptionComponent";
-import FlagValueComponent
-	from "web/components/form/input/select/flag/FlagValueComponent";
+import FlagOptionComponent from "web/components/form/input/select/flag/FlagOptionComponent";
+import FlagValueComponent from "web/components/form/input/select/flag/FlagValueComponent";
 
 class User extends React.Component {
-	constructor(props) {
-		super(props);
-
-		bindAll(this, [
-			"componentDidMount",
-			"handleRefreshClick",
-			"handleOnChange",
-			"handleOnAddNewUser",
-			"handleOnDeleteUser",
-			"onClientRowClick"
-		]);
-	}
-
-	componentDidMount() {
+	componentDidMount = () => {
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(fetchUsersIfNeeded(accessToken));
 		dispatch(fetchClientsIfNeeded(accessToken));
-	}
+	};
 
-	handleRefreshClick(e) {
+	handleRefreshClick = e => {
 		e.preventDefault();
 
 		const { dispatch, accessToken } = this.props;
 
 		dispatch(invalidateUsers());
 		dispatch(fetchUsersIfNeeded(accessToken));
-	}
+	};
 
-	handleOnChange(id, value) {
+	handleOnChange = (id, value) => {
 		const {
 			dispatch,
 			accessToken,
@@ -97,13 +83,18 @@ class User extends React.Component {
 				})[0]
 			);
 
-			set(user, id, value);
-
-			dispatch(putUser(user, accessToken));
+			if (set(user, id, value)) {
+				dispatch(updateUser(user, accessToken));
+				this.debouncedPut(user, accessToken);
+			}
 		}
-	}
+	};
 
-	handleOnAddNewUser(e) {
+	debouncedPut = debounce((user, accessToken) => {
+		this.props.dispatch(putUser(user, accessToken));
+	}, 300);
+
+	handleOnAddNewUser = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -127,9 +118,9 @@ class User extends React.Component {
 				dispatch(clearNewUser());
 			}
 		});
-	}
+	};
 
-	handleOnDeleteUser(e) {
+	handleOnDeleteUser = e => {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -195,15 +186,15 @@ class User extends React.Component {
 				dispatch(push("/user/list"));
 			}
 		});
-	}
+	};
 
-	onClientRowClick(e) {
+	onClientRowClick = e => {
 		this.props.dispatch(
 			push("/client/" + e.currentTarget.getAttribute("data-client-id") + "/")
 		);
-	}
+	};
 
-	render() {
+	render = () => {
 		const {
 			newUser,
 			users,
@@ -427,7 +418,7 @@ class User extends React.Component {
 				</Card>
 			</div>
 		);
-	}
+	};
 }
 
 const mapStateToProps = state => {

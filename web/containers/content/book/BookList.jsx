@@ -61,7 +61,7 @@ class BookList extends React.Component {
 						itemsPerPage={50}
 						sortable={true}
 						defaultSort={{ column: "ID", direction: "asc" }}
-						filterable={["Title"]}
+						filterable={["Title", "Verified"]}
 					>
 						{books.map((book, index) => {
 							return (
@@ -69,8 +69,25 @@ class BookList extends React.Component {
 									key={index}
 									onClick={this.handleBookRowClick}
 									data-book-id={book.id}
-									data={{ ID: book.id, Title: book.title }}
-								/>
+								>
+									<Td column="ID">
+										{book.id}
+									</Td>
+									<Td column="Title">
+										{book.title}
+									</Td>
+									<Td
+										column="Verified"
+										value={book.verified ? "verified" : "unverified"}
+									>
+										<span
+											className="hint-right-middle hint-anim"
+											data-hint={book.verified ? "Verified" : "Unverified"}
+										>
+											{book.verified ? <MdVerifiedUser /> : <MdLockOpen />}
+										</span>
+									</Td>
+								</Tr>
 							);
 						})}
 					</Table>

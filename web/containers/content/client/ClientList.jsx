@@ -81,7 +81,7 @@ class ClientList extends React.Component {
 									</Td>
 									<Td
 										column="Trusted"
-										value={client.trusted ? "trusted" : "untrusted"}
+										value={client.trusted ? "#trusted" : "#untrusted"}
 									>
 										<span
 											className="hint-right-middle hint-anim"

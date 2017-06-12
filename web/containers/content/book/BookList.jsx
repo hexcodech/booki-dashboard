@@ -82,7 +82,7 @@ class BookList extends React.Component {
 									</Td>
 									<Td
 										column="Verified"
-										value={book.verified ? "verified" : "unverified"}
+										value={book.verified ? "#verified" : "#unverified"}
 									>
 										<span
 											className="hint-right-middle hint-anim"

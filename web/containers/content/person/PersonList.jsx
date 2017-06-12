@@ -87,7 +87,7 @@ class PersonList extends React.Component {
 									</Td>
 									<Td
 										column="Verified"
-										value={person.verified ? "verified" : "unverified"}
+										value={person.verified ? "#verified" : "#unverified"}
 									>
 										<span
 											className="hint-right-middle hint-anim"

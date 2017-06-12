@@ -67,7 +67,12 @@ class ConditionList extends React.Component {
 					defaultSort={{ column: "ID", direction: "asc" }}
 					filterable={["Key"]}
 				>
-					<Table>
+					<Table
+						itemsPerPage={50}
+						sortable={true}
+						defaultSort={{ column: "ID", direction: "asc" }}
+						filterable={["Key", "Price Factor"]}
+					>
 						{conditions.map((condition, index) => {
 							return (
 								<Tr

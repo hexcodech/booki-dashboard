@@ -213,6 +213,10 @@ table{
   width: 100%;
 }
 
+tr.clickable{
+  cursor: pointer;
+}
+
 tr.reactable-column-header{
   background-color: $brand-primary;
   color: #fff;

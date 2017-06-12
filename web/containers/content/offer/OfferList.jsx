@@ -69,6 +69,7 @@ class OfferList extends React.Component {
 									key={index}
 									onClick={this.handleOfferRowClick}
 									data-offer-id={offer.id}
+									className="clickable"
 									data={{
 										ID: offer.id,
 										Price: offer.price + " CHF",

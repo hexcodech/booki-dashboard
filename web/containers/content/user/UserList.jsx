@@ -72,6 +72,7 @@ class UserList extends React.Component {
 									key={index}
 									onClick={this.handleUserRowClick}
 									data-user-id={user.id}
+									className="clickable"
 								>
 									<Td
 										column="Capabilities"

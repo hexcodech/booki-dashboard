@@ -71,6 +71,7 @@ class PersonList extends React.Component {
 									key={index}
 									onClick={this.handlePersonRowClick}
 									data-person-id={person.id}
+									className="clickable"
 								>
 									<Td column="ID">
 										{person.id}

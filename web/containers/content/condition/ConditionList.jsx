@@ -74,6 +74,7 @@ class ConditionList extends React.Component {
 									key={index}
 									onClick={this.handleConditionRowClick}
 									data-condition-id={condition.id}
+									className="clickable"
 									data={{
 										ID: condition.id,
 										Key: condition.key,

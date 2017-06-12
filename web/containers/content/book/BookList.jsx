@@ -62,6 +62,7 @@ class BookList extends React.Component {
 						sortable={true}
 						defaultSort={{ column: "ID", direction: "asc" }}
 						filterable={["Title", "Verified"]}
+						className="clickable"
 					>
 						{books.map((book, index) => {
 							return (
@@ -69,6 +70,7 @@ class BookList extends React.Component {
 									key={index}
 									onClick={this.handleBookRowClick}
 									data-book-id={book.id}
+									className="clickable"
 								>
 									<Td column="ID">
 										{book.id}

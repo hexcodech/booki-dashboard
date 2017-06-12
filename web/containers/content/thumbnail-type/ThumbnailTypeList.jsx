@@ -76,6 +76,7 @@ class ThumbnailTypeList extends React.Component {
 									key={index}
 									onClick={this.handleThumbnailTypeRowClick}
 									data-thumbnail-type-id={thumbnailType.id}
+									className="clickable"
 									data={{
 										ID: thumbnailType.id,
 										Name: thumbnailType.name,

@@ -71,6 +71,7 @@ class ClientList extends React.Component {
 									key={index}
 									onClick={this.handleClientRowClick}
 									data-client-id={client.id}
+									className="clickable"
 								>
 									<Td column="ID">
 										{client.id}

@@ -68,6 +68,7 @@ class ImageList extends React.Component {
 									key={index}
 									onClick={this.handleImageRowClick}
 									data-image-id={image.id}
+									className="clickable"
 									data={{ ID: image.id, URL: image.url }}
 								/>
 							);

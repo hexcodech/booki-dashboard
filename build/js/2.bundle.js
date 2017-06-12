@@ -45,7 +45,7 @@ var _Widget = __webpack_require__(339);
 
 var _Widget2 = _interopRequireDefault(_Widget);
 
-var _Table = __webpack_require__(123);
+var _Table = __webpack_require__(207);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -31668,15 +31668,42 @@ var BookList = function (_React$Component) {
 							itemsPerPage: 50,
 							sortable: true,
 							defaultSort: { column: "ID", direction: "asc" },
-							filterable: ["Title"]
+							filterable: ["Title", "Verified"]
 						},
 						books.map(function (book, index) {
-							return _react2.default.createElement(_reactable.Tr, {
-								key: index,
-								onClick: _this.handleBookRowClick,
-								"data-book-id": book.id,
-								data: { ID: book.id, Title: book.title }
-							});
+							return _react2.default.createElement(
+								_reactable.Tr,
+								{
+									key: index,
+									onClick: _this.handleBookRowClick,
+									"data-book-id": book.id
+								},
+								_react2.default.createElement(
+									_reactable.Td,
+									{ column: "ID" },
+									book.id
+								),
+								_react2.default.createElement(
+									_reactable.Td,
+									{ column: "Title" },
+									book.title
+								),
+								_react2.default.createElement(
+									_reactable.Td,
+									{
+										column: "Verified",
+										value: book.verified ? "verified" : "unverified"
+									},
+									_react2.default.createElement(
+										"span",
+										{
+											className: "hint-right-middle hint-anim",
+											"data-hint": book.verified ? "Verified" : "Unverified"
+										},
+										book.verified ? _react2.default.createElement(MdVerifiedUser, null) : _react2.default.createElement(MdLockOpen, null)
+									)
+								)
+							);
 						})
 					)
 				)

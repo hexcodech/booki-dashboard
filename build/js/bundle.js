@@ -17332,6 +17332,10 @@ var Sidebar = function Sidebar(_ref) {
 		background: "linear-gradient(" + "rgba(255, 173, 57, 1), rgba(255, 173, 57, 0.45)" + "), url(" + "https://source.unsplash.com/random/" + Math.round(width / 3) + "x" + height + "/weekly)"
 	};
 
+	var thumbnail = user.thumbnails.filter(function (thumbnail) {
+		return thumbnail.name === "profile-picture-large";
+	})[0];
+
 	return _react2.default.createElement(
 		"aside",
 		{ styleName: "sidebar", style: bgStyles },
@@ -17344,9 +17348,7 @@ var Sidebar = function Sidebar(_ref) {
 				}
 			},
 			_react2.default.createElement("img", {
-				src: _config.API_URL + user.thumbnails.filter(function (thumbnail) {
-					return thumbnail.name === "profile-picture-large";
-				})[0].url,
+				src: thumbnail ? _config.API_URL + thumbnail.url : "https://www.gravatar.com/avatar/?d=mm&s=200",
 				height: "100",
 				width: "100"
 			}),

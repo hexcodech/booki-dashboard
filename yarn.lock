@@ -863,8 +863,8 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
 "booki-frontend-core@github:hexcodech/booki-frontend-core":
-  version "1.0.7"
-  resolved "https://codeload.github.com/hexcodech/booki-frontend-core/tar.gz/c76c2b0865cf9c91a116b461e1485d6960f45d95"
+  version "1.0.8"
+  resolved "https://codeload.github.com/hexcodech/booki-frontend-core/tar.gz/b67ca1976834107201c699d9756704f80ea23e53"
   dependencies:
     lodash "^4.17.4"
     redux "^3.6.0"

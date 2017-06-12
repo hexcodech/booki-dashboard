@@ -11572,7 +11572,7 @@ var deleteClient = exports.deleteClient = function deleteClient() {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.deleteCondition = exports.postCondition = exports.putCondition = exports.updatedCondition = exports.fetchConditionIfNeeded = exports.updateNewCondition = exports.clearNewCondition = exports.invalidateCondition = exports.fetchConditionsIfNeeded = exports.invalidateConditions = undefined;
+exports.deleteCondition = exports.postCondition = exports.putCondition = exports.updateCondition = exports.fetchConditionIfNeeded = exports.updateNewCondition = exports.clearNewCondition = exports.invalidateCondition = exports.fetchConditionsIfNeeded = exports.invalidateConditions = undefined;
 
 var _rest = __webpack_require__(35);
 
@@ -11759,7 +11759,7 @@ var fetchConditionIfNeeded = exports.fetchConditionIfNeeded = function fetchCond
 	};
 };
 
-var updatedCondition = exports.updatedCondition = function updatedCondition() {
+var updateCondition = exports.updateCondition = function updateCondition() {
 	var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
 	return {

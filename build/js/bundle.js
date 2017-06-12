@@ -32827,7 +32827,12 @@ var ConditionList = function (_React$Component) {
 					},
 					_react2.default.createElement(
 						_reactable.Table,
-						null,
+						{
+							itemsPerPage: 50,
+							sortable: true,
+							defaultSort: { column: "ID", direction: "asc" },
+							filterable: ["Key", "Price Factor"]
+						},
 						conditions.map(function (condition, index) {
 							return _react2.default.createElement(_reactable.Tr, {
 								key: index,

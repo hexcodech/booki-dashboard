@@ -206,6 +206,7 @@ class User extends React.Component {
 			currentUser,
 			match: { params: { id: userId } },
 			clients,
+			images,
 			errors
 		} = this.props;
 
@@ -418,6 +419,7 @@ const mapStateToProps = state => {
 		newUser: state.app.newUser,
 		users: state.app.users,
 		clients: state.app.clients,
+		images: state.app.images,
 		currentUser: state.app.authentication.user,
 		errors: state.app.validation
 	};
